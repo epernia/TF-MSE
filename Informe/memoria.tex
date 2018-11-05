@@ -57,6 +57,8 @@ headsepline, % Uncomment to get a line under the header
 %------------------------
 \usepackage{listings}
 
+\usepackage[framemethod=tikz]{mdframed} % @Eric for License
+
 %\usepackage[hyphens]{url}
 %\usepackage[hidelinks]{hyperref}
 %\hypersetup{breaklinks=true}
@@ -86,18 +88,19 @@ headsepline, % Uncomment to get a line under the header
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\supervisor{Nombre del Director} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
-\degree{Especialista en Sistemas Embebidos } % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
-\author{Nombre del Autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
-\juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
-\juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
-\juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
-\fechaINICIO{enero de 2016}
-\fechaFINAL{diciembre de 2016}
+\thesistitle{sAPI (simpleAPI): diseño e implementación de una biblioteca para sistematizar
+la programación de sistemas embebidos} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\supervisor{MSc. Ing. Félix Gustavo E. Safar.} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
+\degree{Magíster en Sistemas Embebidos} % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
+\author{Esp. Ing. Eric Nicolás Pernia} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
+\juradoUNO{Dr. Ing. Pablo M. Gómez (UBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
+\juradoDOS{Mg. Ing. Pablo O. Ridolfi (UTN FRBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
+\juradoTRES{Ing. Juan Manuel Cruz (FIUBA,UTN-FRBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
+\fechaINICIO{marzo de 2018}
+\fechaFINAL{diciembre de 2018}
 
-\subject{Memoria del Trabajo Final de la Carrera de Especialización en Sistemas Embebidos de la UBA} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
-\keywords{CESE, Sistemas Embebidos, CIAA} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\subject{Memoria del Trabajo Final de la Maestría en Sistemas Embebidos (MSE) de la UBA} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{MSE, Sistemas Embebidos, CIAA} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{Universidad de Buenos Aires} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
 \faculty{{Facultad de Ingeniería}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 \department{Departamento de Electrónica} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
@@ -137,16 +140,16 @@ headsepline, % Uncomment to get a line under the header
 
 {\scshape\LARGE UNIVERSIDAD DE BUENOS AIRES\par}\vspace{0.1cm} % University name
 {\scshape\LARGE FACULTAD DE INGENIERÍA\par}\vspace{0.1cm} % Faculty name
-{\scshape\LARGE Carrera de Especialización en Sistemas Embebidos\par}\vspace{1cm} % Thesis type
+{\scshape\LARGE Maestría en Sistemas Embebidos\par}\vspace{1cm} % Thesis type
 
 \includegraphics[width=.3\textwidth]{./Figures/logoFIUBA.png}
-\vspace{1cm}
+\vspace{0.7cm}
 
 \textsc{\Large Memoria del Trabajo Final}\\[0.5cm] % Thesis type
 
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
 
-\vspace{1cm}
+\vspace{0.7cm}
 \LARGE\textbf{Autor:\\
 \authorname}\\ % Author name
 
@@ -157,7 +160,7 @@ headsepline, % Uncomment to get a line under the header
 {Director:} \\
 {\supname} % Supervisor name
  
-\vspace{1cm}
+\vspace{0.7cm}
 Jurados:\\
 \jurunoname\\
 \jurdosname\\
@@ -170,6 +173,29 @@ Jurados:\\
 
 
 %----------------------------------------------------------------------------------------
+%	LICENCIA - LICENSE
+%----------------------------------------------------------------------------------------
+\newpage
+\begin{center}
+
+\begin{mdframed}[outerlinecolor=black, outerlinewidth=2pt, linecolor=gray, middlelinewidth=3pt, roundcorner=10pt]
+
+ \begin{center}
+  \includegraphics*{Figures/cc-by-sa.png}
+ \end{center}
+
+\emph{sAPI (simpleAPI): diseño e implementación de una biblioteca para sistematizar
+la programación de sistemas embebidos} por Esp. Ing. Eric Nicolás Pernia se distribuye bajo una \textbf{Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional}.
+Para ver una copia de esta licencia, visita:
+\\
+\url{http://creativecommons.org/licenses/by-sa/4.0/}.
+
+
+\end{mdframed}
+
+\end{center}
+
+%----------------------------------------------------------------------------------------
 %	RESUMEN - ABSTRACT 
 %----------------------------------------------------------------------------------------
 
@@ -179,9 +205,9 @@ Jurados:\\
 %The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 \centering
 
-Acá va el resumen del trabajo. Debe ser lo más breve posible. No más de dos o tres párrafos, de unas cuatro o cinco oraciones cada uno. Leyendo esto debe quedar muy claro en qué consiste el trabajo realizado, por qué el trabajo es importante, por qué el trabajo muestra que el estudiante aplicó correctamente lo aprendido en la Carrera y qué información va a encontrar el lector en esta Memoria.
+En esta Memoria se presenta el diseño de una biblioteca para la programación de sistemas embebidos totalmente portable entre plataformas de hardware y lenguajes de programación. Se realizó una implementación de referencia en lenguaje C para las plataformas del Proyecto CIAA. Para su validación, se realizó un banco de pruebas de hardware, junto a la utilización de testeo unitario e integración contínua.
 
-No usar en este resumen ninguna referencia bibliográfica del tipo [1], ni tampoco notas a pie de página ni siglas que no estén aclaradas como parte de este texto, ni tipografía en negritas, subrayada o cursiva. Dicho de otra forma, el texto en este resumen debe ser escrito de forma tal que si se recorta el mismo y se lo pega en un archivo .txt entonces este conserve su formato y sea perfectamente entendible sin ningún agregado adicional, es decir, quede autocontenido.
+Además de la biblioteca, se creó una herramienta de código abierto para desarrolladores que automatiza la implemetación de bibliotecas a partir de un modelo que las describe. De esta manera se facilita la futura ampliación de la biblioteca y su implementación en otras plataformas de hardware.
 
 \end{abstract}
 
