@@ -18,9 +18,9 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \documentclass[
 11pt, % The default document font size, options: 10pt, 11pt, 12pt
@@ -70,9 +70,9 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{color}
 
 %
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	MARGIN SETTINGS
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \geometry{
 	paper=a4paper, % Change to letterpaper for US letter
@@ -84,9 +84,9 @@ headsepline, % Uncomment to get a line under the header
 	%showframe,% show how the type block is set on the page
 }
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	INFORMACIÓN DE LA MEMORIA
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \thesistitle{sAPI (simpleAPI): diseño e implementación de una biblioteca para sistematizar
 la programación de sistemas embebidos} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
@@ -99,7 +99,8 @@ la programación de sistemas embebidos} % El títulos de la memoria, se usa en l
 \fechaINICIO{marzo de 2018}
 \fechaFINAL{diciembre de 2018}
 
-\subject{Memoria del Trabajo Final de la Maestría en Sistemas Embebidos (MSE) de la UBA} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+% Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\subject{Memoria del Trabajo Final de la Maestría en Sistemas Embebidos (MSE) de la UBA} 
 \keywords{MSE, Sistemas Embebidos, CIAA} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{Universidad de Buenos Aires} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
 \faculty{{Facultad de Ingeniería}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
@@ -118,7 +119,9 @@ la programación de sistemas embebidos} % El títulos de la memoria, se usa en l
 \newcaptionname{spanish}{\byname}{por}
 
 \renewcommand{\lstlistingname}{Algoritmo}% Listing -> Algorithm
-\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}% List of Listings -> List of Algorithms
+
+% List of Listings -> List of Algorithms
+\renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}
 
 \renewcommand{\listtablename}{Índice de Tablas}
 \renewcommand{\tablename}{Tabla} 
@@ -127,13 +130,16 @@ la programación de sistemas embebidos} % El títulos de la memoria, se usa en l
 
 \begin{document}
 
-\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+% Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+\frontmatter 
 
-\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+% Default to the plain heading style until the thesis style is called for the
+% body content
+\pagestyle{plain}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	CARÁTULA
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \begin{titlepage}
 \begin{center}
@@ -172,9 +178,9 @@ Jurados:\\
 \end{titlepage}
 
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	LICENCIA - LICENSE
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 \newpage
 \begin{center}
 
@@ -184,8 +190,10 @@ Jurados:\\
   \includegraphics*{Figures/cc-by-sa.png}
  \end{center}
 
-\emph{sAPI (simpleAPI): diseño e implementación de una biblioteca para sistematizar
-la programación de sistemas embebidos} por Esp. Ing. Eric Nicolás Pernia se distribuye bajo una \textbf{Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional}.
+\emph{sAPI (simpleAPI): diseño e implementación de una biblioteca para
+sistematizar la programación de sistemas embebidos} por Esp. Ing. Eric Nicolás
+Pernia se distribuye bajo una \textbf{Licencia Creative Commons
+Atribución-CompartirIgual 4.0 Internacional}.
 Para ver una copia de esta licencia, visita:
 \\
 \url{http://creativecommons.org/licenses/by-sa/4.0/}.
@@ -195,28 +203,39 @@ Para ver una copia de esta licencia, visita:
 
 \end{center}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	RESUMEN - ABSTRACT 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 %
-%The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+%The Thesis Abstract is written here (and usually kept to just this page). 
+%The page is kept centered vertically so can expand into the blank space above
+%the title too\ldots
 \centering
 
-En esta memoria se presenta el diseño de una biblioteca para la programación de sistemas embebidos portable entre plataformas de hardware y lenguajes de programación. Se realizó una implementación de referencia en lenguaje C para las plataformas del Proyecto CIAA. Se realizó un banco de pruebas de hardware, junto a la utilización de testeo unitario e integración contínua para la validación.
+En esta memoria se presenta el diseño de una biblioteca para la programación de
+sistemas embebidos portable entre plataformas de hardware y lenguajes de
+programación. Se realizó una implementación de referencia en lenguaje C para
+las plataformas del Proyecto CIAA. Se realizó un banco de pruebas de hardware,
+junto a la utilización de testeo unitario e integración contínua para la
+validación.
 
-Además de la biblioteca, se creó una herramienta de código abierto para desarrolladores que automatiza la implemetación de bibliotecas a partir de un modelo que las describe. De esta manera se facilita la futura ampliación de la biblioteca y su implementación en otras plataformas de hardware.
+Además de la biblioteca, se creó una herramienta de código abierto para
+desarrolladores que automatiza la implemetación de bibliotecas a partir de un
+modelo que las describe. De esta manera se facilita la futura ampliación de la
+biblioteca y su implementación en otras plataformas de hardware.
 
 \end{abstract}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - AGRADECIMIENTOS
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \begin{acknowledgements}
-%\addchaptertocentry{\acknowledgementname} % Descomentando esta línea se puede agregar los agradecimientos al índice
+% Descomentando esta línea se puede agregar los agradecimientos al índice
+%\addchaptertocentry{\acknowledgementname} 
 \vspace{1.5cm}
 
 Agradecimientos personales. \textbf{[OPCIONAL]} 
@@ -227,9 +246,9 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 \end{acknowledgements}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	LISTA DE CONTENIDOS/FIGURAS/TABLAS
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 \renewcommand{\listtablename}{Índice de Tablas}
 
 \tableofcontents % Prints the main table of contents
@@ -239,15 +258,16 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 \listoftables % Prints the list of tables
 
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - DEDICATORIA
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
-\dedicatory{\textbf{Dedicado a... [OPCIONAL]}}  % escribir acá si se desea una dedicatoria
+% escribir acá si se desea una dedicatoria
+\dedicatory{\textbf{Dedicado a... [OPCIONAL]}}  
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - CAPÍTULOS
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \mainmatter % Begin numeric (1,2,3...) page numbering
 
@@ -255,36 +275,117 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 \renewcommand{\tablename}{Tabla} 
 
+%------------------------------------------------------------------------------
+
+% Define some commands to keep the formatting separated from the content 
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\tabhead}[1]{\textbf{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\file}[1]{\texttt{\bfseries#1}}
+\newcommand{\option}[1]{\texttt{\itshape#1}}
+\newcommand{\grados}{$^{\circ}$}
+
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+
 % Incluir los capítulos como archivos separados desde la carpeta Chapters
 % Descomentar las líneas a medida que se escriben los capítulos
 
-\include{Chapters/Chapter1}
-\include{Chapters/Chapter2} 
-\include{Chapters/Chapter3}
-\include{Chapters/Chapter4} 
-\include{Chapters/Chapter5} 
+% Introducción General
+\chapter{Introducción General}
+\label{ChapterIntroGral}
+%\include{Chapters/IntroGral/ContextoYJustificacion}
+\input{Chapters/IntroGral/ContextoYJustificacion}
+\input{Chapters/IntroGral/Motivacion}
+\input{Chapters/IntroGral/ObjetivosYAlcance}
 
-%----------------------------------------------------------------------------------------
+% Introducción Específica
+\chapter{Introducción Específica}
+\label{ChapterIntroEsp}
+
+\input{Chapters/IntroEspecifica/CIAA_Boards} 
+\input{Chapters/IntroEspecifica/Requerimientos} 
+\input{Chapters/IntroEspecifica/Planificacion} 
+
+% Diseño
+\chapter{Diseño}
+\label{ChapterDiseno}
+
+\input{Chapters/Diseno/DescripcionGeneral}
+\input{Chapters/Diseno/ModulesTypes}
+
+\input{Chapters/Diseno/ModelBoard}
+\input{Chapters/Diseno/ModelSoc}
+\input{Chapters/Diseno/ModelCore}
+\input{Chapters/Diseno/ModelGPIO}
+\input{Chapters/Diseno/ModelADC}
+\input{Chapters/Diseno/ModelDAC}
+\input{Chapters/Diseno/ModelTimer}
+\input{Chapters/Diseno/ModelRTC}
+\input{Chapters/Diseno/ModelUART}
+\input{Chapters/Diseno/ModelSPI}
+\input{Chapters/Diseno/ModelI2C}
+
+\input{Chapters/Diseno/ModelVerification}
+
+\input{Chapters/Diseno/ModelModule}
+
+\input{Chapters/Diseno/ModelFileDesign}
+
+% Implementación
+\chapter{Implementación}
+\label{ChapterImplementacion}
+
+\input{Chapters/Implementacion/CIAA_NXP_BoardFile}
+\input{Chapters/Implementacion/EDU_CIAA_NXP_BoardFile}
+\input{Chapters/Implementacion/PicoCIAA_BoardFile}
+\input{Chapters/Implementacion/CIAA_Z3R0_BoardFile}
+
+\input{Chapters/Implementacion/CodeGeneration}
+\input{Chapters/Implementacion/Codemplementation}
+
+\input{Chapters/Implementacion/LibExamples}
+
+\input{Chapters/Implementacion/Documentation}
+\input{Chapters/Implementacion/Difusion}
+
+% Ensayos y Resultados
+\chapter{Ensayos y Resultados}
+\label{ChapterEnsayosYResultados}
+
+\input{Chapters/EnsayosYResultados/Chapter4}
+
+% Conclusiones
+\chapter{Conclusiones} % Main chapter title
+\label{ChapterConclusiones} % Change X to a consecutive number; for referencing
+                            % this chapter elsewhere, use \ref{ChapterX}
+
+\input{Chapters/Conclusiones/Conclusiones} 
+
+%------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - APÉNDICES
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
-\appendix % indicativo para indicarle a LaTeX los siguientes "capítulos" son apéndices
+% indicativo para indicarle a LaTeX los siguientes "capítulos" son apéndices
+\appendix 
 
-% Incluir los apéndices de la memoria como archivos separadas desde la carpeta Appendices
+% Incluir los apéndices de la memoria como archivos separadas desde la carpeta
+% Appendices
 % Descomentar las líneas a medida que se escriben los apéndices
 
 %\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \Urlmuskip=0mu plus 1mu\relax
 \raggedright
 \printbibliography[heading=bibintoc]
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \end{document}  
