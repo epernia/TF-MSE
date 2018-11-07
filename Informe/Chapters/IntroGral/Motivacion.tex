@@ -1,24 +1,45 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-La idea de esta sección es presentar el tema de modo que cualquier persona que no conoce el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.
 \section{Motivación}
 \label{sec:motivacion}
 
-Saraza...
 
-\subsection{Uso de mayúscula inicial para los título de secciones}
-
-Saraza...
-
+%------------------------------------------------------------------------------
 \subsection{Lenguajes de programación y Hardware en Sistemas Embebidos}
 
 Saraza...
 
+
+%------------------------------------------------------------------------------
 \subsection{Bibliotecas para microcontroladores ofrecidas por los fabricantes}
 
 Saraza...
 
+%------------------------------------------------------------------------------
 \subsection{Proyecto CIAA}
 
 Saraza...
+
+
+
+En el mercado se encuentra una gran variedad de plataformas basadas en microcontrolador y aunque todas ellas poseen microcontroladores con características similares y periféricos compatibles, sin embargo, sus bibliotecas son muy diferentes. Esto se debe a que cada fabricante y/o empresas asociadas ofrece sus propias bibliotecas en lenguaje C las cuales están diseñadas fuertemente dependientes de cada arquitectura de cada microcontrolador que estas plataformas contienen.
+Existen también muchas bibliotecas que logran una buena abstracción del hardware en varias plataformas, pero ninguna se ha adoptado como estándar general. Esto se debe a múltiples causas, entre ellas:
+
+
+En el sector de la industria automotriz existe un estándar llamado AUTOSAR[] para la estandariza- ción de la  arquitectura de sistemas electrónicos que aún no ha logrado extenderse a otras industrias y cuya definición de bibliotecas propuesta es muy extensa y compleja de implementar y también para aprender a utilizar.
+Bibliotecas de drivers basadas en POSIX[] (que podemos hallar en sistemas con en Linux Embebido como Raspberry Pi[]). Su abstracción ha sido muy útil en la estandarización de drivers para PCs con sistema operativo Unix-compatible. Sin embargo, es tan alejada del hardware físico que en la práctica provoca una muy baja utilización por parte de los profesionales electrónicos y afines que se dedican a la programación de sistemas embebidos.
+Programadores hobbistas de sistemas embebidos han impulsado la  estandarización de la programación mediante una biblioteca conocida como Wiring[] disponible para múltiples plataformas (como la popular Arduino[]). Esta biblioteca si bien logra una gran facilidad de uso y rápido aprendizaje contiene algunas imprecisiones técnicas que provoca vicios indeseados en el aprendizaje de programación de microcontroladores. También carece de definición de una API para la utilización del periférico temporizador el cual es muy utilizado en un microcontrolador.
+En la actualidad existen muchos fabricantes de microcontroladores que adquieren licencias para la fabricación de microcontroladores con núcleos de procesamiento de arquitecturas Cortex M[] diseñados por la empresa ARM[]. Para los mismos existe una biblioteca estándar llamada CMSIS{} para la programación del núcleo de procesamiento y controlador de interrupciones pero que no se extiende a los perifŕicos donde cada fabricante busca diferenciarse de sus competidores.
+Otras empresas muy difundidas en el campo de la enseñanza en la programación como Microchip[] proveen bibliotecas muy dependientes del hardware y generadores automatizados de código que si bien en principio aceleran los tiempos de desarrollo, cuando una aplicación requiere modos más avanzados terminan dificultando la programación pues unas configuraciones pisan a las otras provocando que no funcione.
+
+De los ejemplos anteriores se observa que para la realización de una biblioteca estándar que satisfaga a los diferentes usuarios se debe lograr un balance entre:
+
+Extensión de la definición de la API.
+Dependencia del hardware.
+Nivel de abstracción.
+Complejidad de aprendizaje y uso.
+Periféricos y modos soportados.
+Escalabilidad.
+
+Por estos motivos se decide realizar la definición de una API de una biblioteca estándar para microcontroladores  en lenguaje C que supere todas estas dificultades.

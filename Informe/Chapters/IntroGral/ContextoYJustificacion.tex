@@ -1,8 +1,44 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-La idea de esta sección es presentar el tema de modo que cualquier persona que no conoce el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.
 \section{Contexto y justificación}
 \label{sec:contextoYJustificacion}
 
-Saraza...
+\emph{La idea de esta sección es presentar el tema de modo que cualquier persona que no conoce el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.}
+
+
+En la actualidad la programación de plataformas basadas en microcontrolador se realiza su mayoría en lenguaje C utilizando bibliotecas para el manejo del núcleo de procesamiento (o los núcleos) y periféricos. En consecuencia, una biblioteca de C es parte integral de cualquier diseño de sistema embebido basado en microcontrolador. 
+
+En este trabajo se presenta un diseño de biblioteca de programación de plataformas de Sistemas Embebidos basadas en microcontrolador de forma sencilla. La misma permite utilizar los modos más comunes de los periféricos típicos de un microcontrolador (tanto del núcleo de procesamiento como sus periféricos). Se expone además las características de implementación de referencia sobre la plataforma EDU-CIAA-NXP.
+
+
+
+
+
+
+
+En la actualidad existe una enorme variedad plataformas de Sistemas Embebidos en el mercado, y si bien todas cuentan con dispositivos programables con características similares y periféricos compatibles, se observa que en la práctica son muy distintos. En consecuencia se debe invertir mucho tiempo en aprender a programar cada una de ellas, con sus particularidades antes de su utilización. Estas diferencias se deben a varios factores:
+
+\begin{itemize}
+   \item Los fabricantes de los dispositivos programables y empresas asociadas carecen de diseños estándar de arquitectura de hardware (tanto en núcleos de procesamiento, como periféricos). Si bien esto trae el beneficio de permitir elegir el dispositivo programable que más se adecúe a un proyecto, también es la principal causa de la necesidad de conocer en detalle la arquitectura en particular.
+   \item Dichas empresas en su mayoría se limitan a ofrecer información de bajo nivel para programar el hardware directamente, o bien, sus propias bibliotecas escritas en lenguaje C, que están diseñadas con una gran dependencia de la arquitectura de hardware subyacente, es decir, carecen de abstracción del hardware.
+\end{itemize}
+
+
+
+
+Se están portando cada vez más lenguajes de programación a las plataformas de Sistemas Embebidos, que antes se reservaban para las computadoras de propósito general (como la PC).
+Esto se debe a que las nuevas plataformas poseen más poder de procesamiento y debido a la complejidad creciente de las aplicaciones se exige más características y abstracción a los lenguajes de programación.
+
+Existen algunos desarrollos de bibliotecas que logran una abstracción de hardware aceptable en varias plataformas, pero que están escritas en un único lenguaje de programación y para el ecosistema de plataformas que soportan la empresa o comunidad involucrada. Ninguna de ellas se ha adoptado como estándar de facto.
+
+
+
+
+
+Debido a la amplia variedad de plataformas de hardware y lenguajes de programación, se propone en este proyecto la realización del diseño de una biblioteca modelada independientemente del lenguaje de programación y arquitectura del hardware, con la intención de convertirlo en una propuesta de estándar para la programación de Sistemas Embebidos. Se tendrá en cuenta en el modelado lograr una buena relación de compromiso entre el nivel de abstracción para independizarse del hardware y los conceptos que espera encontrar un programador de Sistemas embebidos.
+Como el lenguaje más utilizado en la actualidad para programación de sistemas embebidos basados en microcontroladores continúa siendo el lenguaje C, se realizará una implementación de referencia para dicho lenguaje.
+
+Dado que el presente autor cumple el rol de Coordinador General del proyecto de hardware y software abierto "Computadora Industrial Abierta Argentina (CIAA)" se realizará la implementación de referencia tomando las plataformas de hardware diseñadas en el marco de este proyecto como casos de validación del diseño de biblioteca a realizar. Esto permitirá a la comunidad de usuarios de las plataformas del Proyecto CIAA programar las diferentes plataformas utilizando la misma biblioteca, reduciendo tiempos de aprendizaje y desarrollo.
+
+Este trabajo es parte de un grupo de iniciativas promovidas por la Universidad Nacional de Quilmes para colaborar en el marco del Proyecto CIAA, para facilitar el desarrollo y la enseñanza de Sistemas Embebidos en Argentina. Otras iniciativas incluyen: entorno de programación PLC Ladder (IDE4PLC), programación Java para CIAA (CIAA-HVM), Firmata4CIAA (para facilitar la programación de bloques gráficos en BYOB Snap! lenguaje para uso en escuelas secundarias) y CIAABOT IDE.

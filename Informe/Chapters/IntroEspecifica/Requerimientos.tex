@@ -4,16 +4,62 @@
 \section{Requerimientos}
 \label{sec:requerimientos}
 
-Saraza...
+%\subsection{Diseño de la biblioteca}
 
-\subsection{Diseño de la biblioteca}
+%\subsection{Implementación}
 
-Saraza...
+%\subsection{Documentación y difusión}
 
-\subsection{Implementación}
+Los requerimientos se establecieron en base a los objetivos expuestos en la sección \ref{sec:objetivosAlance}, reuniones con desarrolladores del Proyecto CIAA, alumnos (de grado de UNQ, posgrado de FIUBA y cursos CAPSE) y el director. El espíritu de los mismos es proponer una solución que permita la estandarización de la programación de microcontroladores. Estos son:
 
-Saraza...
+\begin{enumerate}
+   \item Fecha de finalización: 19/11/2018.
+   \item Diseño de la biblioteca.
+      \begin{enumerate}[1]
+         \item Realizar un diseño independiente del hardware y lenguaje de programación, teniendo en cuenta los conceptos familiares al programador de Sistemas Embebidos.
+         \item Debe estar modelada con objetos y contar con una descripción mediante diagramas UML.
+         \item Debe modelar al menos:
+            \begin{enumerate}[1]
+               \item CORE: un núcleo de procesamiento.
+               \item GPIO: periférico que consiste en un único pin de entrada/salida de propósito general (pin), así como un grupo de pines (port).
+               \item ADC: periférico conversor analógico-digital.
+               \item DAC: periférico conversor digital-analógico.
+               \item TIMER: periférico temporizador.CORE: un núcleo de procesamiento.
+               \item RTC: periférico reloj de tiempo real.CORE: un núcleo de procesamiento.
+               \item UART: periférico de comunicación serial asincrónico.
+               \item SPI: periférico interfaz serie sincrónica.
+               \item I2C: periférico de comunicación serie entre circuitos integrados.
+            \end{enumerate}
+      \end{enumerate}
+   \item Implementación de la biblioteca.
+      \begin{enumerate}[1]
+         \item Utilizar un sistema de control de versiones con repositorios on line.
+         \item Programar en lenguaje C la biblioteca para cada plataforma de hardware particular utilizando como plantilla los archivos generados.
+         \item Desarrollar ejemplos de utilización para las diferentes plataformas.
+      \end{enumerate}
+   \item Documentación y difusión.
+      \begin{enumerate}[1]
+         \item Confeccionar un manual de referencia de la API de la biblioteca.
+         \item Desarrollar un tutorial de instalación de las herramientas para utilizar la biblioteca con las plataformas de hardware citadas.
+         \item Publicación on line del código fuente.
+         \item Informar a la comunidad del Proyecto CIAA y a la comunidad de programadores de
+   Sistemas Embebidos.
+      \end{enumerate}
+\end{enumerate}
 
-\subsection{Documentación y difusión}
+% \subsection{Entregables principales del trabajo}
+% 
+% Se listan a continuación los entregables principales del proyecto:
+% 
+% 1. Archivos de descripción de la biblioteca mediante diferentes diagramas y código
+% independiente del lenguaje de programación.
+% 2. Código fuente de la implementación en lenguaje C de la biblioteca para las plataformas de hardware:
+%    - CIAA-NXP.
+%    - EDU-CIAA-NXP.
+%    - CIAA-Z3R0.
+%    - PicoCIAA.
+% 3. Ejemplos de utilización.
+% 4. Informe final.
+% 5. Manual de referencia de la API de la biblioteca.
+% 6. Tutorial de instalación de las herramientas para utilizar la biblioteca con las plataformas de hardware citadas.
 
-Saraza...
