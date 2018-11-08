@@ -4,23 +4,281 @@
 \section{Plataformas del Proyecto CIAA}
 \label{sec:ciaaBoards}
 
-Saraza...
+
+
+En sus comienzos el proyecto CIAA desarrolla una computadora industrial basada en un microcontrolador NXP LPC4337 (JDB 144) Dual-core Cortex-M4+Cortex-M0 a 204MHz, con 1 MB de memoria Flash y 136 KB de memoria SRAM nombrada CIAA-NXP [ ]. En base a este diseño los integrantes del proyecto CIAA diseñan una versión educativa sin las protecciones industriales, nombrada EDU-CIAA-NXP [ ]. En la figura [ ] se presenta esta plataforma.
+
+Esta plataforma incluye todos los periféricos típicos que podemos encontrar en los microcontroladores disponibles en el mercado permitiendo la enseñanza con herramientas modernas.
+
+Mediante la colaboración de la Red Universitaria de Sistemas Embebidos (RUSE) [ ] se han distribuido en 2015 entre 10 y 40 placas en Universidades de Argentina con carreras afines a la electrónica.
+
+Utilizando la EDU-CIAA-NXP como plataforma base para la enseñanza se ha desarrollado, o colaborado en el desarrollo de diferentes herramientas de software y hardware abiertas, las cuales se describen en las siguientes secciones.
+
+--------------------------------------
+
+
+El proyecto de la Computadora Industrial Abierta Argentina (CIAA) nació en 2013 como una iniciativa conjunta entre el sector académico y el industrial, representados por la ACSE\footnote{Asociación Civil para la investigación, promoción y desarrollo de los Sistemas electrónicos Embebidos. Sitio web: \url{http://www.sase.com.ar/asociacion-civil-sistemas-embebidos}} y CADIEEL\footnote{Cámara Argentina de Industrias Electrónicas, Electromecánicas y Luminotécnicas. Sitio web: \url{http://www.cadieel.org.ar/}}, respectivamente.
+
+\medskip
+
+\noindent Los objetivos del proyecto CIAA son:
+
+\begin{itemize}
+\item
+Impulsar el desarrollo tecnológico nacional, a partir de sumar valor agregado al trabajo y a los productos y servicios, mediante el uso de sistemas electrónicos, en el marco de la vinculación de las instituciones educativas y el sistema científico-tecnológico con la industria.
+\item
+Darle visibilidad positiva a la electrónica argentina.
+\item
+Generar cambios estructurales en la forma en la que se desarrollan y utilizan en nuestro país los conocimientos en el ámbito de la electrónica y de las instituciones y empresas que hacen uso de ella.
+\end{itemize}
+
+\noindent Todo esto en el marco de un trabajo libre, colaborativo y articulado entre industria y academia. 
+
+\bigskip
+
+Con esta iniciativa, se han desarrollado en la actualidad varias plataformas de hardware y entornos de programación para utilizarlas.
+
+\medskip
+
+Al momento de la presentación de este trabajo, existen dos versiones de la plataforma CIAA cuyo desarrollo ha sido completado:
+
+\begin{itemize}
+\item 
+CIAA-NXP, basada en el microcontrolador NXP LPC4337, que ya se comercializa.
+\item 
+CIAA-FSL, que utiliza, en cambio, el microcontrolador Freescale MK60FX512VLQ15, pero únicamente hay prototipos de esta plataforma. 
+\end{itemize}
+
+Además, existe una versión educativa de bajo costo de la CIAA-NXP, nombrada EDU-CIAA-NXP, que ya se distribuyeron alrededor de 1000 unidades y ya hay otras 1000 reservadas en producción. 
+
+\medskip
+
+Debido a estas razones, el trabajo se enfoca en el desarrollo de herramientas para programar las dos plataformas basadas en el microcontrolador NXP LPC4337. Se introducen a continuación las características de las mismas.
+
+
+
+
+Siendo el autor participante de este proyecto desde mediados de 2014, ocupando el rol de Responsable de Software-PLC mediante el aporte al proyecto CIAA de un IDE\footnote{IDE4PLC. Sitio web: \url{http://proyecto-ciaa.com.ar/devwiki/doku.php?id=desarrollo:software-plc}} que permite programar esta plataforma con lenguajes de PLC industriales (IEC-661131-3), se desea agregar en esta oportunidad la posibilidad de programar a esta plataforma con un lenguaje de programación orientado a objetos mediante el desarrollo de un IDE para tal fin.
+
 
 \subsection{CIAA-NXP}
 
-Saraza...
+La CIAA-NXP es la primera y única computadora del mundo que reúne dos cualidades:
+
+\begin{itemize}
+\item 
+Ser \textbf{Industrial}, ya que su diseño está preparado para las exigencias de confiabilidad, temperatura, vibraciones, ruido electromagnético, tensiones, cortocircuitos, etc., que demandan los productos y procesos industriales.
+\item 
+Ser \textbf{Abierta}, ya que toda la información sobre su diseño de hardware, firmware, software, etc. está libremente disponible en Internet bajo la Licencia BSD, para que cualquiera la utilice como quiera.
+\end{itemize}
+
+\noindent Esta plataforma se compone de:
+
+\begin{itemize}
+\item
+CPU: Microcontrolador NXP LPC 4337 JDB 144 (Dual-core Cortex-M4 + Cortex-M0 @ 204MHz).
+\item
+Debugger: USB-to-JTAG FT2232H. Soportado por OpenOCD.
+\item
+Memorias: 
+   \begin{itemize}
+   \item
+   IS42S16400F - SDRAM. 64Mbit @ 143MHz.
+   \item
+   S25FL032P0XMFI011 - Flash SPI. 32 Mbit, Quad I/O Fast read: 80 MHz.
+   \item
+   24AA1025 - EEPROM I2C. 1 Mbit, 400 kHz. Almacenamiento de propósito general, datos de calibración del usuario, etc.
+   \item
+   24AA025E48 - EEPROM I2C. 2 kbit, 400 kHz. Para implementación de MAC-Address o almacenamiento de propósito general.
+   \end{itemize}
+\item
+Entradas y salidas:   
+   \begin{itemize}
+   \item
+   8 entradas digitales opto-aisladas 24VDC.
+   \item
+   4 Entradas analógicas 0-10V/4-20mA.
+   \item
+   4 salidas Open-Drain 24VDC.
+   \item
+   4 Salidas con Relay DPDT.
+   \item
+   1 Salida analógica 0-10V/4-20mA.
+   \end{itemize}
+\item
+LV-GPIO:
+   \begin{itemize}
+   \item
+   14 GPIOs.
+   \item
+   I2C.
+   \item
+   SPI.
+   \item
+   4 canales analógicos.
+   \item
+   Aux. USB.
+   \end{itemize}
+\item
+Interfaces de comunicación:
+   \begin{itemize}
+   \item
+   Ethernet.
+   \item
+   USB On-The-Go.
+   \item
+   RS232.
+   \item
+   RS485.
+   \item
+   CAN.
+   \end{itemize}
+\item
+Múltiples fuentes de alimentación.
+
+\end{itemize}
+
+\noindent En la figura [\ref{fig:ciaaNxp}] se muestra una fotografía de la plataforma.
+
+\begin{figure}[!htbp]
+\begin{center}  %[width=14cm,height=8cm]
+\includegraphics*[width=\textwidth]{Figures/CIAA-NXP_Foto.png}
+\par\caption{Plataforma CIAA-NXP.}\label{fig:ciaaNxp}
+\end{center}
+\end{figure}
+
+
+%http://proyecto-ciaa.com.ar/devwiki/doku.php?id=desarrollo:hardware:ciaa_nxp:ciaa_nxp_inicio
 
 \subsection{EDU-CIAA-NXP}
 
-Saraza...
+La plataforma EDU-CIAA-NXP es un desarrollo colaborativo, realizado por miembros de la Red Universitaria de Sistemas Embebidos (RUSE), en el marco del Proyecto CIAA. RUSE se compone de docentes pertenecientes a más de 60 Universidades a lo largo y a lo ancho del país. 
+
+\medskip
+
+\noindent Los propósitos de la plataforma son: 
+
+\begin{itemize}
+\item
+Proveer una plataforma de desarrollo moderna, económica y de fabricación nacional basada en la CIAA-NXP, que sirva a docentes y a estudiantes en los cursos de sistemas embebidos.
+\item
+Lograr una amplia inserción en el sistema educativo argentino.
+\item
+Realizar un aporte eficaz al desarrollo de vocaciones tempranas en electrónica, computación e informática.
+\item
+Demostrar que las universidades argentinas son capaces de realizar un desarrollo colaborativo exitoso en el área de los sistemas embebidos, cumpliendo con requerimientos de tiempo y forma.
+\end{itemize}
+
+\medskip
+
+\noindent Características de la EDU-CIAA-NXP:
+
+\begin{itemize}
+\item
+CPU: Microcontrolador NXP LPC 4337 JDB 144 (Dual-core Cortex-M4 + Cortex-M0 @ 204MHz).
+\item
+Debugger: USB-to-JTAG FT2232H. Soportado por OpenOCD.
+\item
+2 puertos micro-USB (uno para aplicaciones y debug, otro OTG).
+\item
+6 salidas digitales implementadas con leds (3 normales y uno RGB).
+\item
+4 entradas digitales con pulsadores.
+\item
+1 puerto de comunicaciones RS-485 con bornera.
+\item
+2 conectores de expasión:
+   \begin{itemize}
+   \item
+   P0:
+      \begin{itemize}
+      \item
+      3 entradas analógicas (ADC0 a ADC2).
+      \item
+      1 salida analógica (DAC0).
+      \item
+      1 conexión para un teclado de 3 x 4.
+      \item
+      12 pines genéricos de I/O.
+      \end{itemize}
+   \item
+   P1:
+      \begin{itemize}
+      \item
+      1 puerto Ethernet.
+      \item
+      1 puerto CAN.
+      \item
+      1 puerto SPI.
+      \item
+      1 puerto I2C.
+      \item
+      12 pines genéricos de I/O.
+      \end{itemize}
+   \end{itemize}
+\end{itemize}
+
+\noindent En la figura [\ref{fig:eduCiaa}] se muestra una fotografía de esta plataforma.
+
+\begin{figure}[!htbp]
+\begin{center}  %[width=14cm,height=8cm]
+\includegraphics*[width=\textwidth]{Figures/EDU-CIAA-NXP_Foto.png}
+\par\caption{Plataforma EDU-CIAA-NXP.}\label{fig:eduCiaa}
+\end{center}
+\end{figure}
+
+\medskip 
+
+%http://proyecto-ciaa.com.ar/devwiki/doku.php?id=desarrollo:edu-ciaa:edu-ciaa-nxp
+
+% http://proyecto-ciaa.com.ar/devwiki/doku.php?id=start
 
 \subsection{Pico-CIAA}
 
-Saraza...
+http://www.proyecto-ciaa.com.ar/devwiki/doku.php?id=desarrollo:hardware:picociaa
+
+Procesador Dual-Core de 32 bits
+
+Tiene un procesador Dual Core de 32-bit ARM Cortex-M4F / Cortex-M0+ @100 MHz con 512kB flash y 104 kB SRAM, incluye debug vía un LPC11U35 programable.
+
+Diagrama en bloques
+
+Posee diversos puertos de comunicación, entre ellos USB, PCIExpress, UART, SPI, I2C y soporte para PWM y entradas y salidas digitales de propósito general.
+special
+
+Es la CIAA más pequeña
+
+Con sólo 51 x 30 mm la picoCIAA es la placa más pequeña de la familia CIAA,
+lo que la hace ideal para aplicaciones de internet de las cosas (IoT).
+
+Ideal en Single Board Computers
+
+Su interfaz PCI Express permite integrarla fácilmente en SBC de propósito general, para dar soporte de bajo nivel al manejo de dispositivos en tiempo real.
+
+\begin{figure}[!htbp]
+\begin{center}  %[width=14cm,height=8cm]
+\includegraphics*[width=\textwidth]{Figures/PicoCIAA_Foto.png}
+\par\caption{Plataforma PicoCIAA.}\label{fig:picoCiaa}
+\end{center}
+\end{figure}
 
 \subsection{CIAA-Z3R0}
 
-Saraza...
+Esta plataforma es ideal para aplicaciones de bajo consumo y proyectos de robótica educativa. Está diseñada para ser integrada como componente en un diseño mayor debido a su reducido tamaño conectándola mediante tiras de pines, o soldada a través de su borde de agujeros para montaje castellated.
+
+Se puede comprar en Argentina por aproximadamente AR \$400 a inicios de 2018.
+
+Posee la mayoría de los periféricos que se encuentran en la EDU-CIAA-NXP pero utiliza un microcontrolador siete veces más económico que esta última, de la empresa Silicon Labs, modelo EFM32HG322F64 (QFP48) con núcleo ARM Cortex-M0+ a 25MHz, 64KB de memoria Flash y 8KB de memoria SRAM, que es suficiente para que un alumno entre en el mundo de los microcontroladores modernos de 32 bits.
+
+El dispositivo de depuración se debe comprar por separado, sin embargo, mediante un único dispositivo de depuración se pueden programar muchas plataformas CIAAZ3R0.
+No es necesario dejar este circuito de depuración en el diseño final
+
+\begin{figure}[!htbp]
+\begin{center}  %[width=14cm,height=8cm]
+\includegraphics*[width=\textwidth]{Figures/CIAA-Z3R0_Foto.png}
+\par\caption{Plataforma CIAA-Z3R0.}\label{fig:ciaaZero}
+\end{center}
+\end{figure}
 
 \subsection{Arquitectura de Hardware}
 

@@ -1,14 +1,237 @@
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	SECTION
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 \section{Trabajo realizado}
 
 \emph{La idea de esta sección es resaltar cuáles son los principales aportes del trabajo realizado y cómo se podría continuar. Debe ser especialmente breve y concisa. Es buena idea usar un listado para enumerar los logros obtenidos.}
 
-%----------------------------------------------------------------------------------------
+
+% Que se logoro realizar (de objetivos) --> implementacion.
+% Que se logoro realizar (no planeado inicialmente) --> implementacion.
+% Que se diseño --> Diseño.
+	% Metodología aplicada 
+		% --> Diseño iterativo con implementaciones de referencia.
+	% Desafios a lo largo del proyecto.
+% Que conocimientos puse en práctica de la Especializacion.
+% Conocimientos adquiridos.
+% Reflexion final.
+
+En el presente Trabajo Final se ha logrado obtener un entorno de desarrollo para aplicaciones Java SCJ sobre las plataformas CIAA-NXP y EDU-CIAA-NXP, que además de ser software libre, cubre las necesidades planteadas, tanto al ofrecer programación orientada a objetos, así como funcionalidades de tiempo real para entornos industriales, sobre sistemas embebidos.
+
+\medskip
+
+Como subproducto, se obtiene además una biblioteca con una API sencilla para el manejo de periféricos de las plataformas CIAA-NXP y EDU-CIAA-NXP, que puede utilizarse en aplicaciones Java, o directamente en lenguaje C, debido a su diseño como módulo de Firmware de la CIAA. Se ha tenido especial cuidado en el diseño de esta biblioteca para que la misma sea lo más genérica posible logrando que además se comporte como una HAL.
+
+% Metodología aplicada 
+	% --> Diseño iterativo con implementaciones de referencia.
+
+% Desafios a lo largo del proyecto.
+
+\medskip
+
+El desarrollo de este Trabajo Final demandó la articulación de conocimientos  adquiridos a lo largo de la Carrera de Especialización en Sistemas Embebidos, en especial las asignaturas:
+
+\begin{itemize}
+\item
+\textbf{Arquitectura de microprocesadores}. De esta asignatura se emplean los conocimientos adquiridos sobre la arquitectura ARM Cortex M necesarios para implementar en lenguaje \textit{assembler} las funciones que realizan el cambio de contexto, necesarias para que funcione el concepto de Proceso SCJ. 
+\item
+\textbf{Programación de microprocesadores}. De esta asignatura se aprovecha la experiencia sobre lenguaje C para microcontroladores de 32 bits y el manejo de sus periféricos. Fue de especial importancia, debido a que; a excepción de unas pocas, todas las funciones para portar HVM a la CIAA debían realizarse en lenguaje C. Este lenguaje también se utilizó en la creación de  la API para el manejo de periféricos.
+\item
+\textbf{Ingeniería de software en sistemas embebidos}. Se aplican las metodologías de trabajo, provenientes de la ingeniería de software, que aportan calidad y eficiencia la desarrollo. En particular, el diseño iterativo, manejo repositorios de software y diseño modular en capas.
+\item
+\textbf{Gestión de Proyectos en Ingeniería}. Durante ésta se desarrolló el Plan de Proyecto del Trabajo Final, permitiendo desde un principio tener una clara planificación del trabajo a realizar. 
+\item
+\textbf{Sistemas Operativos de Proposito General}. Se usan los conocimientos adquiridos sobre Linux para probar las herramientas desarrolladas sobre este sistema operativo.
+\item
+\textbf{Sistemas Operativos de Tiempo Real (I y II)}. De estas asignaturas se aplica el conocimiento obtenido sobre planificadores de tareas expropiativos y la manera en que trabajan. Esto ha sido muy importante para la realización de este Trabajo Final. También la creación de módulos de Firmware para la CIAA.
+\item
+\textbf{Desarrollo de Sistemas Embebidos en Android}. La plataforma Andoid es un claro caso de éxito de programación en Java de sistemas embebidos (aunque no sea para aplicaciones induistriales). Si bien se contaba con experiencia en programación orientada a objetos en otros lenguajes, esta asignatura fue para el autor el primer acercamiento a dicho lenguaje. En consecuencia, mucho de lo aprendido colaboró en la decisión de llevar a cabo este trabajo.
+\item
+\textbf{Diseño de Sistemas Críticos}. Los conceptos de esta materia contribuyeron a comprender, inmediatamente, las importantes implicancias de poder programar aplicaciones SCJ en sistemas embebidos para aplicaciones industriales.
+\end{itemize}
+
+\medskip
+
+\noindent También, se han adquirido aprendizajes en las temáticas:
+
+\begin{itemize}
+\item
+Programación de aplicaciones en lenguaje Java.
+\item
+Especificaciones de Java, entre ellas, RTSJ y SCJ.
+\item
+Programación de aplicaciones SCJ.
+\item
+Experiencia en implementación de cambio de contexto, procesos y planificadores.
+\item
+Máquinas Virtuales de Java para sistemas embebidos y su funcionamiento interno.
+\item
+Desarrollo de una biblioteca Java para manejo de periféricos en sistemas embebidos. Conexión con bibliotecas nativas en lenguaje C.
+\end{itemize}
+
+\medskip
+
+Por lo tanto, se llega a la conclusión que los objetivos planteados al comenzar el trabajo han sido alcanzados satisfactoriamente, y además, se obtienen conocimientos muy importantes para la formación profesional del autor.
+
+---------------------------------------------------------------------
+
+CONCLUSIONES Y TRABAJOS  FUTUROS (paper sAPI)
+
+En base a los resultados obtenidos al utilizar la biblioteca en el dictado de diferentes cursos, asignaturas de diferentes niveles en la enseñanza, y la aceptación de múltiples programadores para sus proyectos personales, se cree que se ha logrado diseñar una biblioteca que permite la programación en lenguaje C de forma sencilla en plataformas embebidas basadas en microcontrolador sin la necesidad de conocer en detalle la arquitectura particular de cada uno de ellos. En particular, para programadores experimentados la biblioteca sAPI logra agilizar el desarrollo de aplicaciones mediante su directa utilización, extender o reconfigurar la misma de acuerdo a sus necesidades; o bien, tomarla como base para entender la programación de una plataforma particular revisando su código fuente. En el campo de la enseñanza de la programación de sistemas embebidos, permite concentrar los esfuerzos de los estudiantes novatos en entender la programación aplicaciones sobre sistemas embebidos en general, en lugar de una aprender la programación de una única plataforma particular, logrando que se entiendan los conceptos más importantes independientemente del hardware subyacente. Luego, con el avance de la formación un alumno puede entender como está realizada la biblioteca para una plataforma en particular y tomarla como un ejemplo de capa de abstracción de hardware. De esta manera se hace hincapié en todo momento en el hecho fundamental de diseñar aplicaciones independientes del hardware debido a la velocidad de cambio de estos dispositivos en el mercado.
+
+Aún se continúa portando la biblioteca a otros micro- controladores y mejorando su definición. Se prevé concluir para finales del presente año 2017 la implementación completa de biblioteca para las plataformas:
+
+CIAA-NXP.
+Pico-CIAA
+CIAA-PIC.
+
+Se desea además trabajar en el futuro cercano en el desarrollo de un simulador capaz de ejecutar un programa en C realizado con la biblioteca sAPI sobre una placa virtual en la PC para facilitar la enseñanza de la programación sin disponer de la plataforma física.
+
+
+---------------------------------------------------------------------
+
+CONCLUSIONES Y TRABAJO A FUTURO (paper tools)
+
+
+En base a los resultados obtenidos al utilizar la secuencia
+didáctica con las herramientas propuestas para enseñar
+programación de Sistemas Embebidos a lo largo de los cursos
+se cree que el enfoque utilizado es correcto y que el desarrollo
+y selección de las herramientas ha colaborado enormemente
+para lograr el objetivo que estudiantes sin experiencia previa,
+aprendan a programar Sistemas Embebidos desde lo más
+sencillo hasta utilizar las herramientas profesionales.
+
+El diseño de los cursos ha permitido que los estudiantes
+concentren sus esfuerzos en entender cómo se realizan
+aplicaciones con Sistemas Embebidos, en lugar de aprender la
+programación de una única plataforma particular, lo que hace
+posible comprender los conceptos importantes
+independientemente del hardware subyacente. Una vez
+adquiridas las nociones propuestas, el estudiante puede seguir
+profundizando sus conocimientos. De esta forma, se enfatiza
+en todo momento el hecho fundamental de diseñar
+aplicaciones independientes del hardware, un beneficio real
+dada la velocidad de cambio de los dispositivos en el mercado
+actual.
+
+Aún existe mucho trabajo por delante para continuar
+mejorando las herramientas, como el desarrollo de un
+simulador que permita virtualizar las plataformas de hardware,
+para tener la capacidad de ejecutar un programa escrito en C
+utilizando la biblioteca sAPI, dentro de la PC, para facilitar la
+enseñanza de la programación sin necesidad de una plataforma
+física del microcontrolador.
+
+---------------------------------------------------------------------
+
+%\section{Conclusión} %IDE4PLC
+%
+%
+%En este trabajo se ha logrado llevar a cabo un diseño completo de un micro PLC, incluyendo especificaciones de Hardware, Software base (sistema operativo, drivers, implementaciones de funciones standard, etc.), y formato que debe respetar el resultado de la compilación de programas definidos en los lenguajes de la norma IEC61131-3, para poder ejecutarse en equipos que se correspondan con el modelo diseñado.
+%
+%\medskip
+%
+%Por otra parte, se definen en detalle los siguientes aspectos salientes para la implementación de un entorno de edición de programas para PLC: comportamiento esperado de la interfaz de usuario, y requisitos que debe cumplir un modelo computacional de los conceptos y lenguajes de programación descriptos en la norma citada.
+%
+%\medskip
+%
+%Se buscó generar especificaciones que no dependieran de determinados componentes o fabricantes para el Hardware, ni de un Sistema Operativo específico para el entorno de edición de programas. Permitiendo así, construir un PLC de bajo costo de Hardware, de forma tal que pueda ser utilizado en ámbitos académicos y que, al mismo tiempo, permitan la edición de programas en forma ágil y cómoda, en particular para los lenguajes gráficos (Ladder y FBD) incluidos en la norma.
+%
+%\medskip
+%
+%Como parte del trabajo, se desarrolló una implementación que cumple con las pautas y definiciones incluidas en las distintas partes del diseño, utilizando componentes de Hardware económicos y fácilmente obtenibles; y un entorno de programación (para desarrollar el entorno de edición de programas) que puede obtenerse desde Internet en forma gratuita.
+%
+%\medskip
+%
+%Por lo tanto, se llega a la conclusión que los objetivos planteados al comenzar el trabajo han sido alcanzados satisfactoriamente.
+%
+%\medskip
+%
+%La definición del diseño fue llevada a cabo en conjunto, y en muchos casos influida por la construcción de implementaciones de referencia. Se culmina este Trabajo Final con la férrea convicción que esta manera de realizarlo, permitió llegar a diseños más acabados, brindando pautas concretas y realmente útiles para el desarrollo de futuras implementaciones.
+%
+%\medskip
+%
+%Por otro lado, el trabajo resultó sumamente arduo en varios aspectos; entre los se destacan: 
+%
+%\begin{itemize}
+%\item 
+%La gran cantidad de iteraciones y versiones preliminares que culminaron en la especificación presentada del modelo computacional referente a los conceptos y lenguajes de programación incluidos en la norma IEC61131-3.
+%\item 
+%La complejidad inherente a algunos detalles de la implementación de la interfaz de usuario para lenguajes gráficos, en particular el recálculo de las posiciones ante distintas acciones que puede llevar a cabo el usuario en un segmento de programa en lenguaje Ladder. 
+%\end{itemize}
+%
+%Considerando este último aspecto, si bien algunas características del Framework Morphic ayudaron en la implementación de referencia de la GUI, la poca documentación existente sobre esta herramienta, hizo que en muchas oportunidades fuera necesario revisar el código de sus clases constituyentes, recurriendo a las capacidades avanzadas de depuración de Pharo, que permiten examinar y modificar el código de su propia interfaz en tiempo de ejecución.
+%
+%\medskip
+%
+%Cabe resaltar que la utilización de los conceptos principales del paradigma de programación orientada a objetos, facilitó el desarrollo del diseño y su implementación de referencia. 
+%En particular, contribuyó a manejar la gran complejidad del modelo computacional de una Configuración de Software y de los programas incluidos, permitiendo la obtención de componentes bien definidos e interfaces claras entre los mismos, logrando que componentes de distintas características (como por ejemplo, los segmentos que corresponden a distintos lenguajes de programación IEC61131-3) puedan ensamblarse en forma sencilla dentro de un mismo diseño general.
+%
+%\medskip
+%
+%Además, el desarrollo de un modelo computacional adecuado referente a los conceptos de distintos lenguajes de programación, involucró investigar y adquirir conocimientos avanzados de programación, por ejemplo; tipos de datos, definiciones, declaraciones, parseo, compilación, etc. 
+%
+%
+%\medskip
+%
+%Otra herramienta clave para llevar a cabo esta labor, fue la experiencia adquirida en programación de Microcontroladores, siendo, el autor de este trabajo, alumno y auxiliar académico en las materias correspondientes, hecho que contribuyó en la investigación de uno de los Microcontroladores (y su IDE de desarrollo) más novedosos disponible en el mercado, utilizado para la implementación de referencia del Hardware.
+%
+%\medskip
+%
+%Concluyendo, la realización de este Trabajo Final demandó la articulación entre los conocimientos adquiridos a lo largo de la carrera y los aprendizajes incorporados, habilitando su puesta en práctica.
+
+%------------------------------------------------------------------------------
 %	SECTION
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 \section{Próximos pasos}
 
 \emph{Acá se indica cómo se podría continuar el trabajo más adelante.}
+
+
+Trabajo a futuro
+
+Como labor a futuro, pueden realizarse las siguientes tareas:
+
+
+-----------------------------------------------
+
+AGRADECIMIENTOS (paper tools)
+
+A Mg. Ing. Félix Safar, director del Programa de
+Investigación en el que participo en UNQ, y el departamento
+de ciencia y tecnología, dirigido por Dr. Alejandra Zinni por el
+apoyo al Programa de investigación.
+
+A Dr. Ing. Ariel Lutemberg, Dr. Ing. Pablo Gómez, Ing.
+José Juarez y otros docentes que confiaron en el criterio del
+autor, colaborando activamente en el uso de las herramientas y
+metodología propuestas.
+
+A Martín Ribleotta que ha sido un invaluable colaborador
+tanto en diseño como en la implementación de las
+herramientas.
+
+A Leandro Lanzieri Rodriguez por su colaboración en el
+Proyecto CIAA con el desarrollo de CIAABOT IDE.
+
+A la comunidad del proyecto CIAA que ha adoptado estas
+herramientas con grán entusiasmo, motivando al autor a
+continuar con la mejora continua de las mismas.
+
+-----------------------------------------------
+
+AGRADECIMIENTOS  (paper sAPI)
+A Martín Ribelotta cuya experiencia ha sido y continúa siendo un aporte fundamental durante el la revisión actual de la biblioteca.
+
+Al Dr. Ing. Ariel Lutemberg y al Dr. Ing. Pablo Gómez quienes confiaron en utilizar la misma para los CAPSE[].
+
+A los coordinadores del Proyecto CIAA[] para quienes han decidido utilizarla como biblioteca estándar para sus plataformas, en especial, al coordinador general Esp. Ing. Pablo Ridolfi.
+
+A los alumnos de la CESE (FI-UBA)[], IACI (UNQ)[] y los CAPSE para los cuales se fue desarrollando la biblioteca y recibieron muy entusiasmados impulsando el desarrollo.
+
+Finalmente, al Ing. Leonardo Gassman que ideó el nombre de la biblioteca durante el proyecto de Java[].
+
+
+
