@@ -19,6 +19,14 @@ Saraza...
 %------------------------------------------------------------------------------
 \subsection{Proyecto CIAA}
 
+De esta forma, es posible programarlos sin necesidad de conocer detalles sobre
+la arquitectura subyacente. Este diseño promueve y permite la programación 
+independiente del hardware, reduciendo la complejidad general del desarrollo de
+sistemas embebidos. Esta biblioteca se utilizará para programar las diferentes
+plataformas que componen el Proyecto Computadora Industrial Abierta Argentina 
+(CIAA).
+
+
 Saraza...
 
 
@@ -29,17 +37,24 @@ Existen también muchas bibliotecas que logran una buena abstracción del hardwa
 
 En el sector de la industria automotriz existe un estándar llamado AUTOSAR[] para la estandariza- ción de la  arquitectura de sistemas electrónicos que aún no ha logrado extenderse a otras industrias y cuya definición de bibliotecas propuesta es muy extensa y compleja de implementar y también para aprender a utilizar.
 Bibliotecas de drivers basadas en POSIX[] (que podemos hallar en sistemas con en Linux Embebido como Raspberry Pi[]). Su abstracción ha sido muy útil en la estandarización de drivers para PCs con sistema operativo Unix-compatible. Sin embargo, es tan alejada del hardware físico que en la práctica provoca una muy baja utilización por parte de los profesionales electrónicos y afines que se dedican a la programación de sistemas embebidos.
+
 Programadores hobbistas de sistemas embebidos han impulsado la  estandarización de la programación mediante una biblioteca conocida como Wiring[] disponible para múltiples plataformas (como la popular Arduino[]). Esta biblioteca si bien logra una gran facilidad de uso y rápido aprendizaje contiene algunas imprecisiones técnicas que provoca vicios indeseados en el aprendizaje de programación de microcontroladores. También carece de definición de una API para la utilización del periférico temporizador el cual es muy utilizado en un microcontrolador.
+
 En la actualidad existen muchos fabricantes de microcontroladores que adquieren licencias para la fabricación de microcontroladores con núcleos de procesamiento de arquitecturas Cortex M[] diseñados por la empresa ARM[]. Para los mismos existe una biblioteca estándar llamada CMSIS{} para la programación del núcleo de procesamiento y controlador de interrupciones pero que no se extiende a los perifŕicos donde cada fabricante busca diferenciarse de sus competidores.
+
 Otras empresas muy difundidas en el campo de la enseñanza en la programación como Microchip[] proveen bibliotecas muy dependientes del hardware y generadores automatizados de código que si bien en principio aceleran los tiempos de desarrollo, cuando una aplicación requiere modos más avanzados terminan dificultando la programación pues unas configuraciones pisan a las otras provocando que no funcione.
 
 De los ejemplos anteriores se observa que para la realización de una biblioteca estándar que satisfaga a los diferentes usuarios se debe lograr un balance entre:
 
-Extensión de la definición de la API.
-Dependencia del hardware.
-Nivel de abstracción.
-Complejidad de aprendizaje y uso.
-Periféricos y modos soportados.
-Escalabilidad.
+\begin{itemize}
+\item Extensión de la definición de la API.
+\item Dependencia del hardware.
+\item Nivel de abstracción.
+\item Complejidad de aprendizaje y uso.
+\item Periféricos y modos soportados.
+\item Escalabilidad.
+\end{itemize}
+
+
 
 Por estos motivos se decide realizar la definición de una API de una biblioteca estándar para microcontroladores  en lenguaje C que supere todas estas dificultades.
