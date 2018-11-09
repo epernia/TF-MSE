@@ -6,63 +6,18 @@
 
 \emph{La idea de esta sección es presentar el tema de modo que cualquier persona que no conoce el tema pueda entender de qué se trata y por qué es importante realizar este trabajo y cuál es su impacto.}
 
+En la actualidad existe una enorme variedad plataformas de sistemas embebidos en el mercado, y si bien todas cuentan con dispositivos programables con características similares y periféricos compatibles, se observa que a la hora de programarlos son distintos. En consecuencia, el profesional que se dedica a la programación de sistemas embebidos debe invertir mucho tiempo en aprender a programar cada nueva plataforma.
 
-En la actualidad la programación de plataformas basadas en microcontrolador se realiza su mayoría en lenguaje C utilizando bibliotecas para el manejo del núcleo de procesamiento (o los núcleos) y periféricos. En consecuencia, una biblioteca de C es parte integral de cualquier diseño de sistema embebido basado en microcontrolador. 
+Estas diferencias se deben a que los fabricantes de los dispositivos programables y empresas asociadas poseen sus respectivas arquitecturas de hardware (tanto en núcleos de procesamiento, como periféricos). Cada periférico exhibe externamente la funcionalidad esperada, pero su configuración y uso es diferente. Si bien permite elegir el dispositivo programable que más se adecúe a un proyecto utilizando múltiples criterios y da a los fabricantes la posibilidad de diferenciarse frente a la competencia, causa que el programador deba conocer en detalle la arquitectura en particular del dispositivo a la hora de utilizarlo.
 
-En este trabajo se presenta un diseño de biblioteca de programación de plataformas de Sistemas Embebidos basadas en microcontrolador de forma sencilla. La misma permite utilizar los modos más comunes de los periféricos típicos de un microcontrolador (tanto del núcleo de procesamiento como sus periféricos). Se expone además las características de implementación de referencia sobre la plataforma EDU-CIAA-NXP.
+Además, estas empresas en su mayoría se limitan a ofrecer información de bajo nivel para programar el hardware directamente (escribiendo registros), o bien, sus propias bibliotecas escritas en lenguaje C, que están diseñadas con una gran dependencia de la arquitectura de hardware subyacente, es decir, carecen de abstracción del hardware.
 
+Por otro lado, se están portando cada vez más lenguajes de programación a las plataformas de Sistemas Embebidos, que antes se reservaban para las computadoras de propósito general. Esto se debe a que las nuevas plataformas poseen cada vez más poder de procesamiento y memoria, a causa de la complejidad creciente de las aplicaciones deseadas. En consecuencia se utilizan lenguajes de programación más modernos, en parte por su mayor capacidad de abstacción, y en parte para estandarizar el lenguaje de programación de una aplicación en la que intervienen sistemas embebidos y computadoras de propósito general, siendo un ejemplo típico una aplicación de IoT\footnote{Del inglés \emph{Internet of Things}, es decir, Internet de las cosas, donde intervienen en una aplicación sistemas embebidos distribuídos, concentradores y servidores.}.
 
+Existen múltiples desarrollos de bibliotecas que logran una abstracción de hardware aceptable. Sin embargo, ninguna de estas se ha adoptado como estándar de facto en la industria y el alcance de las mismas se limita a cubrir plataformas de cierto ecosistema en el marco de una empresa o comunidad y soportan un único lenguaje de programación (en general C o C++).
 
+Este Trabajo Final intenta contribuir a la resolución de esta problemática mediante la sistematización de la implementación de bibliotecas para sistemas embebidos. Para ello se presenta el diseño de una biblioteca para la programación de sistemas embebidos modelada independientemente del lenguaje de programación y arquitectura del hardware.
 
+También se realizaron herramientas de código abierto para desarrolladores que automatizan gran parte de la implemetación de la biblioteca en una nueva plataforma en base a na descripción de la misma, así como la definición de nuevos módulos de bibliotecas. De esta manera se facilita la futura ampliación de la biblioteca y su implementación en diferentes plataformas de hardware.		
 
-
-
-En la actualidad existe una enorme variedad plataformas de Sistemas Embebidos en el mercado, y si bien todas cuentan con dispositivos programables con características similares y periféricos compatibles, se observa que en la práctica son muy distintos. En consecuencia se debe invertir mucho tiempo en aprender a programar cada una de ellas, con sus particularidades antes de su utilización. Estas diferencias se deben a varios factores:
-
-\begin{itemize}
-   \item Los fabricantes de los dispositivos programables y empresas asociadas carecen de diseños estándar de arquitectura de hardware (tanto en núcleos de procesamiento, como periféricos). Si bien esto trae el beneficio de permitir elegir el dispositivo programable que más se adecúe a un proyecto, también es la principal causa de la necesidad de conocer en detalle la arquitectura en particular.
-   \item Dichas empresas en su mayoría se limitan a ofrecer información de bajo nivel para programar el hardware directamente, o bien, sus propias bibliotecas escritas en lenguaje C, que están diseñadas con una gran dependencia de la arquitectura de hardware subyacente, es decir, carecen de abstracción del hardware.
-\end{itemize}
-
-
-
-
-Se están portando cada vez más lenguajes de programación a las plataformas de Sistemas Embebidos, que antes se reservaban para las computadoras de propósito general (como la PC).
-Esto se debe a que las nuevas plataformas poseen más poder de procesamiento y debido a la complejidad creciente de las aplicaciones se exige más características y abstracción a los lenguajes de programación.
-
-Existen algunos desarrollos de bibliotecas que logran una abstracción de hardware aceptable en varias plataformas, pero que están escritas en un único lenguaje de programación y para el ecosistema de plataformas que soportan la empresa o comunidad involucrada. Ninguna de ellas se ha adoptado como estándar de facto.
-
-
-
-
-
-Debido a la amplia variedad de plataformas de hardware y lenguajes de programación, se propone en este proyecto la realización del diseño de una biblioteca modelada independientemente del lenguaje de programación y arquitectura del hardware, con la intención de convertirlo en una propuesta de estándar para la programación de Sistemas Embebidos. Se tendrá en cuenta en el modelado lograr una buena relación de compromiso entre el nivel de abstracción para independizarse del hardware y los conceptos que espera encontrar un programador de Sistemas embebidos.
-Como el lenguaje más utilizado en la actualidad para programación de sistemas embebidos basados en microcontroladores continúa siendo el lenguaje C, se realizará una implementación de referencia para dicho lenguaje.
-
-Dado que el presente autor cumple el rol de Coordinador General del proyecto de hardware y software abierto "Computadora Industrial Abierta Argentina (CIAA)" se realizará la implementación de referencia tomando las plataformas de hardware diseñadas en el marco de este proyecto como casos de validación del diseño de biblioteca a realizar. Esto permitirá a la comunidad de usuarios de las plataformas del Proyecto CIAA programar las diferentes plataformas utilizando la misma biblioteca, reduciendo tiempos de aprendizaje y desarrollo.
-
-Este trabajo es parte de un grupo de iniciativas promovidas por la Universidad Nacional de Quilmes para colaborar en el marco del Proyecto CIAA, para facilitar el desarrollo y la enseñanza de Sistemas Embebidos en Argentina. Otras iniciativas incluyen: entorno de programación PLC Ladder (IDE4PLC), programación Java para CIAA (CIAA-HVM), Firmata4CIAA (para facilitar la programación de bloques gráficos en BYOB Snap! lenguaje para uso en escuelas secundarias) y CIAABOT IDE.
-
-
-
-
-
-
-El autor actualmente cumple el rol de coordinador general de una comunidad de desarrolladores de herramientas de software y hardware abierto llamado Proyecto CIAA\footnote{Siglas de Computadora Industrial Abierta Argentina.} [ ], que desde sus inicios a fines de 2013 intenta impulsar el desarrollo tecnológico nacional proveyendo herramientas abiertas de software y hardware, para mejorar la situación industrial, darle visibilidad a la electrónica y generar cambios estructurales en la forma en que se generan, comparten y utilizan los conocimientos en Argentina. Este proyecto está formado por profesionales de la electrónica y carreras afines.
-
-Entre los principales logros del proyecto se destacan:
-
-\begin{itemize}
-\item
-Se creó una comunidad de desarrolladores de software y hardware abierto con participación de profesionales, docentes Universitarios, alumnos y docentes de escuelas Secundarias a nivel nacional.
-\item
-Se desarrollaron múltiples diseños de referencia de plataformas de hardware para sistemas embebidos. Estas plataformas fueron diseñadas para diferentes casos de uso, entre ellos: educativo, intrustrial, sistema crítico y alta capacidad de cómputo.
-\item
-Se logró la colaboración de empresas nacionales para la fabricación y comercialización de la mayoría de estas plataformas.
-\item
-Se crearon bibliotecas, frameworks y entornos de programación para las plataformas, contando con múltiples lenguajes de programación.
-\item
-En colaboración con la RUSE\footnote{Red Universitaria de Sistemas Embebidos.} [], se insertó la plataforma educativa EDU-CIAA-NXP en las Universidades con carreras de electrónica o afines, a lo largo y a lo ancho del país. De esta forma se logró modernizar las herramientas que utilizan los alumnos en su aprendizaje, alcanzandon el estado del arte.
-\item
-Se han dictado múltiples cursos para docentes y alumnos de escuelas Secundarias, docentes y alumnos Universitarios y público interesado.
-\end{itemize}
+Utilizando estas herramientas se realizó una implementación de referencia en lenguaje C para las plataformas del Proyecto CIAA []. Para su validación, se realizó un banco de pruebas de hardware, junto a la utilización de testeo unitario e integración contínua.	

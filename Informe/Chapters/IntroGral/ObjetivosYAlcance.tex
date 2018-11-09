@@ -10,18 +10,20 @@ En esta sección se definen los objetivos (sección \ref{subsec:objetivos}) y el
 \subsection{Objetivos}
 \label{subsec:objetivos}
 
-El objetivo de este proyecto es diseñar e implementar una biblioteca de
-software para la programación de sistemas embebidos basados en
-microcontroladores con las siguientes características: 
+El objetivo de este proyecto es diseñar e implementar una biblioteca de software para la programación de sistemas embebidos basados en microcontroladores con las siguientes características: 
 
 \begin{itemize}
-   \item Estar modelada independientemente de los lenguajes de programación.
-   \item Definir una interfaz de programación de aplicaciones (API) sencilla que abstraiga los modos de uso más comunes de los periféricos típicos que hallados en cualquier microcontrolador del mercado. 
-   \item Ser totalmente portable entre diferentes arquitecturas de hardware sobre donde se ejecuta, manteniendo una API uniforme a lo largo de las mismas\footnote{Debe cumplir la función de capa de abstracción de hardware, o \textit{Hardware Abstraction Layer} (HAL),  en inglés}.
+\item
+Estar modelada independientemente de los lenguajes de programación.
+\item
+Definir una interfaz de programación de aplicaciones (API) sencilla que abstraiga los modos de uso más comunes de los periféricos típicos que hallados en cualquier microcontrolador del mercado. 
+\item 
+Ser totalmente portable entre diferentes arquitecturas de hardware sobre donde se ejecuta, manteniendo una API uniforme a lo largo de las mismas\footnote{Debe cumplir la función de capa de abstracción de hardware.
+\item
+Útil tanto para enseñanza de programación de sistemas embebidos como para uso a nivel industrial.
 \end{itemize}
 
-Dicha biblioteca se deberá implementar en lenguaje C para las plataformas del
-Proyecto CIAA.
+La implementación de refernecia se realizará en lenguaje C para las plataformas del Proyecto CIAA.
 
 %------------------------------------------------------------------------------
 \subsection{Alcance}
@@ -30,15 +32,20 @@ Proyecto CIAA.
 Este Trabajo Final incluye realización de:
 
 \begin{itemize}
-   \item Diseño de la biblioteca. Archivos de descripción de la biblioteca mediante diferentes diagramas y código independiente del lenguaje de programación.
-   \item Implementación en lenguaje C de la biblioteca para las plataformas de hardware:
-   \begin{itemize}
-      \item CIAA-NXP.
-      \item EDU-CIAA-NXP.
-      \item CIAA-Z3R0.
-      \item PicoCIAA.
-   \end{itemize}
-   \item Manual de instalación de las herramientas para utilizar la biblioteca con las plataformas de hardware citadas.
-   \item Manual de referencia de la biblioteca.
-   \item Ejemplos de utilización.
+\item
+Diseño de la biblioteca. Archivos de descripción de la biblioteca mediante diferentes diagramas y código independiente del lenguaje de programación.
+\item 
+Implementación en lenguaje C de la biblioteca para las plataformas de hardware:
+\begin{itemize}
+\item CIAA-NXP.
+\item EDU-CIAA-NXP.
+\item CIAA-Z3R0.
+\item PicoCIAA.
+\end{itemize}
+\item 
+Manual de instalación de las herramientas para utilizar la biblioteca con las plataformas de hardware citadas.
+\item 
+Manual de referencia de la biblioteca.
+\item 
+Ejemplos de utilización.
 \end{itemize}
