@@ -288,6 +288,9 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 
 %------------------------------------------------------------------------------
 
+\newcommand{\titulo}[1]{\bigskip \noindent\textbf{#1} \\} % @Eric
+\newcommand{\subtitulo}[1]{\bigskip \noindent\textit{#1} \\} % @Eric
+
 %------------------------------------------------------------------------------
 
 % Incluir los capítulos como archivos separados desde la carpeta Chapters
@@ -296,7 +299,9 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 % Introducción General
 \chapter{Introducción General}
 \label{ChapterIntroGral}
-%\include{Chapters/IntroGral/ContextoYJustificacion}
+
+En este capítulo se presenta el contexto y justificación de este trabajo final (\ref{sec:contextoYJustificacion}), la motivación para llevarlo a cabo (\ref{sec:motivacion}), sus objetivos y alcance (\ref{sec:objetivosAlance}).
+
 \input{Chapters/IntroGral/ContextoYJustificacion}
 \input{Chapters/IntroGral/Motivacion}
 \input{Chapters/IntroGral/ObjetivosYAlcance}
@@ -305,6 +310,9 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 \chapter{Introducción Específica}
 \label{ChapterIntroEsp}
 
+En este capítulo se explican los detalles para comprender las decisiones de diseño adoptadas. En particular, en la sección \ref{sec:antecedentes} se describen los trabajos previos que se tomaron como fundamento para el diseño de la biblioteca, en la sección \ref{sec:ciaaBoards} se presentan las plataformas sobre las cuales se elige realizar la implementación de la misma, así como las herramientas provistas por los fabricantes de sus respectivos microcontroladores. Considerando las secciones anteriores, se presentan los requerimientos de este trabajo (\ref{sec:requerimientos}) y la planificación para el cumplimiento de los mismos (\ref{sec:planificacion}).
+
+\input{Chapters/IntroEspecifica/Antecedentes} 
 \input{Chapters/IntroEspecifica/CIAA_Boards} 
 \input{Chapters/IntroEspecifica/Requerimientos} 
 \input{Chapters/IntroEspecifica/Planificacion} 

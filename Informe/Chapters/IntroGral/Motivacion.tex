@@ -4,7 +4,9 @@
 \section{Motivación}
 \label{sec:motivacion}
 
-El autor actualmente cumple el rol de coordinador general de una comunidad de desarrolladores de herramientas de software y hardware abierto llamado Proyecto CIAA\footnote{Siglas de Computadora Industrial Abierta Argentina.} [ ], que desde sus inicios a fines de 2013 intenta impulsar el desarrollo tecnológico nacional proveyendo herramientas abiertas de software y hardware, para mejorar la situación industrial, darle visibilidad a la electrónica y generar cambios estructurales en la forma en que se generan, comparten y utilizan los conocimientos en Argentina. Este proyecto está formado por profesionales de la electrónica y carreras afines.
+Este trabajo es parte de un grupo de iniciativas realizadas por el autor (docente e investigador en la Universidad Nacional de Quilmes), para colaborar en el marco del Proyecto CIAA, con el objetivo de facilitar el desarrollo y la enseñanza de Sistemas Embebidos en Argentina. Otras iniciativas incluyen: entorno de programación PLC Ladder (IDE4PLC), programación Java para CIAA (CIAA-HVM), Firmata4CIAA (para facilitar la programación de bloques gráficos en BYOB Snap! lenguaje para uso en escuelas secundarias). 
+
+El proyecto CIAA nació en 2013 como una iniciativa conjunta entre el sector académico y el industrial, representados por la ACSE\footnote{Asociación Civil para la investigación, promoción y desarrollo de los Sistemas electrónicos Embebidos. Sitio web: \url{http://www.sase.com.ar/asociacion-civil-sistemas-embebidos}} y CADIEEL\footnote{Cámara Argentina de Industrias Electrónicas, Electromecánicas y Luminotécnicas. Sitio web: \url{http://www.cadieel.org.ar/}} respectivamente. Consiste en una comunidad argentina de desarrolladores de herramientas de software y hardware abierto y usuarios que desde sus inicios intenta impulsar el desarrollo tecnológico nacional proveyendo herramientas abiertas de software y hardware, para mejorar la situación industrial, darle visibilidad a la electrónica y generar cambios estructurales en la forma en que se generan, comparten y utilizan los conocimientos en Argentina.
 
 Entre los principales logros del proyecto se destacan:
 
@@ -12,108 +14,19 @@ Entre los principales logros del proyecto se destacan:
 \item
 Se creó una comunidad de desarrolladores de software y hardware abierto con participación de profesionales, docentes Universitarios, alumnos y docentes de escuelas Secundarias a nivel nacional.
 \item
-Se desarrollaron múltiples diseños de referencia de plataformas de hardware para sistemas embebidos. Estas plataformas fueron diseñadas para diferentes casos de uso, entre ellos: educativo, intrustrial, sistema crítico y alta capacidad de cómputo.
+Se desarrollaron múltiples diseños de referencia de plataformas de hardware para sistemas embebidos. Estas plataformas fueron diseñadas para diferentes casos de uso, entre ellos: educativo, industrial, sistema crítico y alta capacidad de cómputo.
 \item
 Se logró la colaboración de empresas nacionales para la fabricación y comercialización de la mayoría de estas plataformas.
 \item
-Se crearon bibliotecas, frameworks y entornos de programación para las plataformas, contando con múltiples lenguajes de programación.
+Se crearon bibliotecas, \emph{frameworks}\footnote{EXPLICAR FRAMEWORK} y entornos de programación para las plataformas, contando con múltiples lenguajes de programación.
 \item
-En colaboración con la RUSE\footnote{Red Universitaria de Sistemas Embebidos.} [], se insertó la plataforma educativa EDU-CIAA-NXP en las Universidades con carreras de electrónica o afines, a lo largo y a lo ancho del país. De esta forma se logró modernizar las herramientas que utilizan los alumnos en su aprendizaje, alcanzandon el estado del arte.
+En colaboración con la RUSE\footnote{Red Universitaria de Sistemas Embebidos.} [], se insertó la plataforma educativa EDU-CIAA-NXP en las Universidades con carreras de electrónica o afines, a lo largo y a lo ancho del país. De esta forma se logró modernizar las herramientas que utilizan los alumnos en su aprendizaje, alcanzando el estado del arte.
 \item
 Se han dictado múltiples cursos para docentes y alumnos de escuelas Secundarias, docentes y alumnos Universitarios y público interesado.
 \end{itemize}
 
-Tanto en el trabajo realizado para la implementación de bibliotecas para diferentes paltaformas del proyecto CIAA. Como en el trabajo 
+El autor de este Trabajo final cumple actualmente el rol de coordinador general del proyecto CIAA. Tanto en el trabajo realizado para la implementación de bibliotecas para diferentes plataformas en el marco de este proyecto, como en el trabajo profesional, ha notado problemática de falta de estadarización en las bibliotecas de sistemas embebidos detallada en la sección \ref{sec:contextoYJustificacion}.
 
-Mediante la experiencia adquirida como desarrollador de sistemas embebidos la problemática d
+Se considera de importancia estratégica para el proyecto CIAA que todas las plataformas de hardware diseñadas en el marco del mismo se programen utilizando la misma biblioteca para permitir a la comunidad de usuarios reducir tiempos de aprendizaje y desarrollo.
 
-
-se realizará la implementación de referencia tomando las plataformas de hardware diseñadas en el marco de este proyecto como casos de validación del diseño de biblioteca a realizar. Esto permitirá a la comunidad de usuarios de las plataformas del Proyecto CIAA programar las diferentes plataformas utilizando la misma biblioteca, reduciendo tiempos de aprendizaje y desarrollo.
-
-
-
-
-
-
-
-
-
-
-En la actualidad la programación de plataformas basadas en microcontrolador se realiza su mayoría en lenguaje C utilizando bibliotecas para el manejo del núcleo de procesamiento (o los núcleos) y periféricos. En consecuencia, una biblioteca de C es parte integral de cualquier diseño de sistema embebido basado en microcontrolador. 
-
-En este trabajo se presenta un diseño de biblioteca de programación de plataformas de Sistemas Embebidos basadas en microcontrolador de forma sencilla. La misma permite utilizar los modos más comunes de los periféricos típicos de un microcontrolador (tanto del núcleo de procesamiento como sus periféricos). Se expone además las características de implementación de referencia sobre la plataforma EDU-CIAA-NXP.
-
-%------------------------------------------------------------------------------
-\subsection{Lenguajes de programación y Hardware en Sistemas Embebidos}
-
-Saraza...
-
-
-%------------------------------------------------------------------------------
-\subsection{Bibliotecas para microcontroladores ofrecidas por los fabricantes}
-
-Saraza...
-
-%------------------------------------------------------------------------------
-\subsection{Proyecto CIAA}
-
-De esta forma, es posible programarlos sin necesidad de conocer detalles sobre
-la arquitectura subyacente. Este diseño promueve y permite la programación 
-independiente del hardware, reduciendo la complejidad general del desarrollo de
-sistemas embebidos. Esta biblioteca se utilizará para programar las diferentes
-plataformas que componen el Proyecto Computadora Industrial Abierta Argentina 
-(CIAA).
-
-
-
-Este diseño promueve y permite la programación independiente del hardware, reduciendo la complejidad general del desarrollo de sistemas embebidos. Esta biblioteca se utilizará para programar las diferentes plataformas que componen el Proyecto Computadora Industrial Abierta Argentina.
-
-
-
-
-
-De esta forma, es posible programarlos sin necesidad de conocer detalles sobre la arquitectura subyacente. Este diseño promueve y permite la programación independiente del hardware, reduciendo la complejidad general del desarrollo de sistemas embebidos. Esta biblioteca se utilizará para programar las diferentes plataformas que componen el Proyecto Computadora Industrial Abierta Argentina.
-
-
- 
-
-
-
-Se tendrá en cuenta en el modelado lograr una buena relación de compromiso entre el nivel de abstracción para independizarse del hardware y los conceptos que espera encontrar un programador de Sistemas embebidos.
-
-
-
-Como el lenguaje más utilizado en la actualidad para programación de sistemas embebidos basados en microcontroladores continúa siendo el lenguaje C, se realizará la implementación de referencia para dicho lenguaje.
-
-
-
-
-En el mercado se encuentra una gran variedad de plataformas basadas en microcontrolador y aunque todas ellas poseen microcontroladores con características similares y periféricos compatibles, sin embargo, sus bibliotecas son muy diferentes. Esto se debe a que cada fabricante y/o empresas asociadas ofrece sus propias bibliotecas en lenguaje C las cuales están diseñadas fuertemente dependientes de cada arquitectura de cada microcontrolador que estas plataformas contienen.
-Existen también muchas bibliotecas que logran una buena abstracción del hardware en varias plataformas, pero ninguna se ha adoptado como estándar general. Esto se debe a múltiples causas, entre ellas:
-
-
-En el sector de la industria automotriz existe un estándar llamado AUTOSAR[] para la estandariza- ción de la  arquitectura de sistemas electrónicos que aún no ha logrado extenderse a otras industrias y cuya definición de bibliotecas propuesta es muy extensa y compleja de implementar y también para aprender a utilizar.
-Bibliotecas de drivers basadas en POSIX[] (que podemos hallar en sistemas con en Linux Embebido como Raspberry Pi[]). Su abstracción ha sido muy útil en la estandarización de drivers para PCs con sistema operativo Unix-compatible. Sin embargo, es tan alejada del hardware físico que en la práctica provoca una muy baja utilización por parte de los profesionales electrónicos y afines que se dedican a la programación de sistemas embebidos.
-
-Programadores hobbistas de sistemas embebidos han impulsado la  estandarización de la programación mediante una biblioteca conocida como Wiring[] disponible para múltiples plataformas (como la popular Arduino[]). Esta biblioteca si bien logra una gran facilidad de uso y rápido aprendizaje contiene algunas imprecisiones técnicas que provoca vicios indeseados en el aprendizaje de programación de microcontroladores. También carece de definición de una API para la utilización del periférico temporizador el cual es muy utilizado en un microcontrolador.
-
-En la actualidad existen muchos fabricantes de microcontroladores que adquieren licencias para la fabricación de microcontroladores con núcleos de procesamiento de arquitecturas Cortex M[] diseñados por la empresa ARM[]. Para los mismos existe una biblioteca estándar llamada CMSIS{} para la programación del núcleo de procesamiento y controlador de interrupciones pero que no se extiende a los perifŕicos donde cada fabricante busca diferenciarse de sus competidores.
-
-Otras empresas muy difundidas en el campo de la enseñanza en la programación como Microchip[] proveen bibliotecas muy dependientes del hardware y generadores automatizados de código que si bien en principio aceleran los tiempos de desarrollo, cuando una aplicación requiere modos más avanzados terminan dificultando la programación pues unas configuraciones pisan a las otras provocando que no funcione.
-
-De los ejemplos anteriores se observa que para la realización de una biblioteca estándar que satisfaga a los diferentes usuarios se debe lograr un balance entre:
-
-\begin{itemize}
-\item Extensión de la definición de la API.
-\item Dependencia del hardware.
-\item Nivel de abstracción.
-\item Complejidad de aprendizaje y uso.
-\item Periféricos y modos soportados.
-\item Escalabilidad.
-\end{itemize}
-
-
-
-
-
-Este trabajo es parte de un grupo de iniciativas promovidas por la Universidad Nacional de Quilmes, para colaborar en el marco del Proyecto CIAA, con el objetivo de facilitar el desarrollo y la enseñanza de Sistemas Embebidos en Argentina. Otras iniciativas incluyen: entorno de programación PLC Ladder (IDE4PLC), programación Java para CIAA (CIAA-HVM), Firmata4CIAA (para facilitar la programación de bloques gráficos en BYOB Snap! lenguaje para uso en escuelas secundarias) y CIAABOT IDE (en colaboración con UTN-FRA).
+Como el lenguaje más utilizado en la actualidad para programación de sistemas embebidos basados en microcontroladores continúa siendo el lenguaje C, se decide realizar la implementación de la biblioteca en este lenguaje.
