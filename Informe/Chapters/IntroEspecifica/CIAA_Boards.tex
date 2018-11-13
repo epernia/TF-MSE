@@ -172,7 +172,7 @@ Ejemplos: incluye un extenso conjunto de ejemplos diseñados para ilustrar cómo
 
 Para la incialización del sistema utiliza la parte de CMSIS Core que inicializa cada uno de sus núcleos de procesamiento.
 
-Si bien contiene buenos ejemplos para comenzar a utilizar los microcontroladores LPC, sus drivers de periféricos están relacionados directamente con su arquitectura de hardware y proveen una muy baja abstracción de la misma. Además, tiene una falla grave en su diseño duplicando el código de las bibliotecas de periféricos para cada núcleo de procesamiento de un mismo microcontrolador.
+Si bien contiene buenos ejemplos para comenzar a utilizar los microcontroladores LPC, sus drivers de periféricos están relacionados directamente con su arquitectura de hardware y proveen una muy baja abstracción de la misma. Además, tiene código duplicado de las bibliotecas de periféricos para cada núcleo de procesamiento de un mismo microcontrolador restándole mantenibilidad.
 
 MCUXpresso de NXP es la evolución de LPCOpen luego de que NXP adquiera a Freescale,  agregando soporte a las líneas de microcontroladores Kinetis [] e i.MX RT []. Requiere registrarse para tener acceso a la misma. Posee soporte únicamente para el microcontrolador LPC54102 de este trabajo.
 
