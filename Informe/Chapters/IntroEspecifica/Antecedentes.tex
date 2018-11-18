@@ -4,19 +4,25 @@
 \section{Antecedentes}
 \label{sec:antecedentes}
 
-Los primeros pasos para la idea de la realización de este trabajo surgen del Trabajo Final de la Carrera de Especialización en Sistemas Embebidos de la Universidad de Buenos Aires (CESE FIUBA) [], realizado por el autor, titulado "Desarrollo de Firmware y Software para programar la CIAA en lenguaje JAVA con aplicación en entornos Industriales" [] (presentado en diciembre de 2015), donde como parte del trabajo se implementó la programación de plataformas de sistemas embebidos en lenguaje Java []. 
+Los primeros pasos para la idea de la realización de este trabajo surgen del trabajo final de la Carrera de Especialización en Sistemas Embebidos de la Universidad de Buenos Aires (CESE FIUBA) [], realizado por el autor, titulado "Desarrollo de Firmware y Software para programar la CIAA en lenguaje JAVA con aplicación en entornos Industriales" [] presentado en diciembre de 2015, donde como parte del trabajo se implementó la programación de plataformas de sistemas embebidos en lenguaje Java []. 
 
-En ese trabajo se realizó, entre otras cosas, la implementación de una biblioteca para acceder a los periféricos de un microcontrolador en lenguaje Java. Para llevarlo a cabo se realizó la definición de clases que modelan los periféricos GPIO, ADC y UART y se implementó el acceso al hardware como métodos nativos de Java, escritos en lenguaje C. Por este motivo se debió realizar una implementación de la biblioteca también lenguaje C. Esta implementación logra un buen balance entre facilidad de uso, extensión y modos de uso definidos. Se implementó para las plataformas del proyecto CIAA EDU-CIAA-NXP [] y CIAA-NXP [] (plataformas que se describen en detalle en la sección \ref{sec:ciaaBoards}). Esta biblioteca se nombró sAPI, siglas de \emph{simple API} en alusión a que provee una API sencilla para la programación de microcontroladores.
+En ese trabajo se realizó, entre otras cosas, la implementación de una biblioteca para acceder a los periféricos de un microcontrolador en lenguaje Java. Para llevarlo a cabo se realizó la definición de clases que modelan los periféricos GPIO, ADC y UART y se implementó el acceso al hardware como métodos nativos de Java, escritos en lenguaje C. Por este motivo se debió realizar una implementación de la biblioteca también lenguaje C. 
+%Esta implementación logra un buen balance entre facilidad de uso, extensión y modos de uso definidos. 
+Se implementó para las plataformas del proyecto CIAA EDU-CIAA-NXP [] y CIAA-NXP [].
+% (plataformas que se describen en detalle en la sección \ref{sec:ciaaBoards}). 
+Esta biblioteca se nombró sAPI, siglas de \emph{simple API} en alusión a que provee una API sencilla para la programación de microcontroladores.
 
-Desde su desarrollo, se ha utilizado como ejemplo de capa de abstracción de hardware en las asignaturas dictadas por el autor ''Programación de microprocesadores'' [] de la CESE FIUBA, y la asignatura ''Sistemas Digitales'' de la carrera Ingeniería en Automatización y Control Industrial (IACI[]) de la Universidad Nacional de Quilmes (UNQ).
+%Desde su desarrollo, se ha utilizado como ejemplo de capa de abstracción de hardware en las asignaturas dictadas por el autor ''Programación de microprocesadores'' [] de la CESE FIUBA, y la asignatura ''Sistemas Digitales'' de la carrera Ingeniería en Automatización y Control Industrial (IACI[]) de la Universidad Nacional de Quilmes (UNQ).
 
-A partir mazo de 2016 se decide utilizar la biblioteca como base para la enseñanza de la programación de periféricos de microcontroladores en los Cursos Abiertos de Programación de Sistemas Embebidos (CAPSE[]) organizados por la ACSE. A lo largo de ese año se extendió la biblioteca de C para la plataforma EDU-CIAA-NXP de forma considerable para explicar la utilización los periféricos típicos de microcontroladores, logrando excelentes resultados en aprendizaje por parte de los alumnos tanto de niveles avanzados como quienes dan sus primeros pasos en el aprendizaje de programación de microcontroladores.
+A partir mazo de 2016 se decide utilizar la biblioteca como base para la enseñanza de la programación de periféricos de microcontroladores.
+% en los Cursos Abiertos de Programación de Sistemas Embebidos (CAPSE[]) organizados por la ACSE. 
+A lo largo de ese año se extendió la biblioteca de C para la plataforma EDU-CIAA-NXP de forma considerable para explicar la utilización los periféricos típicos de microcontroladores, logrando excelentes resultados en aprendizaje por parte de los alumnos tanto de niveles avanzados como quienes dan sus primeros pasos en el aprendizaje de programación de microcontroladores.
 
 Además, la biblioteca sAPI en lenguaje C para la EDU-CIAA-NXP se puso a disposición de cualquier persona ya que se encuentra publicada de forma libre y gratuita por internet bajo una licencia BSD modificada [] en el sitio de github del autor [].
 
 Finalmente, en diciembre de 2016 se decide utilizar la biblioteca sAPI realizada en lenguaje C como biblioteca estándar para las plataformas del proyecto CIAA, distribuyéndola como parte del \emph{framework}\footnote{En el desarrollo de software, un \emph{framework} es una estructura conceptual y tecnológica de asistencia definida, normalmente, con artefactos o módulos concretos de software, que sirve de base para la organización y desarrollo de software []. En este caso concreto se compone de bibliotecas de código C y makefiles para su compilación permitiendo organizar proyectos de software en lenguaje C.} ''Firmware v2'' []. Este \emph{framework} combinó la biblioteca sAPI con \emph{framework} "Workspace" [], desarrollado por Pablo Ridolfi.
 
-Esta plataforma ha sido adoptada por una gran cantidad de usuarios, una prueba de esto es la encuesta realizada en octubre de 2018, titulada "Tecnologías usadas en los Trabajos Finales del Posgrado en Sistemas Embebidos: 2015-2018" [] donde en la sección 27, \emph{''Uso de material del Proyecto CIAA en los trabajos finales"} se observa que alrededor de la mitad de los trabajos finales de la CESE/MSE utilizaron material generado en el marco del Proyecto CIAA. Y en particular, a partir de 2017 se produjo un cambio de tendencia y más del 60\% de los trabajos finales utilizaron material del Proyecto CIAA. Este cambio en la tendencia se observa que comienza en 2016 con la publicación de firmware v2 como se muestra en la gráfica de la figura \ref{fig:tendenciaMaterialCiaa}, extraída de dicho artículo.
+Esta plataforma ha sido adoptada por una gran cantidad de usuarios. Una prueba de esto es la encuesta realizada en octubre de 2018, titulada "Tecnologías usadas en los Trabajos Finales del Posgrado en Sistemas Embebidos: 2015-2018" [] donde en la sección 27, \emph{''Uso de material del Proyecto CIAA en los trabajos finales"} se observa que alrededor de la mitad de los trabajos finales de la CESE/MSE utilizaron material generado en el marco del Proyecto CIAA. Y en particular, a partir de 2017 se produjo un cambio de tendencia y más del 60\% de los trabajos finales utilizaron material del Proyecto CIAA. Este cambio en la tendencia se observa que comienza en 2016 con la publicación de firmware v2 como se muestra en la gráfica de la figura \ref{fig:tendenciaMaterialCiaa}, extraída de dicho artículo.
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
@@ -25,7 +31,9 @@ Esta plataforma ha sido adoptada por una gran cantidad de usuarios, una prueba d
 \end{center}
 \end{figure}
 
-A principios de 2017, el autor llevó a cabo una profunda revisión y mejora de la biblioteca de C con el objetivo de extenderla a las demás plataformas del proyecto CIAA. En este rediseño colaboró Martín Ribelotta. Ese trabajo fue compilado en un artículo y publicado en el Congreso Argentino de Sistemas Embebidos (CASE) [] en agosto de 2017. Es un antecedente fundamental para la realización del presente trabajo final porque se realizó un estudio exhaustivo de las bibliotecas existentes en el mercado dando como resultado los siguientes puntos a considerar en el diseño de una biblioteca de C para la programación de sistemas embebidos:
+A principios de 2017, el autor llevó a cabo una profunda revisión y mejora de la biblioteca de C con el objetivo de extenderla a las demás plataformas del proyecto CIAA.
+% En este rediseño colaboró Martín Ribelotta. 
+Ese trabajo fue compilado en un artículo y publicado en el Congreso Argentino de Sistemas Embebidos (CASE) [] en agosto de 2017. Es un antecedente fundamental para la realización del presente trabajo final porque se realizó un estudio exhaustivo de las bibliotecas existentes en el mercado dando como resultado los siguientes puntos a considerar en el diseño de una biblioteca de C para la programación de sistemas embebidos:
 
 \begin{itemize}
 \item
@@ -44,7 +52,8 @@ Escalabilidad.
 
 Parte de este rediseño se aplicó a la biblioteca sAPI en lenguaje C para la EDU-CIAA-NXP.
 
-En 2017 el autor desarrolla una plataforma más económica que la EDU-CIAA-NXP, nombrada ''CIAA-Z3R0'' [] (se descibe en detalle en la sección \ref{sec:CIAA-Z3R0}), que la empresa Asembli [] saca al mercado en noviembre. En diciembre el autor publicó la primera versión de la biblioteca sAPI en lenguaje C para esta plataforma dándole soporte a algunos periféricos de la misma.
+En 2017 el autor desarrolló una plataforma más económica que la EDU-CIAA-NXP, nombrada ''CIAA-Z3R0'' [], que la empresa Asembli [] sacó al mercado en noviembre. En diciembre el autor publicó la primera versión de la biblioteca sAPI en lenguaje C para esta plataforma dándole soporte a algunos periféricos de la misma.
+% (se descibe en detalle en la sección \ref{sec:CIAA-Z3R0})
 
 Tomando la experiencia adquirida a lo largo de estos años, el autor presenta en esta memoria de trabajo final un diseño mejorado para la biblioteca, ampliando el mismo e independizándolo del lenguaje de programación. Asimismo, teniendo en cuenta las tareas repetitivas que requieren la implementación de una biblioteca para diferentes plataformas de sistemas embebidos se decide desarrollar herramientas para automatizar el proceso donde resulta posible.
 

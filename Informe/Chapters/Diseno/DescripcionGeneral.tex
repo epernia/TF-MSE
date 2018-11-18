@@ -5,5 +5,60 @@
 \label{sec:designDescipGral}
 
 %------------------------------------------------------------------------------
-%\subsection{}
+\subsection{Principios de diseño}
 
+Se utilizan las siguientes premisas para guiar el diseño de la biblioteca sAPI:
+
+\begin{itemize}
+\item
+Modelado a nivel de \emph{chip} (ya sea MCU\footnote{Abreviatura de microcontrolador.} o SoC\footnote{Abreviatura de sistema en un chip.}):
+\begin{itemize}
+\item
+Dar soporte a la programación de núcleos de procesamiento y periféricos, utilizando los modos más comunes de funcionamiento de los mismos.
+\item
+Debe poseer un nivel de abstracción suficiente para independizarse del hardware pero manteniendo la identidad y conceptos claves de cada cada periférico que compone el chip.
+\item
+Especificar de manera explícita las dependencias entre módulos de la biblioteca y el uso de recursos físicos en cada implementación particular.
+\end{itemize}
+\item
+A nivel de biblioteca:
+\begin{itemize}
+\item
+Utilización de nombres sencillos para facilitar el aprendizaje y uso.
+\item
+Mantener baja la extensión de la definición de la API.
+\item
+Especificar las dependencias entre módulos de la biblioteca.
+\end{itemize}
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Arquitectura de una aplicación}
+
+La biblioteca debe aislar la aplicación de usuario del hardware subyacente formando una capa de abstracción del hardware. De esta manera, una aplicación que utiliza la biblioteca contiene al menos las capas de software descriptas en la figura \ref{fig:sapiCapas1}.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=10.4cm]{Figures/sapiCapas1.png}
+\par\caption{Biblioteca sAPI como capa de abstracción del hardware.}\label{fig:sapiCapas1}
+\end{center}
+\end{figure}
+
+Según la implementación de la biblioteca para una plataforma de hardware particular, se puede aprovechar bibliotecas de drivers existentes provistas por el fabricante para su interfaz con el hardware. Además, en una aplicación de embebidos típica, se combinará con un sistema operativo de tiempo real, \emph{stracks} y \emph{middelware} resultando en las capas de software de la figura \ref{fig:sapiCapas2}.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=10.4cm]{Figures/sapiCapas2.png}
+\par\caption{Arquitectura de una aplicación que utiliza la biblioteca.}\label{fig:sapiCapas2}
+\end{center}
+\end{figure}
+
+%------------------------------------------------------------------------------
+\subsection{Arquitectura de la biblioteca sAPI}
+
+La biblioteca sAPI se compone a su vez de módulos de software, agrupados en las capas de software que se resumen en la figura .
+
+
+Figura 2, capas de software de la biblioteca sAPI.
+
+A continuación se exponen las características de cada capa. Luego se expone la composición genérica de un módulo.

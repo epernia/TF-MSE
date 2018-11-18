@@ -6,11 +6,12 @@
 
 Todos los desarrollos de hardware realizados en el marco del proyecto CIAA han sido publicados con licencia BSD de tres cláusulas con el espíritu de que sean utilizadas como base tanto para diseños abiertos como para diseños cerrados. Los mismos pueden descargarse del repositorio oficial del proyecto CIAA nombrado ''CIAA Hardware'' [].
 
-Las plataformas sobre las cuales se decide realizar el presente trabajo son aquellas que han logrado pasar de la fase de prototipo y se pueden hallar como producto en el mercado. Cabe destacar que el proyecto CIAA no se beneficia económicamente de la venta de plataformas y fomenta la libre competencia.
+Las plataformas sobre las cuales se decide realizar el presente trabajo son aquellas que han logrado pasar de la fase de prototipo y se pueden hallar como producto en el mercado. Cabe destacar que el proyecto CIAA no se beneficia económicamente de la venta de plataformas.
+% y fomenta la libre competencia.
 
 \subsection{CIAA-NXP}
 
-La plataforma CIAA-NXP (figura \ref{fig:ciaaNxp}) fue la primer paltaforma desarrollada en el marco del proyecto CIAA. Consiste en una computadora para uso industrial basada en el microcontrolador NXP LPC4337 JDB144 [] \emph{dual-core} asimétrico, formado por un procesador Cortex-M4 y un Cortex-M0 (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 204MHz; con 1 MB de memoria Flash y 136 KB de memoria SRAM.
+La plataforma CIAA-NXP (figura \ref{fig:ciaaNxp}) fue la primer paltaforma desarrollada en el marco del proyecto CIAA. Consiste en una computadora para uso industrial basada en el microcontrolador NXP LPC4337 JDB144 [] \emph{dual-core} asimétrico, formado por un procesador Cortex-M4F y un Cortex-M0 (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 204MHz; con 1 MB de memoria Flash y 136 KB de memoria SRAM.
 
 
 \begin{figure}[!htbp]
@@ -24,16 +25,16 @@ Sus características destacables son:
 
 \begin{itemize}
 \item
-\textbf{Interfaces de entrada/salida}: 8 entradas digitales (opto-aisladas 24VDC), 4 entradas analógicas (0-10V/4-20mA), 4 salidas digitales Open-Drain (24VDC), 4 salidas digitales a relé DPDT y 1 salida analógica (0-10V/4-20mA).
+Interfaces de entrada/salida: 8 entradas digitales (opto-aisladas 24VDC), 4 entradas analógicas (0-10V/4-20mA), 4 salidas digitales Open-Drain (24VDC), 4 salidas digitales a relé DPDT y 1 salida analógica (0-10V/4-20mA).
 \item
-\textbf{Interfaces de comunicación}: 1 Ethernet, 2 USB On-The-Go, 1 RS232, 1 RS485, 1 CAN, 1 SPI, 1 I2C.
+Interfaces de comunicación: 1 Ethernet, 2 USB On-The-Go, 1 RS232, 1 RS485, 1 CAN, 1 SPI, 1 I2C.
 \item
-\textbf{Uso de Linux}: Posee memorias RAM y Flash externas que posibilitan ejecutar Linux sobre esta plataforma. Exite un \emph{port} de Linux para la misma que puede hallarse en [].
+Uso de Linux: Posee memorias RAM y Flash externas que posibilitan ejecutar Linux sobre esta plataforma. Exite un \emph{port} de Linux para la misma que puede hallarse en [].
 \item
-\textbf{Incluye \emph{debugger}}: Esta plataforma incluye el circuito que permite depuración en tiempo real del programa que corre en la plataforma desde la PC. Se basa en el chip FTDI FT2232H [].
+Incluye \emph{debugger}: Esta plataforma incluye el circuito que permite depuración en tiempo real del programa que corre en la plataforma desde la PC. Se basa en el chip FTDI FT2232H [].
 \end{itemize}
 
-Es fabricada y distribuida al por mayor por EXO S.A. [], y distribuida al por menor por Electrocomponentes S.A. []. Se puede comprar en Argentina por AR\$ 11.310,04 (precio de noviembre 2018).
+%Es fabricada y distribuida al por mayor por EXO S.A. [], y distribuida al por menor por Electrocomponentes S.A. []. Se puede comprar en Argentina por AR\$ 11.310,04 (precio de noviembre 2018).
 
 \subsection{EDU-CIAA-NXP}
 
@@ -48,19 +49,17 @@ En base al diseño de la CIAA-NXP los integrantes del proyecto CIAA realizan una
 
 Utiliza el mismo microcontrolador que la CIAA-NXP, circuito de depuración, interfaz RS-485 y posee 1 USB OTG.
 
-Los pines no utilizados por las interfaces anteriores se disponen en los conectores P1 y P2. En ellos incluye todos los periféricos típicos que podemos encontrar en los microcontroladores disponibles en el mercado (GPIO, ADC, DAC, TIMER, UART, SPI, I2C, etc.).
+Los pines no utilizados por las interfaces anteriores se disponen en los conectores P1 y P2. En ellos incluye todos los periféricos típicos que podemos encontrar en los microcontroladores disponibles en el mercado (GPIO, ADC, DAC, TIMER, UART, SPI, I2C, etc.). Además posee 1 LED RGB, 3 LEDs y 4 pulsadores.
 
-Además posee 1 LED RGB, 3 LEDs y 4 pulsadores.
+%Mediante la colaboración de la Red Universitaria de Sistemas Embebidos (RUSE) [] se han distribuido en 2015 entre 10 y 40 placas en Universidades de Argentina con carreras afines a la electrónica.
 
-Mediante la colaboración de la Red Universitaria de Sistemas Embebidos (RUSE) [] se han distribuido en 2015 entre 10 y 40 placas en Universidades de Argentina con carreras afines a la electrónica.
-
-Esta plataforma es fabricada y distribuida por Electrocomponentes S.A., en colaboración con Ernesto Mayer S.A. [], Assisi S.A. [] y Asembli S.A. [], y se puede comprar en Argentina por AR\$ 2.240,94 (en noviembre 2018). 
+%Esta plataforma es fabricada y distribuida por Electrocomponentes S.A., en colaboración con Ernesto Mayer S.A. [], Assisi S.A. [] y Asembli S.A. [], y se puede comprar en Argentina por AR\$ 2.240,94 (en noviembre 2018). 
 
 \subsection{PicoCIAA}
 
 La PicoCIAA [] (figura \ref{fig:picoCiaa}) es una placa en formato mini PCI Express, pensada para ser utilizada como un módulo de cómputo y/o adquisición en una plataforma mayor.
 
-Se basa en el SoC NXP LPC54102J512 BD64 [], otro microcontrolador \emph{dual-core} asimétrico formado por un procesador Cortex-M4 y un Cortex-M0+ (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 100 Mhz; con 512 KB de memoria Flash y 104 KB de SRAM .
+Se basa en el microcontrolador NXP LPC54102J512 BD64 [], otro microcontrolador \emph{dual-core} asimétrico formado por un procesador Cortex-M4F y un Cortex-M0+ (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 100 MHz; con 512 KB de memoria Flash y 104 KB de SRAM .
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
@@ -71,16 +70,15 @@ Se basa en el SoC NXP LPC54102J512 BD64 [], otro microcontrolador \emph{dual-cor
 
 Incluye circuito de depuración USB vía un microcontrolador NXP LPC11U35 [] programable.
 
-Posee diversos puertos de comunicación, entre ellos USB, mini PCI Express, UART, SPI, I2C y soporte para PWM y entradas y salidas digitales de propósito general. 
+Posee diversos puertos de comunicación, entre ellos USB, mini PCI Express, UART, SPI, I2C y soporte para PWM y entradas y salidas digitales de propósito general. Su tamaño reducido (51 x 30 mm) es ideal en Single Board Computers.
 
-Su tamaño reducido (51 x 30 mm) es ideal en Single Board Computers.
-
-Esta plataforma fue diseñada por Pablo Ridolfi y fabricada y distribuida por Vicda Argentina S.A. []. Su precio en Argentina es de AR\$ 2.470,00 (precio en noviembre 2018).
+%Esta plataforma fue diseñada por Pablo Ridolfi y fabricada y distribuida por Vicda Argentina S.A. []. Su precio en Argentina es de AR\$ 2.470,00 (precio en noviembre 2018).
 
 \subsection{CIAA-Z3R0}
 \label{sec:CIAA-Z3R0}
 
-La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIAA. Esta plataforma es ideal para aplicaciones de bajo consumo (como sensores de IoT) y proyectos de robótica educativa. Está diseñada para ser utilizada como componente en un diseño mayor debido a su tamaño (19.8 x 51.8 mm), soldada a través de su borde de agujeros para montaje \emph{castellated}\footnote{Este tipo de terminación de borde de pin del PCB permite soldar una placa sobre otra, para más información ver [].}, o bien, conectándola mediante tiras de pines.
+La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIAA. Esta plataforma es ideal para aplicaciones de bajo consumo (como sensores de IoT) y proyectos de robótica educativa. Está diseñada para ser utilizada como componente en un diseño mayor debido a su tamaño (19.8 x 51.8 mm), soldada a través de su borde de agujeros para montaje \emph{castellated}[], o bien, conectándola mediante tiras de pines.
+%\footnote{Este tipo de terminación de borde de pin del PCB permite soldar una placa sobre otra, para más información ver [].}
 
 \begin{figure}[!htbp]
 \begin{center}  %[width=14cm,height=8cm]
@@ -89,11 +87,11 @@ La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIA
 \end{center}
 \end{figure}
 
-Posee la mayoría de los periféricos que se encuentran en la EDU-CIAA-NXP pero utiliza un microcontrolador siete veces más económico que esta última (con un precio aproximanddo de USD \$2), de la empresa Silicon Labs, modelo EFM32HG322F64 (QFP48) [] con núcleo ARM Cortex-M0+ a una frecuencia máxima de 25M Hz; 64 KB de memoria Flash y 8 KB de memoria SRAM, que es suficiente para que un alumno entre en el mundo de los microcontroladores modernos de 32 bits.
+Posee la mayoría de los periféricos que se encuentran en la EDU-CIAA-NXP pero utiliza un microcontrolador siete veces más económico que esta última, de la empresa Silicon Labs, modelo EFM32HG322F64 (QFP48) [] con núcleo ARM Cortex-M0+ a una frecuencia máxima de 25 MHz; 64 KB de memoria Flash y 8 KB de memoria SRAM, que es suficiente para que un alumno entre en el mundo de los microcontroladores modernos de 32 bits.
 
 El \emph{debugger} se debe comprar por separado, sin embargo, mediante un único dispositivo de depuración se pueden programar muchas plataformas CIAA-Z3R0.
 
-Esta plataforma fue diseñada por el autor y fabricada y distribuida por Asembli S.A. con la gestión de Ariel Lutemberg y Gastón Lagoa. Su precio en Argentina es de AR\$ 650,00 (noviembre de 2018). 
+%Esta plataforma fue diseñada por el autor y fabricada y distribuida por Asembli S.A. con la gestión de Ariel Lutemberg y Gastón Lagoa. Su precio en Argentina es de AR\$ 650,00 (noviembre de 2018). 
 
 \subsection{Material provisto por los fabricantes}
 
@@ -109,11 +107,9 @@ Se exponen a continuación las principales bibliotecas provistas por las empresa
 
 \titulo{CMSIS de ARM}
 
-CMSIS son las siglas de \emph{''Cortex Microcontroller Software Interface Standard''}, es decir, interfaz de software para microcontroladores Cortex. Mediante este conjunto de bibliotecas, la empresa ARM intenta estandarizar cómo se programan los microcontroladores que ofrecen las empresas proveedores de silicio licenciantes de sus núcleos de procesamiento Cortex-M. 
+CMSIS son las siglas de \emph{''Cortex Microcontroller Software Interface Standard''}, es decir, interfaz de software para microcontroladores Cortex. Mediante este conjunto de bibliotecas, la empresa ARM intenta estandarizar cómo se programan los microcontroladores que ofrecen las empresas proveedores de silicio licenciantes de sus núcleos de procesamiento Cortex-M. CMSIS se desarrolla públicamente en GitHub. 
 
-CMSIS se desarrolla públicamente en GitHub. 
-
-Las principales bibliotecas que posee están realizadas en en su mayoría lenguaje C y son:
+Las principales bibliotecas que posee están realizadas en su mayoría lenguaje C y son:
 
 \begin{itemize}
 \item
@@ -121,7 +117,7 @@ CMSIS-CORE: define el arranque del sistema y acceso periféricos.
 \item
 CMSIS-RTOS: es una API de abtracción del RTOS\footnote{Siglas en inglés de Sistema Operativo de Tiempo Real.} que permite capas de software coherentes con componentes de \emph{middleware}\footnote{\emph{Middleware} son bibliotecas que asisten a una aplicación, por ejemplo, biblioteca para manejo de sistema de archivos y \emph{stracks} de protocolos.} y bibliotecas de bajo nivel.
 \item
-CMSIS-DSP: es una rica colección de funciones de procesamiento de señales digitales, optimizada para núcleos de procesamiento Cortex-M.
+CMSIS-DSP: es una colección de funciones de procesamiento de señales digitales, optimizada para núcleos de procesamiento Cortex-M.
 \item
 CMSIS-Driver: interfaces genéricas de periféricos para \emph{middleware} y código de aplicación.
 \end{itemize}
@@ -132,20 +128,20 @@ Además provee las siguientes herramientas:
 \item
 CMSIS-Pack: define la estructura de un paquete de software que contiene componentes de software. Los componentes del software son fácilmente seleccionables, y se resaltan las dependencias de otros paquetes.
 \item
-CMSIS-SVD: Son archivos que habilitan vistas detalladas a los periféricos del dispositivo, que muestran el estado actual de cada registro, y aseguran que la vista del depurador coincida con la implementación real de los periféricos del dispositivo.
+CMSIS-SVD: son archivos que habilitan vistas detalladas a los periféricos del dispositivo, que muestran el estado actual de cada registro, y aseguran que la vista del depurador coincida con la implementación real de los periféricos del dispositivo.
 \item
 CMSIS-DAP: una interfaz estandarizada para el puerto de acceso de depuración de Cortex (DAP) y es utilizada por muchos kits de de desarrollo, siendo compatible con varios dispositivos de hardware para depuración.
 \item
 CMSIS-NN: es una colección de núcleos de redes neuronales eficientes desarrollada para maximizar el rendimiento y minimizar la huella de memoria de las redes neuronales para núcleos Cortex-M.
 \end{itemize}
 
-El soporte de CMSIS es diferente para cada uno de los mcirocontroladores donde se realiza este trabajo. En el caso del LPC4337 existe soporte completo para la capa Core, incluyendo el núcleo de procesamiento [] y los drivers de periféricos []. Para el LPC54102 solo se encontró soporte de la inicialización del núcleo de procesamiento de la capa Core de CMSIS [] pero no sus drivers de periféricos. En EFM32HG322 existe soporte de la inicialización del núcleo de procesamiento de la capa Core [], y Silicon Labs provee los \emph{headers} de drivers de periféricos.
+Para los tres microcontroladores de este trabajo existe soporte completo para la capa Core, incluyendo el núcleo de procesamiento y los drivers de periféricos.
 
 \titulo{Mbed de ARM}
 
 Mbed es una plataforma de drivers y sistema operativo para prototipado rápido, enfocada en dispositivos IoT basados en mcirocontroladores ARM. Es un proyecto de código abierto, también disponible en github [], desarrollado colaborativamente por ARM y sus socios tecnológicos.
 
-Provee una muy buena abstracción del hardware pero se limita a plataformas del ecosistema ARM. A diferencia de CMSIS, en este caso se provee soporte para plataformas de hardware completas en lugar de solamente ocuparse del microcontrolador. De esta forma muchas empresas añaden soporte a mbed a sus kit de desarrollo con microcontroladores ARM Cortex-M. 
+Provee abstracción del hardware pero se limita a plataformas del ecosistema ARM. A diferencia de CMSIS, en este caso se provee soporte para plataformas de hardware completas en lugar de solamente ocuparse del microcontrolador. De esta forma muchas empresas añaden soporte a mbed a sus kit de desarrollo con microcontroladores ARM Cortex-M. 
 
 Existen kits de desarrollo que contienen los microcontroladores LPC4337 y EFM32 HG322 con soporte de mbed, los cuales son LPCXpresso4337 [] y EFM32 USB-enabled Happy Gecko [] respectivamente. Para el LPC54102 no existe un kit de desarrollo soportado por mbed, pero existe el kit LPCXpresso54114 [] que posee un  microcontrolador de la misma familia.
 
@@ -172,7 +168,7 @@ Ejemplos: incluye un extenso conjunto de ejemplos diseñados para ilustrar cómo
 
 Para la incialización del sistema utiliza la parte de CMSIS Core que inicializa cada uno de sus núcleos de procesamiento.
 
-Si bien contiene buenos ejemplos para comenzar a utilizar los microcontroladores LPC, sus drivers de periféricos están relacionados directamente con su arquitectura de hardware y proveen una muy baja abstracción de la misma. Además, tiene código duplicado de las bibliotecas de periféricos para cada núcleo de procesamiento de un mismo microcontrolador restándole mantenibilidad.
+Si bien contiene ejemplos para comenzar a utilizar los microcontroladores LPC, sus drivers de periféricos están relacionados directamente con su arquitectura de hardware y proveen una muy baja abstracción de la misma. Además, tiene código duplicado de las bibliotecas de periféricos para cada núcleo de procesamiento de un mismo microcontrolador restándole mantenibilidad.
 
 MCUXpresso de NXP es la evolución de LPCOpen luego de que NXP adquiera a Freescale,  agregando soporte a las líneas de microcontroladores Kinetis [] e i.MX RT []. Requiere registrarse para tener acceso a la misma. Posee soporte únicamente para el microcontrolador LPC54102 de este trabajo.
 
@@ -182,7 +178,7 @@ Para el mcirocontrolador EFM32HG322 Silicon Labs ofrece las siguientes bibliotec
 
 \begin{itemize}
 \item
-Cabeceras de drivers de dispositivos CMSIS-CORE para EFM32 Happy Gecko.
+Drivers CMSIS-CORE para EFM32 Happy Gecko.
 \item
 Biblioteca de periféricos EMLIB, que provee soporte de bajo nivel para periféricos proporcionando una API unificada para todos los MCU y SoC EFM32, EZR32 y EFR32 de Silicon Labs.
 \item
@@ -196,4 +192,3 @@ Drivers para componentes de los kits de desarrollo: incluye pantallas, sensores 
 \item
 Programas de ejemplo.
 \end{itemize}
-
