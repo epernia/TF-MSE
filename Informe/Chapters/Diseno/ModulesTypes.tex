@@ -1,8 +1,26 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\section{Modelado de plataforma de hardware genérica}
+\section{Modelo de plataforma de hardware}
 \label{sec:modelHardware}
 
-%------------------------------------------------------------------------------
-\subsection{Clasificación de módulos de hardware}
+En la figura \ref{fig:ModelBoard} se muestra el diagrama que describe una \emph{board} y las partes que la componen.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/Board.pdf}
+\par\caption{Arquitectura de una aplicación que utiliza la biblioteca.}\label{fig:ModelBoard}
+\end{center}
+\end{figure}
+
+Estas partes son:
+
+\begin{itemize}
+\item
+Circuitos Integrados (en adelante IC, por sus siglas en inglés): son los módulos que describen circuitos integrados necesarios para programar la plataforma, por ejemplo, MCU, sensores y memorias montados en la placa. Contiene una lista de terminales de conexión. 
+\item
+Conectores: son los conectores físicos de la placa, como ser, pines, borneras, etc.
+\item
+Conexiones: modela el mapa de conexiones entre circuitos integrados y conectores. Es un diccionario (conjunto de asociaciones clave-valor), donde se tienen asociaciones de terminales de conexión. 
+\end{itemize}
+

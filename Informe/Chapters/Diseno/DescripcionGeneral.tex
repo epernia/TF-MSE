@@ -1,11 +1,8 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\section{Descripción general}
-\label{sec:designDescipGral}
-
-%------------------------------------------------------------------------------
-\subsection{Principios de diseño}
+\section{Principios de diseño}
+\label{sec:principiosDiseno}
 
 Se utilizan las siguientes premisas para guiar el diseño de la biblioteca sAPI:
 
@@ -33,7 +30,10 @@ Especificar las dependencias entre módulos de la biblioteca.
 \end{itemize}
 
 %------------------------------------------------------------------------------
-\subsection{Arquitectura de una aplicación}
+%	SECTION
+%------------------------------------------------------------------------------
+\section{Arquitectura de una aplicación}
+\label{sec:arqApp}
 
 La biblioteca debe aislar la aplicación de usuario del hardware subyacente formando una capa de abstracción del hardware. De esta manera, una aplicación que utiliza la biblioteca contiene al menos las capas de software descriptas en la figura \ref{fig:sapiCapas1}.
 
@@ -54,11 +54,20 @@ Según la implementación de la biblioteca para una plataforma de hardware parti
 \end{figure}
 
 %------------------------------------------------------------------------------
-\subsection{Arquitectura de la biblioteca sAPI}
+%	SECTION
+%------------------------------------------------------------------------------
+\section{Arquitectura de la biblioteca sAPI}
+\label{sec:arqSapi}
 
-La biblioteca sAPI se compone a su vez de módulos de software, agrupados en las capas de software que se resumen en la figura .
+La biblioteca sAPI modela todo el hardware que necesita acceder tanto la aplicación de usuario como las otras capas superiores de software. Utiliza un diseño modular que facilita la reutilización de sus partes. Estos módulos pueden agruparse en:
 
+\begin{itemize}
+\item
+Plataforma de hardware (en adelante \emph{board}): son los módulos que describen cierta placa de sistema embebido completa.
+\item
+Periféricos externos conectados a la \emph{board}: son los módulos que modelan, por ejemplo, un chip conectado al I2C o al SPI.
+\item
+Módulos abstractos: representan módulos que agregan un mayor nivel de abstracción, los cuales permiten realizar tareas más avanzadas como, por ejemplo, buffers.
+\end{itemize}
 
-Figura 2, capas de software de la biblioteca sAPI.
-
-A continuación se exponen las características de cada capa. Luego se expone la composición genérica de un módulo.
+Los periféricos externos y módulos abstractos utilizan los módulos en el grupo \emph{board} y en consecuencia no dependen del hardware subyacente.
