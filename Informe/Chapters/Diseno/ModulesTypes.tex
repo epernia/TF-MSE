@@ -17,10 +17,21 @@ Estas partes son:
 
 \begin{itemize}
 \item
-Circuitos Integrados (en adelante IC, por sus siglas en inglés): son los módulos que describen circuitos integrados necesarios para programar la plataforma, por ejemplo, MCU, sensores y memorias montados en la placa. Contiene una lista de terminales de conexión. 
+Componentes: son los componentes dentro de cierta placa, por ejemplo, circuitos integrados, botones, leds, conectores, etc. Los componentes incluyen una lista de terminales de conexión.
 \item
-Conectores: son los conectores físicos de la placa, como ser, pines, borneras, etc.
-\item
-Conexiones: modela el mapa de conexiones entre circuitos integrados y conectores. Es un diccionario (conjunto de asociaciones clave-valor), donde se tienen asociaciones de terminales de conexión. 
+Conexiones: modela el mapa de conexiones entre componentes. Cada conexión posee los dos terminales conectados.
 \end{itemize}
 
+%------------------------------------------------------------------------------
+\subsection{Componentes}
+
+\begin{itemize}
+\item
+Circuitos Integrados (en adelante IC, por sus siglas en inglés): son los módulos que describen circuitos integrados necesarios para programar la plataforma, por ejemplo, MCU, sensores y memorias montados en la placa. Contiene una lista de terminales de conexión. 
+\item
+Conectores: son los conectores físicos de la placa, como ser, pines, borneras, etc. También contienen un alista de terminales.
+\end{itemize}
+
+
+
+Es un diccionario (conjunto de asociaciones clave-valor), donde se tienen asociaciones de terminales de conexión. 
