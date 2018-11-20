@@ -1,3 +1,46 @@
 %------------------------------------------------------------------------------
-\subsection{Plataforma y componentes}
+%	SECTION
+%------------------------------------------------------------------------------
+\section{Modelo de plataforma de hardware}
+\label{sec:modelHardware}
 
+En la figura \ref{fig:ModelBoard} se muestra el diagrama que describe una \emph{board} y las partes que la componen.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/Board.pdf}
+\par\caption{Diagrama de clases de \emph{board}.}\label{fig:ModelBoard}
+\end{center}
+\end{figure}
+
+Estas partes son:
+
+\begin{itemize}
+\item
+Componente: representa los componentes dentro de cierta placa, por ejemplo, circuitos integrados, botones, leds, conectores, etc. 
+\item
+Terminal: describe un terminal de conexión que posee cada componente.
+\item
+Conexión: modela el mapa de conexiones entre componentes. Cada conexión se compone de los dos terminales conectados.
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Componente}
+
+Un componente incluye nombre, documentación, una lista de terminales de conexión y la cantidad de terminales. En la figura \ref{fig:Component} se expone el diagrama de clases. Existen los siguientes tipos de componentes:
+
+\begin{itemize}
+\item
+\emph{SystemOnChip}: modela un sistema completo en un chip.
+\item
+Componente con driver: modela a componentes que necesitan un driver, por ejemplo, LEDs, botones, sensores y memorias montados en la placa.
+\item
+Conector: representa los conectores físicos de la placa, como ser, tira de pines, borneras, etc. Su importancia en el modelo radica en la descripción de a qué terminales del SoC se conectan cada uno.
+\end{itemize}
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/Component.pdf}
+\par\caption{Diagrama de clases de componente.}\label{fig:Component}
+\end{center}
+\end{figure}

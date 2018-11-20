@@ -9,7 +9,7 @@ En la figura \ref{fig:ModelBoard} se muestra el diagrama que describe una \emph{
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
 \includegraphics*[width=14cm]{Figures/Board.pdf}
-\par\caption{Arquitectura de una aplicación que utiliza la biblioteca.}\label{fig:ModelBoard}
+\par\caption{Diagrama de clases de \emph{board}.}\label{fig:ModelBoard}
 \end{center}
 \end{figure}
 
@@ -17,21 +17,32 @@ Estas partes son:
 
 \begin{itemize}
 \item
-Componentes: son los componentes dentro de cierta placa, por ejemplo, circuitos integrados, botones, leds, conectores, etc. Los componentes incluyen una lista de terminales de conexión.
+Componente: representa los componentes dentro de cierta placa, por ejemplo, circuitos integrados, botones, leds, conectores, etc. 
 \item
-Conexiones: modela el mapa de conexiones entre componentes. Cada conexión posee los dos terminales conectados.
+Terminal: cada componente posee terminales de conexión.
+\item
+Conexión: modela el mapa de conexiones entre componentes. Cada conexión posee los dos terminales conectados.
 \end{itemize}
 
 %------------------------------------------------------------------------------
-\subsection{Componentes}
+\subsection{Componente}
+
+Un componente incluye nombre, documentación, una lista de terminales de conexión y la cantidad de terminales. En la figura \ref{fig:Component} se expone el diagrama de clases. Existen los siguientes tipos de componentes:
 
 \begin{itemize}
 \item
-Circuitos Integrados (en adelante IC, por sus siglas en inglés): son los módulos que describen circuitos integrados necesarios para programar la plataforma, por ejemplo, MCU, sensores y memorias montados en la placa. Contiene una lista de terminales de conexión. 
+Componente con driver: modela a componentes programables que necesitan un driver, por ejemplo, SoC, sensores y memorias montados en la placa.
 \item
-Conectores: son los conectores físicos de la placa, como ser, pines, borneras, etc. También contienen un alista de terminales.
+Conector: representa los conectores físicos de la placa, como ser, tira de pines, borneras, etc. Su importancia en el modelo radica en la descripción de a qué terminales del SoC se conectan cada uno.
+\item
+Led: como su nombre lo indica modela un diodo LED.
+\item
+Botón: modela un pulsador en general con 2 estados (\emph{on}/\emph{off}).
 \end{itemize}
 
-
-
-Es un diccionario (conjunto de asociaciones clave-valor), donde se tienen asociaciones de terminales de conexión. 
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/Component.pdf}
+\par\caption{Diagrama de clases de componente.}\label{fig:Component}
+\end{center}
+\end{figure}
