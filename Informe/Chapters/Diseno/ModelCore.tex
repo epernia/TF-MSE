@@ -1,2 +1,63 @@
 %------------------------------------------------------------------------------
-\subsection{Núcleo de procesamiento (Core)}
+\subsection{Módulo Core}
+
+Events:
+Reset
+%void ResetISR(void);
+%WEAK void NMI_Handler(void);
+%WEAK void HardFault_Handler(void);
+%WEAK void MemManage_Handler(void);
+%WEAK void BusFault_Handler(void);
+%WEAK void UsageFault_Handler(void);
+%WEAK void SVC_Handler(void);
+%WEAK void DebugMon_Handler(void);
+%WEAK void PendSV_Handler(void);
+%WEAK void SysTick_Handler(void);
+%WEAK void IntDefaultHandler(void);
+
+
+sleep(UntilNextInterrupt)?
+sleep(UntilGPIOPinIsHigh)
+
+%------------------------------------------------------------------------------
+\subsection{Módulo SoC}
+
+
+%------------------------------------------------------------------------------
+\subsection{Módulo Board}
+
+
+
+%void M0CORE_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void SCT_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void RIT_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void TIMER0_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void TIMER1_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void TIMER2_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void TIMER3_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void ADC0_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void I2C0_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void SPI_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void UART0_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void UART1_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void UART2_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void UART3_IRQHandler(void) ALIAS(IntDefaultHandler);
+%
+%void GPIO0_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO1_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO2_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO3_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO4_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO5_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO6_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GPIO7_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GINT0_IRQHandler(void) ALIAS(IntDefaultHandler);
+%void GINT1_IRQHandler(void) ALIAS(IntDefaultHandler);
+
+

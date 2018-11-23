@@ -1,4 +1,87 @@
+
 %------------------------------------------------------------------------------
-\subsection{ADC}
+\subsection{Módulo ADC}
 
+El módulo ADC modela un periférico Conversor Analógico-Digital. Este periférico contiene varios canales de conversión multiplexados los cuales se pueden configurar individualmente como entradas analógicas.
 
+\titulo{Propiedades de ADC}
+
+\begin{itemize}
+\item
+\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz. Los valores posibles dependen de cada plataforma. Se pueden utilizar alternativamente los valores los valores del tipo \emph{AdcConvRate\_t} cuyos valores posibles son: \emph{LOW}, \emph{MID} y \emph{HIGH}.
+\item
+\emph{voltageReferece}, del tipo \emph{AdcVRef\_t} cuyos valores posibles son: \emph{VCC}, \emph{INTERNAL} y \emph{EXTERNAL}.
+\item
+\emph{conversionMode}, del tipo \emph{AdcConvMode\_t}, con valores: \emph{SINGLE}, \emph{CONTIUOUS} y \emph{EXTERNAL\_TRIGGERED}.
+\item
+\emph{conversionResolution}, del tipo \emph{AdcConvResolution\_t}, con valores:\emph{LOW}, \emph{MID} y \emph{HIGH}, que si bien dependen de la plataforma, ya están definidos para cada una de ellas.
+\item
+\emph{channelsMode}, del tipo \emph{AdcChannelsMode\_t}, con valores: \emph{SIGLE} y \emph{DIFFERENTIAL}.
+\item
+\emph{location}, del tipo \emph{AdcLocation\_t}. Son las posibles ubicaciones del periférico con respecto a pines físicos del SoC. Si bien dependen de la arquitectura, se definen los valores \emph{LOCATION0} a \emph{LOCATION7} para cada plataforma.
+\item
+\emph{value}, del tipo \emph{uint32\_t}. Representa el último valor de conversión del ADC.
+\end{itemize}
+
+\titulo{Métodos de ADC}
+
+Inicialización y restablecimiento de un periférico ADC:
+
+\begin{verbatim}
+ • init( uint32_t conversionRate | 
+         AdcVRef_t voltageReferece |
+         AdcConvMode_t conversionMode |
+         AdcConvResolution_t conversionResolution |
+         AdcChannelsMode_t channelsMode |
+         AdcLocation_t loacation
+       ) : AdcStatus_t
+ • deinit() : AdcStatus_t
+\end{verbatim}
+
+Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
+
+\begin{verbatim}
+ • conversionRate = HIGH
+ • voltageReferece = VCC
+ • conversionMode = SINGLE
+ • conversionResolution = HIGH
+ • channelMode = SINGLE
+ • loacation = DEFAULT
+\end{verbatim}
+
+Habilitación/deshabilitación de un canal particular del ADC (configuración de una entrada analógica):
+
+\begin{verbatim}
+ • channel( AdcChannel_t channel, bool_t enable ) : AdcStatus_t
+\end{verbatim}
+
+Define los métodos \emph{currentChannel()}, que devuelve el canal de la conversión actual, y \emph{channels()} que devuelve la lista de canales del ADC. Notar que esta lista se reduce a la mitad si el modo \emph{channelsMode} es \emph{DIFFERENTIAL)}
+
+\begin{verbatim}
+ • currentChannel() : AdcChannel_t
+ • channels() : List_t
+\end{verbatim}
+
+La lectura del conversor ADC se realiza con el método \emph{read()}, que requiere un parámetro \emph{channel)}:
+
+\begin{verbatim}
+ • read( AdcChannel_t channel ) : uint32_tt
+\end{verbatim}
+
+Si el ADC tiene configurado \emph{conversionMode = SINGLE}, entonces la lectura es bloqueante pues debe esperar a realizar la conversión. Si el ADC está en modo \emph{conversionMode = CONTIUOUS}, entonces devuelve el último valor convertido. Alternativamente existe el método \emph{startConversion()} para realizar una lectura no bloqueante, que se puede utilizar junto a \emph{isConversionComplete()} para encuestar si termino la conversión, o mediante un evento.
+
+\begin{verbatim}
+ • startConversion( AdcChannel_t channel ) : uint32_t
+ • isConversionComplete() : bool_t
+\end{verbatim}
+
+El módulo ADC no define el método \emph{write()}. Para establecer una interrupción en un canal analógico ante cierto evento define los métodos: 
+
+\begin{verbatim}
+ • interrupt( bool_t enable )
+ • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+ • eventCallbackClear( ChannelEvent_t evt )
+\end{verbatim}
+
+Como evento posible se define: \emph{CONVERSION\_COMPLETE} que genera una interrupción cuando se completa la conversión.
+% Ver de agregar Analog Comparator como evento

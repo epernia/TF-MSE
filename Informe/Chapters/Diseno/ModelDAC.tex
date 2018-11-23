@@ -1,3 +1,68 @@
 %------------------------------------------------------------------------------
-\subsection{DAC}
+\subsection{Módulo DAC}
 
+El módulo DAC modela un periférico Conversor Digital-Analógico. Este periférico comparte muchas características con el ADC, contando también con uno o más canales de conversión, los cuales se pueden configurar individualmente como salidas analógicas.
+
+\titulo{Propiedades de DAC}
+
+\begin{itemize}
+\item
+\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz.
+\item
+\emph{voltageReferece}, del tipo \emph{DacVRef\_t} cuyos valores posibles son: \emph{VCC}, \emph{INTERNAL} y \emph{EXTERNAL}.
+\item
+\emph{conversionResolution}, del tipo \emph{DacConvResolution\_t}, con valores:\emph{LOW}, \emph{MID} y \emph{HIGH}.
+\item
+\emph{location}, del tipo \emph{AdcLocation\_t}. Con valores los valores \emph{LOCATION0} a \emph{LOCATION7}.
+\item
+\emph{value}, del tipo \emph{uint32\_t}. Representa el último valor de conversión del DAC.
+\end{itemize}
+
+\titulo{Métodos de DAC}
+
+Inicialización y restablecimiento de un periférico DAC:
+
+\begin{verbatim}
+ • init( uint32_t conversionRate | 
+         DacVRef_t voltageReferece |
+         DacConvResolution_t conversionResolution |
+       ) : DacStatus_t
+ • deinit() : DacStatus_t
+\end{verbatim}
+
+Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
+
+\begin{verbatim}
+ • conversionRate = HIGH
+ • voltageReferece = VCC
+ • conversionResolution = HIGH
+\end{verbatim}
+
+Habilitación/deshabilitación de un canal particular del DAC (configuración de una salida analógica):
+
+\begin{verbatim}
+ • channel( DacChannel_t channel, bool_t enable ) : DacStatus_t
+\end{verbatim}
+
+Define los métodos \emph{currentChannel()}, que devuelve el canal de la conversión actual, y \emph{channels()} que devuelve la lista de canales del DAC.
+
+\begin{verbatim}
+ • currentChannel() : DacChannel_t
+ • channels() : List_t
+\end{verbatim}
+
+El módulo DAC no define el método \emph{read()}. La escritura del DAC se realiza con el método \emph{write()} que requiere un parámetro \emph{channel)}
+
+\begin{verbatim}
+ • write( DacChannel_t channel ) : uint32_t
+\end{verbatim}
+
+La escritura es bloqueante pues debe esperar a que se termine una conversión previa que se esté llevando a cabo antes de comenzar con la actual. Al igual que el ADC, para realizar una escritura no bloqueante existen el método \emph{startConversion()}, que se puede utilizar junto a \emph{isConversionComplete()} para encuestar si termino la conversión, o mediante un evento con los mismos métodos que ADC.
+
+\begin{verbatim}
+ • startConversion( DacChannel_t channel ) : uint32_t
+ • isConversionComplete() : bool_t
+ • interrupt( bool_t enable )
+ • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+ • eventCallbackClear( ChannelEvent_t evt )
+\end{verbatim}

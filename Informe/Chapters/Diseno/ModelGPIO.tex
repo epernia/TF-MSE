@@ -1,5 +1,71 @@
 %------------------------------------------------------------------------------
-\subsection{GPIO}
+\subsection{Módulo GPIO}
 
-Port y Pin
+El módulo GPIO modela tanto un único pin de entrada/salida de propósito general (pin), así como a un conjunto de pines (puerto). 
 
+\titulo{Propiedades de pin}
+
+\begin{itemize}
+\item
+\emph{mode}, del tipo \emph{PinMode\_t}, cuyos valores posibles son: \emph{DISABLE} (deshabilidato), \emph{INPUT} (pin configurado como entrada) y \emph{OUTPUT} u \emph{OUTPUT\_PUSHPULL} (pin configurado como salida, modo \emph{push-pull}), \emph{OUTPUT\_OPEN\_DRAIN} (pin como salida, en modo drenador abierto).
+\item
+\emph{pull}, del tipo \emph{PinPull\_t} cuyos valores posibles son: \emph{DISABLE} (modo por defecto, pin flotante), \emph{PULL\_UP} (con resistencia de \emph{pull-up}), \emph{PULL\_DOWN} (con resistencia de \emph{pull-down}), \emph{PULL\_BOTH} (con ambas resistencias).
+\item
+\emph{value}, del tipo \emph{bool\_t}. Representa el valor a escribir o leer de un pin.
+\end{itemize}
+
+\titulo{Métodos de pin}
+
+Los métodos básicos de configuración y uso de un pin son:
+
+\begin{verbatim}
+ • init( PinMode_t mode | PinPull_t pull ) : PinStatus_t
+ • read() : bool_t
+ • write( bool_t value )
+ • deinit() : PinStatus_t
+\end{verbatim}
+
+Notar que los parámetros de configuración del método \emph{init()} se acumulan mediante el operador $|$. 
+
+Contiene además el método \emph{toggle()} intercambia el valor del pin si el mismo está configurado como salida.:
+
+\begin{verbatim}
+ • toggle()
+\end{verbatim}
+
+Para establecer una interrupción en un pin ante cierto evento define los métodos: 
+
+\begin{verbatim}
+ • hasInterrupt() : bool_t
+ • interrupt( bool_t enable )
+ • eventCallbackSet( PinEvent_t evt, Callback_t c )
+ • eventCallbackClear( PinEvent_t evt )
+\end{verbatim}
+
+Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \emph{LOW\_LEVEL} (interrupción por nivel bajo), \emph{RISING\_EDGE} (interrupción por flanco ascendente), \emph{FALLING\_EDGE} (interrupción por flanco descendente) y \emph{BOTH\_EDGE} (interrupción por flanco ascendente y descendente). Nótese que según la plataforma particular existen las posibilidades de que algunas pines fijos solamente soporten interrupción, o que exista una cantidad de interrupciones de pin y se pueda elegir a qué pines se le asignan, es por eso que se define el método \emph{hasInterrupt()} que retorna true si un dado pin tiene capacidad de configurar interrupción. 
+
+\titulo{Propiedad de puerto}
+
+\emph{value}, del tipo \emph{uitn32\_t}. Representa el valor a escribir o leer en un puerto.
+
+\titulo{Métodos de puerto}
+
+Para la configuración y uso de un puerto se definen los métodos básicos:
+
+\begin{verbatim}
+ • init( List_t config ) : PinStatus_t
+ • read() : uint32_t
+ • write( uint32_t value )
+ • deinit() : PinStatus_t
+\end{verbatim}
+
+El método \emph{init()} de puerto requiere una lista de configuraciones.
+Los métodos \emph{read()} y \emph{write()} permiten leer y escribir el puerto completo.
+
+Se agregan además, el método \emph{pins()}, devuelve una lista de pines que componen el puerto, y los métodos \emph{set()} y \emph{reset()} que permiten escribir el puerto afectado por una máscara de bits que se le pasa como parámetro:
+
+\begin{verbatim}
+ • pins(): List_t
+ • set( uint32_t mask )
+ • reset( uint32_t mask )
+\end{verbatim}

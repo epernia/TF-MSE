@@ -1,3 +1,17 @@
 %------------------------------------------------------------------------------
-\subsection{TIMER}
+\subsection{Módulo Timer}
+Duración: TIME.
 
+323
+
+TIMER: modela un periférico Timer/Counter.
+
+Time/Counterl Capture Event OOOC
+Time/Counterl Compare Match A OOOE
+Time/Counterl Compare Match B 001 0
+Time/Counterl Overflow 001 2
+
+
+\emph{Tick\_t}, representa un valor de conteo de un lapso de tiempo adimencional lapso de tiempo en ticks (se almacena internamente como \emph{uint64\_t}).
+
+Como evento posible se define: \emph{CONVERSION\_COMPLETE} que genera una interrupción cuando se completa la conversión. El método \emph{interrupt()} habilita  o deshabilita todas las interrupciones del periférico.
