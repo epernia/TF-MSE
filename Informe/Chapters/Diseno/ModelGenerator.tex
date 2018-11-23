@@ -1,0 +1,151 @@
+%------------------------------------------------------------------------------
+%	SECTION
+%------------------------------------------------------------------------------
+\section{Generador de sAPI en lenguaje C}
+\label{sec:modelGenerator}
+
+
+
+Cada uno de los módulos contiene un conjunto de propiedades que se agrupan en una estructura asociada al módulo. Esto se define en un tipo de datos de la forma:
+
+\begin{lstlisting}[language=C]
+typedef struct{
+   <type> property1;
+   <type> property2;
+   ...
+}<module>_t;
+\end{lstlisting}
+
+Esta estructura es el área donde se encuentra mapeado mòdulo y no es accesible desde el API pública más allá de como un índice con nombre. Se define entonces un tipo enumerado asociado al nombre del módulo para acceder por nombre al mismo (en los periféricos físicos, por ejemplo, I2C0, SPI1, UART4, etc.). Este tipo es de la forma:
+
+\begin{lstlisting}[language=C]
+typedef enum{
+   <MODULE0>,
+   <MODULE1>,
+   ...
+}<module>_t;
+\end{lstlisting}
+
+Propiedades típicas de un periférico fìsico:
+
+configParamName: Un valor de configuración del periférico.
+power: Encender o apagar el mismo.
+value: Valor a leer o escribir.
+eventName: Un evento asociado al periférico (interrupción u otro).
+eventNameCallback: Una estructura con el puntero a función y el puntero al parámetro que le pueda pasar el usuario a dicha función. (interrupción u otro).
+
+Finalmente se define un conjunto de métodos de acceso a cada módulo, entre ellos:
+
+
+Inicializar el módulo (enciende el módulo de ser necesario y lo inicializa con la configuración más típica utilizada):
+
+\begin{lstlisting}[language=C]
+<module>Init(
+    <MODULEi>,
+    <mostCommonPropertyValue> | 
+    <MODIFY_FLAG1> | ... | 
+    <MODIFY_FLAGn>
+);
+\end{lstlisting}
+
+Asignar valor de una propiedad: 
+
+\begin{lstlisting}[language=C]
+void main (void){
+	int a = 9;
+}
+
+<module><PropertyName>Set(
+    <MODULEi>,
+    <propertyValue> |
+    MODIFY_FLAG1 |
+    MODIFY_FLAG2(value) | ... | 
+    MODIFY_FLAGn
+);
+\end{lstlisting}
+
+Obtener valor de una propiedad: 
+
+
+\begin{lstlisting}
+void main (void){
+	int a = 9;
+}
+
+<propertyValue> = <module><PropertyName>Get( <MODULEi> );
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Java]
+<propertyValue> = <module><PropertyName>Get( <MODULEi> );
+
+
+class Point {
+  constructor( args = {} ) {
+    ( { x: this.x = 0, y: this.y = 0 } = args );
+  }
+
+  toString () {
+    return '(' + this.x + ', ' + this.y + ')';
+  }
+}
+
+let p1 = new Point( { x: 10, y: 20 } );
+let p2 = new Point();
+let p3 = new Point( { y: 10 } );
+
+// Output p1:
+//p1.toString(); // (10, 20)
+
+// Output p2:
+//p2.toString(); // (0, 0)
+
+// Output p2:
+p3.toString(); // (0, 0)
+\end{lstlisting}
+
+
+
+
+%------------------------------------------------------------------------------
+\subsection{Arquitectura de una aplicación en C que utiliza la biblioteca}
+
+La biblioteca debe aislar la aplicación de usuario del hardware subyacente formando una capa de abstracción del hardware. De esta manera, una aplicación que utiliza la biblioteca contiene al menos las capas de software descriptas en la figura \ref{fig:sapiCapas1}.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=10.4cm]{Figures/sapiCapas1.png}
+\par\caption{Biblioteca sAPI como capa de abstracción del hardware.}\label{fig:sapiCapas1}
+\end{center}
+\end{figure}
+
+Según la implementación de la biblioteca para una plataforma de hardware particular, se puede aprovechar bibliotecas de drivers existentes provistas por el fabricante para su interfaz con el hardware. Además, en una aplicación de embebidos típica, se combinará con un sistema operativo de tiempo real, \emph{stracks} y \emph{middelware} resultando en las capas de software de la figura \ref{fig:sapiCapas2}.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=10.4cm]{Figures/sapiCapas2.png}
+\par\caption{Arquitectura de una aplicación que utiliza la biblioteca.}\label{fig:sapiCapas2}
+\end{center}
+\end{figure}
+
+%------------------------------------------------------------------------------
+\subsection{Arquitectura de la biblioteca sAPI en C}
+
+La biblioteca sAPI modela todo el hardware que necesita acceder tanto la aplicación de usuario como las otras capas superiores de software. Utiliza un diseño modular que facilita la reutilización de sus partes. Estos módulos pueden agruparse en:
+
+\begin{itemize}
+\item
+Plataforma de hardware (en adelante \emph{board}): son los módulos que describen cierta placa de sistema embebido completa.
+\item
+Periféricos externos conectados a la \emph{board}: son los módulos que modelan, por ejemplo, un chip conectado al I2C o al SPI.
+\item
+Módulos abstractos: representan módulos que agregan un mayor nivel de abstracción, los cuales permiten realizar tareas más avanzadas como, por ejemplo, buffers.
+\end{itemize}
+
+Los periféricos externos y módulos abstractos utilizan los módulos en el grupo \emph{board} y en consecuencia no dependen del hardware subyacente.
+
+
+%------------------------------------------------------------------------------
+\subsection{Módulo de sAPI en lenguaje C}
+
+sdfsd fds fdsfds fds f

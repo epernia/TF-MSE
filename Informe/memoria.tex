@@ -60,6 +60,68 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[framemethod=tikz]{mdframed} % @Eric for License
 \usepackage{enumitem} % @Eric for Lists 1. 1.1. ...
 
+% Paquete para código en algún lenguaje de programación
+\usepackage{listings} % @Eric for Syntax Highlighting
+
+% Defino el sintaxhighlight para lenguaje C
+\lstdefinestyle{customc}{
+	frame=Ltb,
+    framerule=0pt,
+    aboveskip=0.5cm,
+    framextopmargin=3pt,
+    framexbottommargin=3pt,
+    framexleftmargin=0.4cm,
+    framesep=0pt,
+    rulesep=.4pt,
+    %backgroundcolor=\color{gray97},
+    rulesepcolor=\color{black},
+    %
+    %stringstyle=\ttfamily,
+    showstringspaces = false,
+    basicstyle=\small\ttfamily,
+    %commentstyle=\color{gray45},
+    %keywordstyle=\bfseries,
+    %
+    numbers=left,
+    numbersep=15pt,
+    numberstyle=\tiny,
+    numberfirstline = false,
+    breaklines=true,
+    %
+    %     
+  belowcaptionskip=1\baselineskip,
+  %breaklines=true,
+  %frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  %showstringspaces=false,
+  %basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{purple!80!black},
+  commentstyle=\itshape\color{green!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+  %numbers=left, % where to put the line-numbers; values are (none, left, right)
+  %numbersep=10pt,   % how far the line-numbers are from the code
+  %numberstyle=\tiny % the style that is used for the line-numbers
+}	
+\lstset{escapechar=@,style=customc}	
+
+% Defino el sintaxhighlight para lenguaje Smalltalk
+
+\lstdefinelanguage{Smalltalk}{
+  morekeywords={true,false,self,super,nil},
+  sensitive=true,
+  morecomment=[s]{"}{"},
+  morestring=[d]',
+  %style=SmalltalkStyle
+}
+%\lstdefinestyle{SmalltalkStyle}{
+%  literate={:=}{{$\gets$}}1{^}{{$\uparrow$}}1
+%} 
+
+
+
+
 %\usepackage[hyphens]{url}
 %\usepackage[hidelinks]{hyperref}
 %\hypersetup{breaklinks=true}
@@ -333,21 +395,12 @@ En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \e
 
 \input{Chapters/Diseno/DescripcionGeneral}
 
-\input{Chapters/Diseno/ModelModule}
-%\input{Chapters/Diseno/ModulesTypes}
-
+% Board
 \input{Chapters/Diseno/ModelBoard}
-
-\input{Chapters/Diseno/ModelSoc}
-\input{Chapters/Diseno/ModelCore}
-\input{Chapters/Diseno/ModelGPIO}
-\input{Chapters/Diseno/ModelADC}
-\input{Chapters/Diseno/ModelDAC}
-\input{Chapters/Diseno/ModelTimer}
-\input{Chapters/Diseno/ModelRTC}
-\input{Chapters/Diseno/ModelUART}
-\input{Chapters/Diseno/ModelSPI}
-\input{Chapters/Diseno/ModelI2C}
+% Modulos sAPI
+\input{Chapters/Diseno/ModelModule} 
+% Generador de sAPI
+\input{Chapters/Diseno/ModelGenerator} 
 
 \input{Chapters/Diseno/ModelVerification}
 

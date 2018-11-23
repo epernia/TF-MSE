@@ -40,7 +40,47 @@ Conector: representa los conectores físicos de la placa, como ser, tira de pine
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
-\includegraphics*[width=14cm]{Figures/Component.pdf}
+\includegraphics*[width=11cm]{Figures/Component.pdf}
 \par\caption{Diagrama de clases de componente.}\label{fig:Component}
 \end{center}
 \end{figure}
+
+%------------------------------------------------------------------------------
+\subsection{Modelo de SoC}
+\label{sec:modelSoC}
+
+Un SoC describe un sistema completo dentro de un chip. Este término se utiliza para describir tanto microcontroladores (que incluyen núcleos de procesamiento, memorias y diversos periféricos), como sistemas que incluyen además lógica programable (FPGA) o módulos analógicos de radiofrecuencia complejos como ser Bluetooth y Wi-Fi.
+
+En la figura \ref{fig:ModelSoC} se muestra el modelo de SoC, el cual se compone de núcleos de procesamiento (\emph{Core}), periféricos (\emph{Peripheral}) y memorias (\emph{Memory}).
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=8cm]{Figures/SoC.pdf}
+\par\caption{Diagrama de clases de SoC.}\label{fig:ModelSoC}
+\end{center}
+\end{figure}
+
+%------------------------------------------------------------------------------
+\subsection{Modelo de IP core}
+\label{sec:modelSoC}
+
+Para modelar núcleos de procesamiento, periféricos y memorias se utiliza el concepto de \emph{IP core}. Un núcleo de propiedad intelectual es un bloque de lógica o datos reutilizable, para definir un diseño de hardware de forma abstracta. Normalmente se utilizan en electrónica como componentes en un diseño de hardware ya sea en una FPGA o ASIC. Define una interfaz de señales y comportamiento interno.
+
+En la figura \ref{fig:IPCore} se muestra el modelo de \emph{IPCore} y sus relaciones.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/IPCore.pdf}
+\par\caption{Diagrama de clases de \emph{IPcore}.}\label{fig:IPCore}
+\end{center}
+\end{figure}
+
+Un \emph{IPCore} define una dirección base, que se utiliza para localizarlo en el mapa de memoria. También define una interfaz que se compone de una lista ordenada de señales.
+
+Las clases \emph{Memory} e \emph{IPCoreExtended} heredan de la clase \emph{IPCore} agregándole funcionalidades particulares. 
+
+\emph{Memory} modela una memoria interna del SoC, por ejemplo, RAM o Flash. Tiene las propiedades: tipo de memoria, tamaño en bytes y tipo de acceso permitido (lectura, lectura/escritura).
+
+\emph{IPCoreExtended} contiene registros e interrupciones. Los registros se modelan tanto para fines de documentación, como para poder realizar \emph{tests} sobre valores de los mismos. Las interrupciones son necesarias para conocer cuales tenemos disponibles físicamente y a qué evento responden. De la clase \emph{IPCoreExtended} heredan \emph{Core} y \emph{Peripheral}. La primera modela un núcleo de procesamiento y la segunda un periférico. 
+
+\emph{Peripheral} contiene una lista ordenada de \emph{Locations} (ubicaciones). Una ubicación define un conjunto de conexiones entre señales del periférico y terminales del SoC. Esto permite modelar las posibles configuraciones de pines de un dado periférico.

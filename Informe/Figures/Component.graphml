@@ -18,7 +18,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="60.73339830186666" width="129.2755064683097" x="-984.4997684542465" y="-623.1440780039504"/>
+          <y:Geometry height="31.29896351925794" width="129.2755064683097" x="-984.4997684542465" y="-623.1440780039504"/>
           <y:Fill color="#C0C0C0" color2="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="69.0" x="30.137753234154843" y="3.0">Connector<y:LabelModel>
@@ -28,7 +28,7 @@
               <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
             </y:ModelParameter>
           </y:NodeLabel>
-          <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
+          <y:UML clipContent="true" constraint="" omitDetails="true" stereotype="" use3DEffect="false">
             <y:AttributeLabel>specification : String</y:AttributeLabel>
             <y:MethodLabel/>
           </y:UML>
@@ -39,7 +39,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="117.39287656273626" width="138.84262126435863" x="-1143.1183897186052" y="-790.6248404070634"/>
+          <y:Geometry height="126.29165917143195" width="138.84262126435863" x="-1143.1183897186052" y="-799.5236230157591"/>
           <y:Fill color="#C0C0C0" color2="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.2109375" x="31.315841882179313" y="3.0">Component<y:LabelModel>
@@ -51,7 +51,8 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel>name : String
-documentation : String
+description : String
+vendor : String 
 numberOfTerminals : Int
 terminals : List</y:AttributeLabel>
             <y:MethodLabel/>
@@ -63,7 +64,7 @@ terminals : List</y:AttributeLabel>
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="60.73339830186666" width="151.99462126435856" x="-1149.6943897186052" y="-623.1440780039504"/>
+          <y:Geometry height="31.298963519257825" width="151.99462126435856" x="-1149.6943897186052" y="-623.1440780039504"/>
           <y:Fill color="#C0C0C0" color2="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.94091796875" x="5.026851647804278" y="3.0">ComponentWithDriver<y:LabelModel>
@@ -73,7 +74,7 @@ terminals : List</y:AttributeLabel>
               <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
             </y:ModelParameter>
           </y:NodeLabel>
-          <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="false">
+          <y:UML clipContent="true" constraint="" omitDetails="true" stereotype="" use3DEffect="false">
             <y:AttributeLabel>drivers : Set</y:AttributeLabel>
             <y:MethodLabel/>
           </y:UML>
@@ -84,10 +85,10 @@ terminals : List</y:AttributeLabel>
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="75.2824693291517" width="82.33854376166755" x="-943.8039740473573" y="-756.6815780351558"/>
+          <y:Geometry height="60.73339830186649" width="98.97854376166765" x="-943.8039740473573" y="-756.6815780351558"/>
           <y:Fill color="#FFCC00" color2="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="58.18359375" x="12.077475005833776" y="3.0">Terminal<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="58.18359375" x="20.397475005833826" y="3.0">Terminal<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -104,7 +105,7 @@ terminals : List</y:AttributeLabel>
     <node id="n4">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
-          <y:Geometry height="15.483523789020438" width="20.919794406889025" x="-989.4283249759856" y="-726.7821052650901"/>
+          <y:Geometry height="15.483523789020438" width="20.919794406889025" x="-989.4283249759856" y="-721.8754534390031"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="25.345703125" x="-2.212954359055516" y="-1.608824042989795">1...*<y:LabelModel>
@@ -145,7 +146,7 @@ peripherals : Set</y:AttributeLabel>
     <edge id="e0" source="n0" target="n1">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-0.0" sy="-30.366699150933307" tx="0.0" ty="0.0">
+          <y:Path sx="-0.0" sy="-15.64948175962895" tx="0.0" ty="0.0">
             <y:Point x="-919.8620152200916" y="-643.122351324846"/>
             <y:Point x="-1073.7389689773843" y="-643.122351324846"/>
             <y:Point x="-1073.738968977384" y="-643.1440780039504"/>
@@ -159,7 +160,7 @@ peripherals : Set</y:AttributeLabel>
     <edge id="e1" source="n2" target="n1">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-0.04188989095831697" sy="-6.652363916133145" tx="0.0" ty="0.0">
+          <y:Path sx="-0.04188989095831697" sy="-3.4282964785370638" tx="0.0" ty="0.0">
             <y:Point x="-1073.738968977384" y="-643.1658046830548"/>
             <y:Point x="-1073.738968977384" y="-643.1658046830548"/>
           </y:Path>
@@ -170,11 +171,10 @@ peripherals : Set</y:AttributeLabel>
       </data>
     </edge>
     <edge id="e2" source="n1" target="n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-5.621868739660613" sy="24.65996953116064" tx="-13.467873475123952" ty="-26.424602771144123">
-            <y:Point x="-963.8039740473573" y="-707.2684325945346"/>
+          <y:Path sx="-1.741999522269225" sy="33.92017961811712" tx="-16.18962934288312" ty="-21.317790707046466">
+            <y:Point x="-963.8039740473573" y="-702.457613811926"/>
             <y:Point x="-963.8039740473573" y="-745.464946141724"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>

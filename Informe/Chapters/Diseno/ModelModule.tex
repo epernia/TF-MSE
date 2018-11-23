@@ -1,8 +1,312 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\section{Modelo abstracto de módulo de biblioteca}
+\section{Módulos de biblioteca sAPI}
 \label{sec:modelLibrary}
 
-Cada módulo que compone la biblioteca sAPI se modela utilizando los conceptos del paradigma de la programación orientada a objetos, los cuales son especialmente útiles para describir módulos de software que encapsulan funcionalidad. Estos se describen mediante diagramas UML de clases de forma independiente del lenguaje de programación.
+Se utilizan las siguientes premisas para guiar el diseño de los módulos de la biblioteca sAPI:
+
+\begin{itemize}
+\item
+%A nivel de biblioteca:
+Utilización de nombres sencillos para facilitar el aprendizaje y uso.
+\item
+Mantener baja la extensión de la definición de la API.
+\item
+%Modelado a nivel de SoC:
+Dar soporte a la programación de núcleos de procesamiento y periféricos, utilizando los modos más comunes de funcionamiento de los mismos, con un nivel de abstracción suficiente para independizarse del hardware, pero manteniendo la identidad y conceptos de cada cada periférico.
+\item
+Debe especificar las dependencias entre módulos de la biblioteca, y el uso de recursos físicos en cada implementación particular.
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Módulo de sAPI}
+
+Cada módulo de biblioteca sAPI define:
+
+\begin{itemize}
+\item
+Nombre del módulo.
+\item
+Descripción. Se utiliza para la generación de documentación.
+\item
+Versión del módulo. Se utiliza versionado semántico [].
+\item
+Autor del módulo. Se debe completar nombres, apellidos y dirección de correo electrónico del autor. 
+\item
+Licencia. Se puede completar con el texto completo de la licencia del módulo o un enlace a la misma. Los módulos sAPI utilizan la licencia de código abierto \emph{BSD-3clause} [].
+\item
+Dependencias. Una lista de los módulos de sAPI de los cuales depende el módulo actual. Se puede además exigir que la dependencia sea a una versión específica, a partir de una versión mínima o hasta cierta versión máxima.
+\end{itemize}
+% falta inherits y métodos de clases
+
+Además, define un conjunto de tipos de datos, constantes, propiedades y métodos.
+
+En los módulos de sAPI se encuentran las siguientes categorías de propiedades (o atributos):
+
+\begin{itemize}
+\item
+Confiuración: corresponde a las propiedades para la configuración de modos de funcionamiento de un módulo. Por ejemplo, \emph{power}, \emph{clockSource}, etc.
+\item
+Valor: un cierto valor que se puede leer o escribir en un módulo.
+\item
+Eventos: representa los eventos que controla el módulo.
+\end{itemize}
+%polling_events (List)
+%interrupt_events (List)
+%event_callbacks (List)
+
+Todos los módulos poseen los siguientes métodos:
+
+\begin{itemize}
+\item
+\emph{init} (inicialización): es un método para inicializar el módulo. Permite establecer múltiples parámetros de configuración.
+\item
+\emph{read} (leer): permite leer el valor característico del módulo.
+\item
+\emph{write} (escribir): permite escribir un valor característico del módulo.
+\item
+\emph{deinit} (restablecer configuración): es un método para restablecer el módulo a la configuración por defecto.
+\item
+\emph{getters y settes} de cada propiedad.
+\end{itemize}
+
+Se destaca que en los lenguajes no orientados a objetos en lugar de métodos se tiene funciones y, por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método.
+
+%------------------------------------------------------------------------------
+\subsection{Módulo DataTypes}
+
+Define constantes y tipos de datos primitivos, debido a eso todos los demás módulos de la biblioteca sAPI dependen de este módulo.
+
+Constantes:
+
+\begin{itemize}
+\item
+Estados lógicos: \emph{TRUE} y \emph{FALSE}.
+\item
+Estados funcionales: \emph{ON} y \emph{OFF}.
+\item
+Estados eléctricos: \emph{HIGH} y \emph{LOW}.
+\item
+Estados de habilitación: \emph{ENABLE} y \emph{DISABLE}.
+\end{itemize}
+
+Tipos de datos primitivos: 
+
+\begin{itemize}
+\item
+Booleano: \emph{bool\_t}. Cualquiera de las constantes definidas previamente se considera un valor booleano válido, además de 0 y !0 (cualquier valor distinto de 0).
+\item
+Enteros con signo, tienen un rango de valores de $-2^{(N-1)}$ a $2^{(N-1)} - 1$, (donde N = número de bits) y formato complemento a 2. Estos son: \emph{int8\_t}, \emph{int16\_t}, \emph{int32\_t} e \emph{int64\_t}.
+\item
+Enteros sin signo, con rango de valores de $0$ a $2^{N} - 1$. Estos son: \emph{uint8\_t} (\emph{byte\_t}), \emph{uint16\_t} (\emph{word\_t}), \emph{uint32\_t} (\emph{lword\_t}) y \emph{uint64\_t} (\emph{dword\_t}).
+\item
+Floatantes: representa valores con punto flotante IEEE-754. Estos son \emph{float32\_t} y \emph{float64\_t}.
+\item
+Cadena de caracteres: \emph{string\_t}.
+\item
+\emph{Callback}: \emph{Callback\_t}. Representa a una función a llamar en respuesta a un evento.
+\item
+Parámetros de \emph{Callback}: \emph{CallbackParams\_t}. Representa los parámetros de una función a llamar en respuesta a un evento.
+%\item
+%Vacío: \emph{void\_t}. Representa el nulo de los tipos de datos. Se utiliza para los métodos que no retornan nada.
+%\item
+%Error: \emph{Error\_t}. Representa valores de error.
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Módulo GPIO}
+
+El módulo GPIO modela tanto un único pin de entrada/salida de propósito general (pin), así como a un conjunto de pines (puerto). 
+
+\titulo{Propiedades de pin}
+
+\begin{itemize}
+\item
+\emph{mode}, del tipo \emph{PinMode\_t}, cuyos valores posibles son: \emph{DISABLE} (deshabilidato), \emph{INPUT} (pin configurado como entrada) y \emph{OUTPUT} u \emph{OUTPUT\_PUSHPULL} (pin configurado como salida, modo \emph{push-pull}), \emph{OUTPUT\_OPEN\_DRAIN} (pin como salida, en modo drenador abierto).
+\item
+\emph{pull}, del tipo \emph{PinPull\_t} cuyos valores posibles son: \emph{DISABLE} (modo por defecto, pin flotante), \emph{PULL\_UP} (con resistencia de \emph{pull-up}), \emph{PULL\_DOWN} (con resistencia de \emph{pull-down}), \emph{PULL\_BOTH} (con ambas resistencias).
+\item
+\emph{value}, del tipo \emph{bool\_t}. Representa el valor a escribir o leer de un pin.
+\end{itemize}
+
+\titulo{Métodos de pin}
+
+Los métodos básicos de configuración y uso de un pin son:
+
+\begin{verbatim}
+ • init( PinMode_t mode | PinPull_t pull ) : PinStatus_t
+ • read() : bool_t
+ • write( bool_t value )
+ • deinit() : PinStatus_t
+\end{verbatim}
+
+Notar que los parámetros de configuración del método \emph{init()} se acumulan mediante el operador $|$. 
+
+Contiene además el método \emph{toggle()} intercambia el valor del pin si el mismo está configurado como salida.:
+
+\begin{verbatim}
+ • toggle()
+\end{verbatim}
+
+Para establecer una interrupción en un pin ante cierto evento define los métodos: 
+
+\begin{verbatim}
+ • eventCallbackSet( PinEvent_t evt, Callback_t c )
+ • eventCallbackClear( PinEvent_t evt )
+ • interrupt( bool_t enable )
+\end{verbatim}
+
+Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \emph{LOW\_LEVEL} (interrupción por nivel bajo), \emph{RISING\_EDGE} (interrupción por flanco ascendente), \emph{FALLING\_EDGE} (interrupción por flanco descendente) y \emph{BOTH\_EDGE} (interrupción por flanco ascendente y descendente) .
+
+\titulo{Propiedad de puerto}
+
+\emph{value}, del tipo \emph{uitn32\_t}. Representa el valor a escribir o leer en un puerto.
+
+\titulo{Métodos de puerto}
+
+Para la configuración y uso de un puerto se definen los métodos básicos:
+
+\begin{verbatim}
+ • init( List_t config ) : PinStatus_t
+ • read() : uint32_t
+ • write( uint32_t value )
+ • deinit() : PinStatus_t
+\end{verbatim}
+
+El método \emph{init()} de puerto requiere una lista de configuraciones.
+Los métodos \emph{read()} y \emph{write()} permiten leer y escribir el puerto completo.
+
+Se agregan además, el método \emph{pins()}, devuelve una lista de pines que componen el puerto, y los métodos \emph{set()} y \emph{reset()} que permiten escribir el puerto afectado por una máscara de bits que se le pasa como parámetro:
+
+\begin{verbatim}
+ • pins(): List_t
+ • set( uint32_t mask )
+ • reset( uint32_t mask )
+\end{verbatim}
+
+%------------------------------------------------------------------------------
+\subsection{Módulo ADC}
+
+El módulo ADC modela un periférico Conversor Analógico-Digital. Este periférico contiene varios canales de conversión multiplexados los cuales se pueden configurar individualmente como entradas analógicas.
+
+\titulo{Propiedades de ADC}
+
+\begin{itemize}
+\item
+\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz. Los valores posibles dependen de cada plataforma. Se pueden utilizar alternativamente los valores los valores del tipo \emph{AdcConvRate\_t} cuyos valores posibles son: \emph{LOW}, \emph{MID} y \emph{HIGH}.
+\item
+\emph{voltageRefereceHighSource}, del tipo \emph{AdcVRefSource\_t} cuyos valores posibles son: \emph{VCC}, \emph{INTERNAL}, \emph{EXTERNAL} y \emph{GND}.
+\item
+\emph{voltageRefereceLowSource}, del tipo \emph{AdcVRefSource\_t}.
+\item
+\emph{conversionMode}, del tipo \emph{AdcConvMode\_t}, con valores: \emph{CONTIUOUS}, \emph{BRUST} y \emph{SINGLE}.
+\item
+\emph{conversionResolution}, del tipo \emph{AdcConvResolution\_t}, con valores:\emph{LOW}, \emph{MID} y \emph{HIGH}, que si bien dependen de la plataforma ya están definidos.
+\item
+\emph{channelsMode}, del tipo \emph{AdcChannelsMode\_t}, con valores: \emph{SIGLE} y \emph{DIFFERENTIAL}.
+\item
+\emph{value}, del tipo \emph{uint32\_t}. Representa el último valor de conversión del ADC.
+\end{itemize}
+
+\titulo{Métodos de ADC}
+
+Inicialización y restablecimiento de un periférico ADC:
+
+\begin{verbatim}
+ • init( uint32_t conversionRate | 
+         AdcVRefSource_t voltageRefereceHighSource |
+         AdcVRefSource_t voltageRefereceLowSource |
+         AdcConvMode_t conversionMode |
+         AdcConvResolution_t conversionResolution |
+         AdcChannelsMode_t channelsMode
+       ) : AdcStatus_t
+ • deinit() : AdcStatus_t
+\end{verbatim}
+
+Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
+
+\begin{verbatim}
+ • conversionRate = HIGH
+ • voltageRefereceHighSource = VCC
+ • voltageRefereceLowSource = GND
+ • conversionMode = SINGLE
+ • conversionResolution = HIGH
+ • channelMode = SINGLE
+\end{verbatim}
+
+Habilitación/deshabilitación de un canal particular del ADC (configuración de una entrada analógica):
+
+\begin{verbatim}
+ • channel( AdcChannel_t channel, bool_t enable ) : AdcStatus_t
+\end{verbatim}
+
+La lectura del conversor ADC se realiza con el método \emph{read()} que requiere un parámetro \emph{channel)}
+
+\begin{verbatim}
+ • read( AdcChannel_t channel ) : uint32_t
+\end{verbatim}
+
+Si el ADC tiene configurado \emph{conversionMode = SINGLE}, entonces la lectura es bloqueante pues debe esperar a realizar la conversión. Si el ADC está en modo \emph{conversionMode = CONTIUOUS}, entonces devuelve el último valor convertido.
+
+Además, define los métodos \emph{currentChannel()}, que devuelve el canal de la conversión actual y \emph{channels()} que devuelve la lsita de canales del ADC. Notar que esta lista se reduce a la mitad si el modo \emph{channelsMode} es \emph{DIFFERENTIAL)}
+
+\begin{verbatim}
+ • currentChannel() : AdcChannel_t
+ • channels() : List_t
+\end{verbatim}
+
+%------------------------------------------------------------------------------
+\subsection{Módulo DAC}
+
+
+DAC: modela un periférico Conversor Digital-Analógico. El valor escrito es entero sin signo.
+
+
+
+\begin{verbatim}
+ • write( AdcChannel_t channel, uint32_t value )
+\end{verbatim}
+
+%------------------------------------------------------------------------------
+\subsection{Módulo Timer}
+Duración: TIME.
+
+
+TIMER: modela un periférico Timer/Counter.
+
+%------------------------------------------------------------------------------
+\subsection{Módulo RTC}
+
+Fecha y Hora: DATE, TIME OF DAY y DATE AND TIME.
+
+
+RCT: modela un periférico Reloj de Tiempo Real.
+
+%------------------------------------------------------------------------------
+\subsection{Módulo UART}
+
+
+UART: modela un periférico de comunicación serie transmisor/receptor asincrónico universal.
+%------------------------------------------------------------------------------
+\subsection{Módulo SPI}
+
+
+SPI: modela un periférico de comunicación serie SPI.
+
+%------------------------------------------------------------------------------
+\subsection{Módulo I2C}
+
+I2C: modela un periférico de comunicación serie I2C.
+
+%------------------------------------------------------------------------------
+\subsection{Módulo Core}
+
+
+%------------------------------------------------------------------------------
+\subsection{Módulo SoC}
+
+%------------------------------------------------------------------------------
+\subsection{Módulo Board}
+
 

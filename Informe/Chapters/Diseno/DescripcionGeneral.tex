@@ -1,73 +1,26 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\section{Principios de diseño}
-\label{sec:principiosDiseno}
+\section{Descripción general}
+\label{sec:descripGralDiseno}
 
-Se utilizan las siguientes premisas para guiar el diseño de la biblioteca sAPI:
-
-\begin{itemize}
-\item
-Modelado a nivel de \emph{chip} (ya sea MCU\footnote{Abreviatura de microcontrolador.} o SoC\footnote{Abreviatura de sistema en un chip.}):
-\begin{itemize}
-\item
-Dar soporte a la programación de núcleos de procesamiento y periféricos, utilizando los modos más comunes de funcionamiento de los mismos.
-\item
-Debe poseer un nivel de abstracción suficiente para independizarse del hardware pero manteniendo la identidad y conceptos claves de cada cada periférico que compone el chip.
-\item
-Especificar de manera explícita las dependencias entre módulos de la biblioteca y el uso de recursos físicos en cada implementación particular.
-\end{itemize}
-\item
-A nivel de biblioteca:
-\begin{itemize}
-\item
-Utilización de nombres sencillos para facilitar el aprendizaje y uso.
-\item
-Mantener baja la extensión de la definición de la API.
-\item
-Especificar las dependencias entre módulos de la biblioteca.
-\end{itemize}
-\end{itemize}
-
-%------------------------------------------------------------------------------
-%	SECTION
-%------------------------------------------------------------------------------
-\section{Arquitectura de una aplicación}
-\label{sec:arqApp}
-
-La biblioteca debe aislar la aplicación de usuario del hardware subyacente formando una capa de abstracción del hardware. De esta manera, una aplicación que utiliza la biblioteca contiene al menos las capas de software descriptas en la figura \ref{fig:sapiCapas1}.
+El sistema propuesto para la creación de bibliotecas de software para la programación de plataformas de hardware se ilustra en la figura \ref{fig:sapi_gen}.
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
-\includegraphics*[width=10.4cm]{Figures/sapiCapas1.png}
-\par\caption{Biblioteca sAPI como capa de abstracción del hardware.}\label{fig:sapiCapas1}
+\includegraphics*[width=14cm]{Figures/sapi_gen.pdf}
+\par\caption{Diagrama del sistema diseñado.}\label{fig:sapi_gen}
 \end{center}
 \end{figure}
 
-Según la implementación de la biblioteca para una plataforma de hardware particular, se puede aprovechar bibliotecas de drivers existentes provistas por el fabricante para su interfaz con el hardware. Además, en una aplicación de embebidos típica, se combinará con un sistema operativo de tiempo real, \emph{stracks} y \emph{middelware} resultando en las capas de software de la figura \ref{fig:sapiCapas2}.
+Se diseñó un modelo de plataforma de hardware (en adelante \emph{board} por sus siglas en inglés). Este modelo describe una plataforma de hardware completa y se debe instanciar para cada nueva plataforma de hardware.
 
-\begin{figure}[!htbp]
-\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
-\includegraphics*[width=10.4cm]{Figures/sapiCapas2.png}
-\par\caption{Arquitectura de una aplicación que utiliza la biblioteca.}\label{fig:sapiCapas2}
-\end{center}
-\end{figure}
+Por otra parte, se desarrollaron módulos de biblioteca (en adelante módulos sAPI) independientes del hardware y lenguajes de programación. Estos definen propiedades y métodos describen las propiedades y métodos de cada uno de los periféricos de un cierto SoC, definiendo entonces, la API de la biblioteca.
 
-%------------------------------------------------------------------------------
-%	SECTION
-%------------------------------------------------------------------------------
-\section{Arquitectura de la biblioteca sAPI}
-\label{sec:arqSapi}
+Además, se debe proveer la implementación de cada uno de los métodos de los módulos sAPI (en adelante \emph{drivers}). Estos \emph{drivers} deben estar escritos en un cierto lenguaje de programación y son dependientes de la arquitectura del hardware.
 
-La biblioteca sAPI modela todo el hardware que necesita acceder tanto la aplicación de usuario como las otras capas superiores de software. Utiliza un diseño modular que facilita la reutilización de sus partes. Estos módulos pueden agruparse en:
+También, se diseñó un generador de biblioteca sAPI. Este generador se debe definir para cada lenguaje de programación. Para este trabajo final se desarrolló solamente el generador de lenguaje C, sin embargo, el mismo se realizó de forma modular para que pueda ser fácilmente adaptado a otros lenguajes. 
 
-\begin{itemize}
-\item
-Plataforma de hardware (en adelante \emph{board}): son los módulos que describen cierta placa de sistema embebido completa.
-\item
-Periféricos externos conectados a la \emph{board}: son los módulos que modelan, por ejemplo, un chip conectado al I2C o al SPI.
-\item
-Módulos abstractos: representan módulos que agregan un mayor nivel de abstracción, los cuales permiten realizar tareas más avanzadas como, por ejemplo, buffers.
-\end{itemize}
+Mediante el generador de C, utilizando una instancia de \emph{board} y \emph{drivers} específicos, junto con los módulos sAPI, se genera entonces una biblioteca sAPI en lenguaje C para una plataforma particular.
 
-Los periféricos externos y módulos abstractos utilizan los módulos en el grupo \emph{board} y en consecuencia no dependen del hardware subyacente.
+En las siguientes secciones de detalla el diseño de cada una de las entidades descriptas. Las mismas se modelaron utilizaron los conceptos del paradigma de la programación orientada a objetos, que son especialmente útiles para describir módulos de software que encapsulan funcionalidad. Estos se describen mediante diagramas UML de clases de forma independiente del lenguaje de programación.
