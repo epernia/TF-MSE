@@ -1,4 +1,3 @@
-
 %------------------------------------------------------------------------------
 \subsection{Módulo ADC}
 
@@ -8,19 +7,17 @@ El módulo ADC modela un periférico Conversor Analógico-Digital. Este perifér
 
 \begin{itemize}
 \item
-\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz. Los valores posibles dependen de cada plataforma. Se pueden utilizar alternativamente los valores los valores del tipo \emph{AdcConvRate\_t} cuyos valores posibles son: \emph{LOW}, \emph{MID} y \emph{HIGH}.
+\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz. Los valores posibles dependen de cada plataforma. Se pueden utilizar alternativamente los valores genéricos: \emph{LOW}, \emph{MEDIUM}, \emph{HIGH} y \emph{VERY\_HIGH}.
+\item
+\emph{conversionMode}, del tipo \emph{AdcConvMode\_t}, con valores: \emph{SINGLE} (activado por software desde el programa de usuario), \emph{CONTINUOUS} (conversion periódica disparada por hardware a tasa \emph{conversionRate}).% y \emph{EXTERNAL\_TRIGGERED} (Timer Match signal o GPIO).
 \item
 \emph{voltageReferece}, del tipo \emph{AdcVRef\_t} cuyos valores posibles son: \emph{VCC}, \emph{INTERNAL} y \emph{EXTERNAL}.
 \item
-\emph{conversionMode}, del tipo \emph{AdcConvMode\_t}, con valores: \emph{SINGLE}, \emph{CONTIUOUS} y \emph{EXTERNAL\_TRIGGERED}.
-\item
-\emph{conversionResolution}, del tipo \emph{AdcConvResolution\_t}, con valores:\emph{LOW}, \emph{MID} y \emph{HIGH}, que si bien dependen de la plataforma, ya están definidos para cada una de ellas.
+\emph{resolution}, del tipo \emph{AdcRes\_t}, cuyos valores también dependen de la plataforma pero se pueden utilizar en su lugar los valores genéricos.
 \item
 \emph{channelsMode}, del tipo \emph{AdcChannelsMode\_t}, con valores: \emph{SIGLE} y \emph{DIFFERENTIAL}.
 \item
-\emph{location}, del tipo \emph{AdcLocation\_t}. Son las posibles ubicaciones del periférico con respecto a pines físicos del SoC. Si bien dependen de la arquitectura, se definen los valores \emph{LOCATION0} a \emph{LOCATION7} para cada plataforma.
-\item
-\emph{value}, del tipo \emph{uint32\_t}. Representa el último valor de conversión del ADC.
+\emph{location}, del tipo \emph{Location\_t}. Son las posibles ubicaciones del periférico con respecto a pines físicos del SoC. Si bien dependen de la arquitectura, se definen los valores genéricos \emph{LOCATION0} a \emph{LOCATION7} para cada plataforma.
 \end{itemize}
 
 \titulo{Métodos de ADC}
@@ -29,59 +26,96 @@ Inicialización y restablecimiento de un periférico ADC:
 
 \begin{verbatim}
  • init( uint32_t conversionRate | 
-         AdcVRef_t voltageReferece |
-         AdcConvMode_t conversionMode |
-         AdcConvResolution_t conversionResolution |
-         AdcChannelsMode_t channelsMode |
-         AdcLocation_t loacation
-       ) : AdcStatus_t
- • deinit() : AdcStatus_t
+         conversionMode |
+         voltageReferece |
+         resolution |
+         channelsMode |
+         location
+       )
+ • deInit()
 \end{verbatim}
 
 Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
 
 \begin{verbatim}
- • conversionRate = HIGH
+ • conversionRate = VERY_HIGH
  • voltageReferece = VCC
  • conversionMode = SINGLE
- • conversionResolution = HIGH
+ • resolution = VERY_HIGH
  • channelMode = SINGLE
- • loacation = DEFAULT
+ • loacation = LOCATION0
 \end{verbatim}
 
 Habilitación/deshabilitación de un canal particular del ADC (configuración de una entrada analógica):
 
 \begin{verbatim}
- • channel( AdcChannel_t channel, bool_t enable ) : AdcStatus_t
+ • channel( AdcChannel_t channel, bool_t enable )
 \end{verbatim}
 
-Define los métodos \emph{currentChannel()}, que devuelve el canal de la conversión actual, y \emph{channels()} que devuelve la lista de canales del ADC. Notar que esta lista se reduce a la mitad si el modo \emph{channelsMode} es \emph{DIFFERENTIAL)}
+Para conocer los canales disponibles de un ADC existe el método 
+\emph{channelsGet()} que devuelve la lista de canales del ADC. Esta lista se reduce a la mitad si el modo \emph{channelsMode} es \emph{DIFFERENTIAL)}
 
 \begin{verbatim}
- • currentChannel() : AdcChannel_t
- • channels() : List_t
+ • channelsGet() : List_t
 \end{verbatim}
 
-La lectura del conversor ADC se realiza con el método \emph{read()}, que requiere un parámetro \emph{channel)}:
+Si el ADC tiene configurado \emph{conversionMode = CONTINUOUS} muestrea automáticamente los canales habilitados. El método\emph{startConversion()} comienza el muestreo automático, para parar el muestreo se utiliza \emph{stopConversion()}. Si en cambio \emph{conversionMode = SINGLE}, la lectura se debe lanzar mediante el método \emph{startConversion()} que recibe un canal como parámetro. 
+Una conversión se puede abortar con \emph{stopConversion()}.
 
 \begin{verbatim}
- • read( AdcChannel_t channel ) : uint32_tt
+ • startConversion( AdcChannel_t channel )
+ • stopConversion()
 \end{verbatim}
 
-Si el ADC tiene configurado \emph{conversionMode = SINGLE}, entonces la lectura es bloqueante pues debe esperar a realizar la conversión. Si el ADC está en modo \emph{conversionMode = CONTIUOUS}, entonces devuelve el último valor convertido. Alternativamente existe el método \emph{startConversion()} para realizar una lectura no bloqueante, que se puede utilizar junto a \emph{isConversionComplete()} para encuestar si termino la conversión, o mediante un evento.
+Existen 2 formas de leer los valores convertidos del ADC, por encuesta, o por interrupción. En el primer caso se debe chequear si finalizó la conversión con el método \emph{conversionStatus()}, que retorna un un valor del tipo \emph{AdcConvStatus\_t}. Si se realizó la conversión correctamente se puede leer el valor convertido con el método \emph{read()}.
 
 \begin{verbatim}
- • startConversion( AdcChannel_t channel ) : uint32_t
- • isConversionComplete() : bool_t
+ • conversionStatus() : AdcConvStatus_t
+ • read() : uint32_t
 \end{verbatim}
 
-El módulo ADC no define el método \emph{write()}. Para establecer una interrupción en un canal analógico ante cierto evento define los métodos: 
+Los valores posibles de \emph{AdcConvStatus\_t} son: 
+
+%\emph{CONVERTING}, \emph{CONVERSION\_COMPLETE}, \emph{CONVERSION\_COMPLETE\_OVERRUN}, \emph{CONVERSION\_ADC\_ERROR}, \emph{CONVERSION- \_TIMEOUT}. 
 
 \begin{verbatim}
- • interrupt( bool_t enable )
+ • CONVERTING
+ • CONVERSION_COMPLETE
+ • CONVERSION_COMPLETE_OVERRUN
+ • CONVERSION_ADC_ERROR
+ • CONVERSION_TIMEOUT
+\end{verbatim}
+
+Para leer un canal por interrupción se debe primero establecer una función de \emph{callback} al evento \emph{CONVERSION\_COMPLETE} y otra al evento  \emph{CONVERSION\_ERROR} y luego activar la interrupción del periférico. Esto se realiza con los métodos:
+
+\begin{verbatim}
  • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
  • eventCallbackClear( ChannelEvent_t evt )
+ • interrupt( bool_t enable )
 \end{verbatim}
 
-Como evento posible se define: \emph{CONVERSION\_COMPLETE} que genera una interrupción cuando se completa la conversión.
-% Ver de agregar Analog Comparator como evento
+Al completar la conversión se ejecutará una de las dos funciones.
+
+\titulo{Métodos de Canal de ADC}
+
+Como alternativa, existen métodos que aplican a cierto canal de ADC y proveen un mayor nivel de abstracción:
+
+\begin{verbatim}
+ • read() : uint32_t
+ • readSync( uint32_t data, 
+             Time_ms_t timout 
+           ) : AdcConvStatus_t
+ • readAsync( Callback_t sucess, 
+              Callback_t error 
+            )
+\end{verbatim}
+
+Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} en fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. {readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data} que recibe como parámetro.
+
+\emph{readAsync()} realiza una lectura no bloqueante. Recibe como parámetros dos funciones de \emph{callback}, una que lanza en caso de conversión exitosa (si esto ocurre le pasa como parámnetro el valor convertido) y otra en caso de error (le pasa el estado de conversión).
+
+Este módulo no define método \emph{write()}.
+
+% Ver de agregar Analog Comparator como evento: Comparación del valor convertido contra un valor programado, para mayor que, igual que o menor que.
+%    ADC_GREATER_THAN: Modo comparación por mayor que.
+%    ADC_LESS_THAN: Modo comparación por menor que.

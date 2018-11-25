@@ -9,7 +9,7 @@ El módulo GPIO modela tanto un único pin de entrada/salida de propósito gener
 \item
 \emph{mode}, del tipo \emph{PinMode\_t}, cuyos valores posibles son: \emph{DISABLE} (deshabilidato), \emph{INPUT} (pin configurado como entrada) y \emph{OUTPUT} u \emph{OUTPUT\_PUSHPULL} (pin configurado como salida, modo \emph{push-pull}), \emph{OUTPUT\_OPEN\_DRAIN} (pin como salida, en modo drenador abierto).
 \item
-\emph{pull}, del tipo \emph{PinPull\_t} cuyos valores posibles son: \emph{DISABLE} (modo por defecto, pin flotante), \emph{PULL\_UP} (con resistencia de \emph{pull-up}), \emph{PULL\_DOWN} (con resistencia de \emph{pull-down}), \emph{PULL\_BOTH} (con ambas resistencias).
+\emph{pull}, del tipo \emph{PinPull\_t} cuyos valores posibles son: \emph{NONE} (modo por defecto, pin flotante), \emph{PULL\_UP} (con resistencia de \emph{pull-up}), \emph{PULL\_DOWN} (con resistencia de \emph{pull-down}), \emph{PULL\_BOTH} (con ambas resistencias).
 \item
 \emph{value}, del tipo \emph{bool\_t}. Representa el valor a escribir o leer de un pin.
 \end{itemize}
@@ -19,13 +19,19 @@ El módulo GPIO modela tanto un único pin de entrada/salida de propósito gener
 Los métodos básicos de configuración y uso de un pin son:
 
 \begin{verbatim}
- • init( PinMode_t mode | PinPull_t pull ) : PinStatus_t
+ • init( PinMode_t mode | PinPull_t pull )
  • read() : bool_t
  • write( bool_t value )
- • deinit() : PinStatus_t
+ • deInit()
 \end{verbatim}
 
-Notar que los parámetros de configuración del método \emph{init()} se acumulan mediante el operador $|$. 
+%Speed. %Specifies the speed for the selected pins. %Possible values are:
+%GPIO_SPEED_LOW
+%GPIO_SPEED_MEDIUM
+%GPIO_SPEED_FAST
+%GPIO_SPEED_HIGH
+
+Notar que los parámetros de configuración del método \emph{init()} se acumulan mediante el operador ''$|$''. El parámetro \emph{mode} es requerido mientras que el parámetro \emph{pull} es opcional.
 
 Contiene además el método \emph{toggle()} intercambia el valor del pin si el mismo está configurado como salida.:
 
@@ -36,13 +42,14 @@ Contiene además el método \emph{toggle()} intercambia el valor del pin si el m
 Para establecer una interrupción en un pin ante cierto evento define los métodos: 
 
 \begin{verbatim}
- • hasInterrupt() : bool_t
- • interrupt( bool_t enable )
  • eventCallbackSet( PinEvent_t evt, Callback_t c )
  • eventCallbackClear( PinEvent_t evt )
-\end{verbatim}
+ • interrupt( bool_t enable ) : PinStatus_t
+\end{verbatim} 
 
-Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \emph{LOW\_LEVEL} (interrupción por nivel bajo), \emph{RISING\_EDGE} (interrupción por flanco ascendente), \emph{FALLING\_EDGE} (interrupción por flanco descendente) y \emph{BOTH\_EDGE} (interrupción por flanco ascendente y descendente). Nótese que según la plataforma particular existen las posibilidades de que algunas pines fijos solamente soporten interrupción, o que exista una cantidad de interrupciones de pin y se pueda elegir a qué pines se le asignan, es por eso que se define el método \emph{hasInterrupt()} que retorna true si un dado pin tiene capacidad de configurar interrupción. 
+\emph{eventCallbackSet()} establece el evento ante el cual se interrumpe, junto a una función de \emph{callback} que se ejecutará ante su ocurrencia. \emph{eventCallbackClear()} permite remover el \emph{callback}. Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \emph{LOW\_LEVEL} (interrupción por nivel bajo), \emph{RISING\_EDGE} (interrupción por flanco ascendente), \emph{FALLING\_EDGE} (interrupción por flanco descendente) y \emph{BOTH\_EDGE} (interrupción por flanco ascendente y descendente). 
+
+\emph{interrupt()} permite habilitar o deshabilitar la interrupción de hardware del pin ante la ocurrencia del evento. Según la plataforma particular existe la posibilidad de que soporten interrupción algunos pines fijos, o que exista una cierta cantidad de interrupciones de pin y se pueda elegir a qué pines se le asignan, es por eso que el método \emph{interrupt()} retorna un valor del tipo \emph{PinStatus\_t}. Este tipo de datos define los valores \emph{STATUS\_OK}, si pudo configurar la interrupción, \emph{ERROR\_NOT\_SUPPORT}, si el pin no soporta capacidad de interrupción, y \emph{ERROR\_NO\_MORE\_AVAILABLE}, si ya se configuraron todas las interrupciones de hardware disponibles. 
 
 \titulo{Propiedad de puerto}
 
@@ -53,19 +60,31 @@ Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \em
 Para la configuración y uso de un puerto se definen los métodos básicos:
 
 \begin{verbatim}
- • init( List_t config ) : PinStatus_t
+ • init( List_t config )
  • read() : uint32_t
  • write( uint32_t value )
- • deinit() : PinStatus_t
+ • deInit()
 \end{verbatim}
 
-El método \emph{init()} de puerto requiere una lista de configuraciones.
-Los métodos \emph{read()} y \emph{write()} permiten leer y escribir el puerto completo.
+El método \emph{init()} de puerto requiere una lista de configuraciones. Los métodos \emph{read()} y \emph{write()} permiten leer y escribir el puerto completo.
 
-Se agregan además, el método \emph{pins()}, devuelve una lista de pines que componen el puerto, y los métodos \emph{set()} y \emph{reset()} que permiten escribir el puerto afectado por una máscara de bits que se le pasa como parámetro:
+Se agregan además los métodos:
 
 \begin{verbatim}
  • pins(): List_t
  • set( uint32_t mask )
  • reset( uint32_t mask )
 \end{verbatim}
+
+El método \emph{pins()}, devuelve una lista de pines que componen el puerto, y los métodos \emph{set()} y \emph{reset()} que permiten escribir el puerto afectado por una máscara de bits que se le pasa como parámetro.
+
+% Para implementacion ver:
+
+% https://github.com/epernia/sAPI/blob/develop/sapi1Project/libs/sapi_soc_peripherals/inc/sapi_gpio.h
+
+% https://github.com/epernia/sAPI/blob/develop/sapi1Project/libs/sapi_soc_peripherals/src/sapi_gpio.c
+
+% https://github.com/epernia/sAPI/blob/develop/toMergeIn_sapi1Project/sapi_soc_peripherals/PERIPH/GPIO/gpioInterruptLPCOpenExample.c.txt
+
+% Ejemplos de micropython de uart interrupt de gigliotti
+

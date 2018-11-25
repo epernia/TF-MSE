@@ -3,7 +3,178 @@
 
 El módulo UART modela un periférico de comunicación serie transmisor/receptor asincrónico universal.
 
-Events:
-USART, Receive complete
-USART, Data Register Empty
-USART, Transmit Complete
+\titulo{Propiedades de UART}
+
+\begin{itemize}
+\item
+\emph{baudRate}, del tipo \emph{uint32\_t}, tasa de baudios. Depende de la arquitectura pero en general se permiten: 1200, 2400, 4800, 9600, 19200, 38400, 57600 o 115200.
+\item
+\emph{dataBits}, del tipo \emph{UartDataBits\_t}, que puede tomar los valores \emph{DATABITS\_5}, \emph{DATABITS\_6}, \emph{DATABITS\_7}, \emph{DATABITS\_8}. o \emph{DATABITS\_9}
+\item
+\emph{parity}, del tipo \emph{UartParity\_t}, con valores posibles \emph{NONE}, \emph{EVEN} o \emph{ODD}.
+\item
+\emph{stopBits}, del tipo \emph{UartStopBits\_t}, con valores \emph{STOPBITS\_1}, \emph{STOPBITS\_2} o \emph{STOPBITS\_1\_5}.
+\item
+\emph{flowControl}, del tipo \emph{UartFlowCtrl\_t}, cuyos valores posibles son \emph{NONE}, \emph{CTS}, \emph{RTS} o \emph{RTS\_CTS}.
+\item
+\emph{enableTransmitter}, del tipo \emph{bool\_t}, se utiliza para habilitar/deshabilitar el transmisor de la UART.
+\item
+\emph{enableReceiver}, del tipo \emph{bool\_t}, permite habilitar/deshabilitar el receptor de la UART.
+\item
+\emph{location}, del tipo \emph{Location\_t}.
+\item
+\emph{transmitValue}, del tipo \emph{uint8\_t}. Representa el valor a transmitir.
+\item
+\emph{receiveValue}, del tipo \emph{uint8\_t}. Representa el último valor recibido. 
+\end{itemize}
+
+\titulo{Métodos de UART}
+
+Inicialización y restablecimiento de un periférico UART:
+
+\begin{verbatim}
+ • init( uint32_t baudRate | 
+         dataBits | 
+         parity | 
+         stopBits | 
+         flowControl |
+         enableTransmitter | 
+         bool_t enableReceiver |
+         location
+       )
+ • deInit()
+\end{verbatim}
+
+Todos los parámetros del método \emph{init()} son opcionales. Los valores por defecto son:
+
+\begin{verbatim}
+ • baudRate = 9600
+ • dataBits = DATABITS_8
+ • parity = NONE
+ • stopBits = STOPBITS_1
+ • flowControl = NONE
+ • loacation = LOCATION0
+ • enableTransmitter = TRUE
+ • enableReceiver = TRUE
+\end{verbatim}
+
+Se puede transmitir o recibir un byte usando el módulo UART tanto por encuesta como por interrupción. Para ello se utilizan las siguientes funciones:
+
+\begin{verbatim}
+ • transmitterStatus() : UartStatus_t
+ • send( uint8_t value )
+ • receiverStatus() : UartStatus_t
+ • receive() : uint8_t
+ • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+ • eventCallbackClear( ChannelEvent_t evt )
+ • interrupt( bool_t enable )
+\end{verbatim}
+
+Los posibles valores de \emph{UartStatus\_t} son:
+
+%\emph{TRANSMIT\_COMPLETE}, \emph{RECEIVE\_COMPLETE}, \emph{TRANSMIT\_DATA\_OVERRUN}, \emph{RECEIVE\_FRAME\_ERROR}, \emph{RECEIVE\_DATA\_OVERRUN},  \emph{RECEIVE\_PARITY\_ERROR}, \emph{TRANSMIT\_TIMEOUT} y \emph{RECEIVE\_TIMEOUT}
+
+\begin{verbatim}
+ • TRANSMIT_COMPLETE
+ • RECEIVE_COMPLETE
+ • TRANSMIT_DATA_OVERRUN
+ • RECEIVE_FRAME_ERROR
+ • RECEIVE_DATA_OVERRUN
+ • RECEIVE_PARITY_ERROR
+ • TRANSMIT_TIMEOUT
+ • RECEIVE_TIMEOUT
+\end{verbatim}
+
+Y los posibles eventos:
+
+%\emph{TRANSMIT\_COMPLETE}, \emph{RECEIVE\_COMPLETE}, \emph{TRANSMIT\_ERROR}, \emph{RECEIVE\_ERROR} 
+
+\begin{verbatim}
+ • TRANSMIT_COMPLETE
+ • RECEIVE_COMPLETE
+ • TRANSMIT_ERROR
+ • RECEIVE_ERROR
+\end{verbatim}
+
+Existe además el método \emph{sendBreak()} que envía una \emph{break condition} al bus. Esto significa que mantiene la línea de transmisión en nivel bajo durante un tiempo mayor al requerido para enviar un caracter.
+
+\begin{verbatim}
+ • sendBreak()
+\end{verbatim}
+
+\titulo{Métodos de UART de alto nivel}
+
+Métodos de lectura y escritura de byte:
+
+\begin{verbatim}
+ • readByte() : uint8_t
+ • readByteSync( uint8_t value, 
+                 Time_ms_t timout
+               ) : UartStatus_t
+ • readByteAsync( Callback_t sucess, 
+                  Callback_t error 
+                )
+ • writeByte( uint8_t value )
+ • writeByteSync( uint8_t value, 
+                  Time_ms_t timout 
+                ) : UartStatus_t
+ • writeByteAsync( uint8_t value, 
+                   Callback_t sucess,
+                   Callback_t error 
+                 )
+\end{verbatim}
+
+Métodos de lectura y escritura de \emph{String}:
+
+\begin{verbatim}
+ • readString( String_t data, 
+               String_t terminator
+             )
+ • readStringSync( String_t data, 
+                   String_t terminator,
+                   Time_ms_t timout 
+                 ) : UartStatus_t
+ • readStringAsync( String_t data, 
+ 	                String_t terminator,
+                    Callback_t sucess, 
+                    Callback_t error 
+                  ) 
+ • writeString( String_t data )
+ • writeStringSync( String_t data,
+                    Time_ms_t timout
+                  ) : UartStatus_t
+ • writeStringAsync( String_t value, 
+                     Callback_t sucess,
+                     Callback_t error )
+\end{verbatim}
+
+Métodos de lectura y escritura de vector de bytes:
+
+\begin{verbatim}
+ • readByteArray( ByteArray_t data, 
+                  uint32_t dataSize
+                )
+ • readByteArraySync( ByteArray_t data, 
+                      uint32_t dataSize,
+                      Time_ms_t timout
+                    ) : UartStatus_t
+ • writeByteArrayAsync( ByteArray_t data, 
+                        uint32_t dataSize,
+                        Callback_t sucess,
+                        Callback_t error 
+                      )
+ • writeByteArray( ByteArray_t data, 
+                   uint32_t dataSize
+                 )
+ • writeByteArraySync( ByteArray_t data, 
+                       uint32_t dataSize, 
+                       Time_ms_t timout
+                     ) : UartStatus_t
+ • writeByteArrayAsync( ByteArray_t data, 
+                        uint32_t dataSize,
+                        Callback_t sucess,
+                        Callback_t error
+                      )
+\end{verbatim}
+
+En todos los métodos de lectura se le pasa como primer parámetro la variable donde escribirá el, o los, datos recibidos. En la lectura de \emph{String} se le debe pasar un parámetro \texttt{terminator} que es un \texttt{String} que indica como debe ser el fin de cadena a buscar. Cuando se lee un \emph{Byte Array} almacena la cantidad de datos leidos en la variable \emph{dataSize} que se le pasa como parámetro.

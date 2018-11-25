@@ -19,8 +19,8 @@ El módulo RTC modela un periférico Reloj de Tiempo Real.
 Inicialización y restablecimiento de un periférico RTC:
 
 \begin{verbatim}
- • init( DateAndTime_t absTime | ) : RtcStatus_t
- • deinit() : RtcStatus_t
+ • init( DateAndTime_t absTime | )
+ • deinit()
 \end{verbatim}
 
 El parámetro \emph{absTime} establece la fecha/hora actual. La lectura del RTC se realiza con el método \emph{read()}, que retorna la fecha/hora actual. Para cambiar la fecha/hora se utiliza el método \emph{write()}:

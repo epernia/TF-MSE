@@ -9,13 +9,13 @@ El módulo DAC modela un periférico Conversor Digital-Analógico. Este perifér
 \item
 \emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz.
 \item
-\emph{voltageReferece}, del tipo \emph{DacVRef\_t} cuyos valores posibles son: \emph{VCC}, \emph{INTERNAL} y \emph{EXTERNAL}.
+\emph{conversionMode}, del tipo \emph{DacConvMode\_t}.
 \item
-\emph{conversionResolution}, del tipo \emph{DacConvResolution\_t}, con valores:\emph{LOW}, \emph{MID} y \emph{HIGH}.
+\emph{voltageReferece}, del tipo \emph{DacVRef\_t}.
 \item
-\emph{location}, del tipo \emph{AdcLocation\_t}. Con valores los valores \emph{LOCATION0} a \emph{LOCATION7}.
+\emph{resolution}, del tipo \emph{DacRes\_t}.
 \item
-\emph{value}, del tipo \emph{uint32\_t}. Representa el último valor de conversión del DAC.
+\emph{location}, del tipo \emph{DaLocation\_t}.
 \end{itemize}
 
 \titulo{Métodos de DAC}
@@ -24,45 +24,53 @@ Inicialización y restablecimiento de un periférico DAC:
 
 \begin{verbatim}
  • init( uint32_t conversionRate | 
-         DacVRef_t voltageReferece |
-         DacConvResolution_t conversionResolution |
-       ) : DacStatus_t
- • deinit() : DacStatus_t
+         conversionMode | 
+         voltageReferece | 
+         resolution |
+         location
+       )
+ • deInit()
 \end{verbatim}
 
 Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
 
 \begin{verbatim}
- • conversionRate = HIGH
+ • conversionRate = VERY_HIGH
  • voltageReferece = VCC
- • conversionResolution = HIGH
+ • conversionMode = SINGLE
+ • resolution = VERY_HIGH
+ • loacation = LOCATION0
 \end{verbatim}
 
-Habilitación/deshabilitación de un canal particular del DAC (configuración de una salida analógica):
+El resto de la API también es muy similar a la del ADC con la diferencia que en lugar de métodos para leer (no define el método \emph{read()}) define métodos para escribir el DAC:
 
 \begin{verbatim}
- • channel( DacChannel_t channel, bool_t enable ) : DacStatus_t
-\end{verbatim}
-
-Define los métodos \emph{currentChannel()}, que devuelve el canal de la conversión actual, y \emph{channels()} que devuelve la lista de canales del DAC.
-
-\begin{verbatim}
- • currentChannel() : DacChannel_t
- • channels() : List_t
-\end{verbatim}
-
-El módulo DAC no define el método \emph{read()}. La escritura del DAC se realiza con el método \emph{write()} que requiere un parámetro \emph{channel)}
-
-\begin{verbatim}
- • write( DacChannel_t channel ) : uint32_t
-\end{verbatim}
-
-La escritura es bloqueante pues debe esperar a que se termine una conversión previa que se esté llevando a cabo antes de comenzar con la actual. Al igual que el ADC, para realizar una escritura no bloqueante existen el método \emph{startConversion()}, que se puede utilizar junto a \emph{isConversionComplete()} para encuestar si termino la conversión, o mediante un evento con los mismos métodos que ADC.
-
-\begin{verbatim}
- • startConversion( DacChannel_t channel ) : uint32_t
- • isConversionComplete() : bool_t
- • interrupt( bool_t enable )
+ • channel( DacChannel_t channel, bool_t enable )
+ • channelsGet() : List_t
+ • write( uint32_t value )
+ • startConversion( DacChannel_t channel )
+ • stopConversion()
+ • conversionStatus() : DacConvStatus_t
  • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
  • eventCallbackClear( ChannelEvent_t evt )
+ • interrupt( bool_t enable )
 \end{verbatim}
+
+\titulo{Métodos de Canal de DAC}
+
+\begin{verbatim}
+ • write( uint32_t value )
+ • writeSync( uint32_t value, Time_ms_t timout ) : DacConvStatus_t
+ • writeAsync( uint32_t value, 
+               Callback_t sucess, 
+               Callback_t error )
+\end{verbatim}
+
+Se agrega el conjunto de métodos para la generación de señales:
+
+\begin{verbatim}
+ • waveGenSet( Array_t samples, Time_ms_t periodicity )
+ • waveGenStart()
+ • waveGenStop()
+\end{verbatim}
+

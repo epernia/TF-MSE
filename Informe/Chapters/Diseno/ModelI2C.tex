@@ -5,3 +5,17 @@ I2C: modela un periférico de comunicación serie I2C.
 
 Events:
 I2C
+
+
+%   void i2cSoftwareDelay( tick_t duration );
+%
+%   void i2cSoftwareMasterWriteStart( void );
+%
+%   void i2cSoftwareMasterWriteStop( void );
+%
+%   bool_t i2cSoftwareMasterWriteAddress( uint8_t i2cSlaveAddress,
+%                                         I2C_Software_rw_t readOrWrite );
+%
+%   bool_t i2cSoftwareMasterWriteByte( uint8_t dataByte );
+%
+%	uint8_t i2cSoftwareMasterReadByte( bool_t ack );
