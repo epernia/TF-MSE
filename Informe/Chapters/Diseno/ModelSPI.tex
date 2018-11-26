@@ -1,16 +1,164 @@
 %------------------------------------------------------------------------------
 \subsection{Módulo SPI}
 
-SPI: modela un periférico de comunicación serie SPI.
+Modela un bus de serie para interfaz con periféricos (bus SPI). El periférico SPI proporciona comunicación serial sincrónica \emph{full duplex} entre dispositivos maestros y esclavos. Se usa comúnmente para la comunicación con periféricos externos como memorias flash, sensores, relojes en tiempo real (RTC), etc.
 
+\titulo{Propiedades de SPI}
 
-Events:
-SPI Transfer complete
+\begin{itemize}
+\item
+\emph{mode}, del tipo \emph{SpiMode\_t}, que representa el modo de funcionamiento del periférico SPI, con valores \emph{MASTER} o \emph{SLAVE}.
+\item
+\emph{clockFrequency}, del tipo \emph{int\_t}, es la frecuencia de reloj (en Hz) del BUS SPI (solo tiene sentido en modo \emph{MASTER}).
+\item
+\emph{clockPolarity}, del tipo \emph{SpiClockParity\_t}, define el nivel cuando se considera activo el clock, con valores \emph{POLARITY\_LOW} o \emph{POLARITY\_HIGH}.
+\item
+\emph{clockPhase}, del tipo \emph{SpiClockPhase\_t}, establece en que flanco de reloj se muestrean los datos, cuyos valores posibles son \emph{PHASE\_EDGE1} o \emph{PHASE\_EDGE2}.
+\item
+\emph{dataBits}, del tipo \emph{SpiDataBits\_t}, que puede tomar los valores \emph{DATABITS8} o \emph{DATABITS16}.
+\item
+\emph{dataOrder}, del tipo \emph{SpiDataOrder\_t}, representa el orden con el que se mueven los bits en el registro de desplazamiento, es decir si se mueven primero el bit menos significativo o el más significativo: \emph{MSB\_FIRST} o \emph{LSB\_FIRST}.
+\item
+\emph{location}, del tipo \emph{Location\_t}.
+\item
+\emph{transmitValue}, del tipo \emph{ByteArray\_t}. Representa el valor a transmitir.
+\item
+\emph{receiveValue}, del tipo \emph{ByteArray\_t}. Representa el último valor recibido. 
+\end{itemize}
 
-Evento interrupción de SPI: TRANSFER\_COMPLETE
+\titulo{Métodos de SPI}
 
-% Pare este módulo reusar el trabajo de martín y marcos en:
+Inicialización y restablecimiento de un periférico SPI:
+
+\begin{verbatim}
+   • init( SpiInit_t mode |
+           clockFrequency |
+           clockPolarity |
+           clockPhase |
+           dataOrder |
+           dataBits |
+           location
+         )
+   • deInit()
+\end{verbatim}
+
+Los valores de configuración son opcionales, con valores por defecto:
+
+\begin{verbatim}
+   • mode = MASTER
+   • clockFrequency = 100000
+   • clockPolarity = POLARITY_HIGH
+   • clockPhase = PHASE_EDGE1
+   • dataBits = DATABITS8
+   • dataOrder MSB_FIRST
+   • location = LOCATION0
+\end{verbatim}
+
+En caso de seleccionar modo \emph{MASTER} se debe configurar al menos un pin como selector de esclavo con:
+
+\begin{verbatim}
+   • initSSPin( Pin_t pin )
+\end{verbatim}
+
+Luego para elegir que esclavo habilitar o deshabilitar se utiliza:
+
+\begin{verbatim}
+   • slaveSet( Pin_t pin, bool_t enable )
+\end{verbatim}
+
+Permite realizar envío, recepción o transferencia de datos (que envía y recibe simultáneamente). Estas operaciones pueden realizarse por encuesta o interrupción con los siguientes métodos:
+
+\begin{verbatim}
+   • transferStatus() : SpiStatus_t
+   • send( const ByteArray_t data )
+   • receive( inOut ByteArray_t receive )
+   • transfer( const ByteArray_t send, 
+               inOut ByteArray_t receive
+             ) : SpiStatus_t
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+   • eventCallbackClear( ChannelEvent_t evt )
+   • interrupt( bool_t enable )
+\end{verbatim}
+
+Los posibles valores de \emph{SPIStatus\_t} son:
+
+\begin{verbatim}
+   • READY
+   • BUSY
+   • ERROR
+   • ERROR_TIMEOUT
+\end{verbatim}
+
+Y los posibles eventos:
+
+\begin{verbatim}
+   • TRANSFER_COMPLETE
+   • TRANSFER_ERROR
+\end{verbatim}
+
+\titulo{Métodos de SPI de alto nivel}
+
+% Los métodos de escritura y lectura de a un byte no tienen sentido pues si el tamaño de datos no es 8, entonces siempre es byte array.
+
+Lectura de arreglo de bytes:
+
+\begin{verbatim}
+   • readByteArray( inOut ByteArray_t data,
+                    inOut size_t dataSize
+                  )
+   • readByteArraySync( inOut ByteArray_t data,
+                        inOut size_t dataSize,
+                        Time_t timout
+                      ) : SpiStatus_t
+   • readByteArrayAsync( inOut ByteArray_t data, 
+                         inOut size_t dataSize,
+                         Callback_t sucess,
+                         Callback_t error 
+                       )
+\end{verbatim}
+
+Escritura de arreglo de bytes:
+
+\begin{verbatim}
+   • writeByteArray( const ByteArray_t data,
+                     inOut size_t dataSize
+                   )
+   • writeByteArraySync( const ByteArray_t data,
+                         inOut size_t dataSize,
+                         Time_t timout
+                       ) : SpiStatus_t
+   • writeByteArrayAsync( const ByteArray_t data, 
+                          inOut size_t dataSize,
+                          Callback_t sucess,
+                          Callback_t error 
+                        )
+\end{verbatim}
+
+Transferencia de arreglo de bytes:
+
+\begin{verbatim}
+   • transferByteArray( const ByteArray_t send,
+                        inOut size_t sendSize,
+                        inOut ByteArray_t receive,
+                        inOut size_t dataSize
+                      )
+   • transferByteArraySync( const ByteArray_t send,
+                            inOut size_t sendSize,
+                            inOut ByteArray_t receive,
+                            inOut size_t dataSize
+                          ) : SpiStatus_t
+   • transferByteArrayAsync( const ByteArray_t send,
+                             inOut size_t sendSize,
+                             inOut ByteArray_t receive,,
+                             Callback_t sucess,
+                             Callback_t error 
+                           )
+\end{verbatim}
+
+% Para la implementación:
 
 % https://github.com/epernia/sAPI/blob/develop/toMergeIn_sapi1Project/sapi_soc_peripherals/inc/sapi_spi.h
 
 %  https://github.com/epernia/sAPI/blob/develop/toMergeIn_sapi1Project/sapi_soc_peripherals/src/sapi_spi.c
+
+%https://www.mikroe.com/ebooks/programming-dspic-microcontrollers-in-pascal/master-and-slave-modes

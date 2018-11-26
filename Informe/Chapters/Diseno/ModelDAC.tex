@@ -7,7 +7,7 @@ El módulo DAC modela un periférico Conversor Digital-Analógico. Este perifér
 
 \begin{itemize}
 \item
-\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz.
+\emph{conversionRate}, del tipo \emph{int\_t}, representa la tasa de conversión en Hertz.
 \item
 \emph{conversionMode}, del tipo \emph{DacConvMode\_t}.
 \item
@@ -23,54 +23,56 @@ El módulo DAC modela un periférico Conversor Digital-Analógico. Este perifér
 Inicialización y restablecimiento de un periférico DAC:
 
 \begin{verbatim}
- • init( uint32_t conversionRate | 
-         conversionMode | 
-         voltageReferece | 
-         resolution |
-         location
-       )
- • deInit()
+   • init( DacInit_t conversionRate | 
+           conversionMode | 
+           voltageReferece | 
+           resolution |
+           location
+         )
+   • deInit()
 \end{verbatim}
 
-Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
+Todos los valores de inicialización son opcionales y si no se aplican se aplican utiliza por defecto:
 
 \begin{verbatim}
- • conversionRate = VERY_HIGH
- • voltageReferece = VCC
- • conversionMode = SINGLE
- • resolution = VERY_HIGH
- • loacation = LOCATION0
+   • conversionRate = VERY_HIGH
+   • voltageReferece = VCC
+   • conversionMode = SINGLE
+   • resolution = VERY_HIGH
+   • loacation = LOCATION0
 \end{verbatim}
 
 El resto de la API también es muy similar a la del ADC con la diferencia que en lugar de métodos para leer (no define el método \emph{read()}) define métodos para escribir el DAC:
 
 \begin{verbatim}
- • channel( DacChannel_t channel, bool_t enable )
- • channelsGet() : List_t
- • write( uint32_t value )
- • startConversion( DacChannel_t channel )
- • stopConversion()
- • conversionStatus() : DacConvStatus_t
- • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
- • eventCallbackClear( ChannelEvent_t evt )
- • interrupt( bool_t enable )
+   • channel( DacChannel_t channel, bool_t enable )
+   • channelsGet() : List_t
+   • write( DacValue_t value )
+   • startConversion( DacChannel_t channel )
+   • stopConversion()
+   • conversionStatus() : DacConvStatus_t
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+   • eventCallbackClear( ChannelEvent_t evt )
+   • interrupt( bool_t enable )
 \end{verbatim}
 
 \titulo{Métodos de Canal de DAC}
 
 \begin{verbatim}
- • write( uint32_t value )
- • writeSync( uint32_t value, Time_ms_t timout ) : DacConvStatus_t
- • writeAsync( uint32_t value, 
-               Callback_t sucess, 
-               Callback_t error )
+   • write( DacValue_t value )
+   • writeSync( DacValue_t value, 
+                Time_t timout 
+              ) : DacConvStatus_t
+   • writeAsync( DacValue_t value, 
+                 Callback_t sucess, 
+                 Callback_t error 
+               )
 \end{verbatim}
 
 Se agrega el conjunto de métodos para la generación de señales:
 
 \begin{verbatim}
- • waveGenSet( Array_t samples, Time_ms_t periodicity )
- • waveGenStart()
- • waveGenStop()
+   • waveGenSet( Array_t samples, Time_t periodicity )
+   • waveGenStart()
+   • waveGenStop()
 \end{verbatim}
-

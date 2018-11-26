@@ -3,6 +3,19 @@
 
 El módulo GPIO modela tanto un único pin de entrada/salida de propósito general (pin), así como a un conjunto de pines (puerto). 
 
+\titulo{Tipos de datos}
+
+\begin{itemize}
+\item
+\emph{Pin\_t}, modela un pin.
+\item
+\emph{Port\_t}, representa un puerto.
+\item
+\emph{PortValue\_t}, representa el valor de todos los pines del puerto.
+\end{itemize}
+
+La cantidad de pines que forman un puerto depende de la arquitectura.
+
 \titulo{Propiedades de pin}
 
 \begin{itemize}
@@ -19,10 +32,10 @@ El módulo GPIO modela tanto un único pin de entrada/salida de propósito gener
 Los métodos básicos de configuración y uso de un pin son:
 
 \begin{verbatim}
- • init( PinMode_t mode | PinPull_t pull )
- • read() : bool_t
- • write( bool_t value )
- • deInit()
+   • init( PintInit_t mode | pull )
+   • read() : bool_t
+   • write( bool_t value )
+   • deInit()
 \end{verbatim}
 
 %Speed. %Specifies the speed for the selected pins. %Possible values are:
@@ -31,39 +44,37 @@ Los métodos básicos de configuración y uso de un pin son:
 %GPIO_SPEED_FAST
 %GPIO_SPEED_HIGH
 
-Notar que los parámetros de configuración del método \emph{init()} se acumulan mediante el operador ''$|$''. El parámetro \emph{mode} es requerido mientras que el parámetro \emph{pull} es opcional.
+El valor \emph{mode} es requerido mientras que \emph{pull} es opcional. Notar que los valores de configuración del método \emph{init()} se acumulan mediante el operador ''$|$''.
 
 Contiene además el método \emph{toggle()} intercambia el valor del pin si el mismo está configurado como salida.:
 
 \begin{verbatim}
- • toggle()
+   • toggle()
 \end{verbatim}
 
 Para establecer una interrupción en un pin ante cierto evento define los métodos: 
 
 \begin{verbatim}
- • eventCallbackSet( PinEvent_t evt, Callback_t c )
- • eventCallbackClear( PinEvent_t evt )
- • interrupt( bool_t enable ) : PinStatus_t
-\end{verbatim} 
+   • eventCallbackSet( PinEvent_t evt, Callback_t c )
+   • eventCallbackClear( PinEvent_t evt )
+   • interrupt( bool_t enable ) : PinStatus_t
+ \end{verbatim} 
 
 \emph{eventCallbackSet()} establece el evento ante el cual se interrumpe, junto a una función de \emph{callback} que se ejecutará ante su ocurrencia. \emph{eventCallbackClear()} permite remover el \emph{callback}. Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \emph{LOW\_LEVEL} (interrupción por nivel bajo), \emph{RISING\_EDGE} (interrupción por flanco ascendente), \emph{FALLING\_EDGE} (interrupción por flanco descendente) y \emph{BOTH\_EDGE} (interrupción por flanco ascendente y descendente). 
 
 \emph{interrupt()} permite habilitar o deshabilitar la interrupción de hardware del pin ante la ocurrencia del evento. Según la plataforma particular existe la posibilidad de que soporten interrupción algunos pines fijos, o que exista una cierta cantidad de interrupciones de pin y se pueda elegir a qué pines se le asignan, es por eso que el método \emph{interrupt()} retorna un valor del tipo \emph{PinStatus\_t}. Este tipo de datos define los valores \emph{STATUS\_OK}, si pudo configurar la interrupción, \emph{ERROR\_NOT\_SUPPORT}, si el pin no soporta capacidad de interrupción, y \emph{ERROR\_NO\_MORE\_AVAILABLE}, si ya se configuraron todas las interrupciones de hardware disponibles. 
 
-\titulo{Propiedad de puerto}
+\titulo{Propiedades y métodos de puerto}
 
-\emph{value}, del tipo \emph{uitn32\_t}. Representa el valor a escribir o leer en un puerto.
+Puerto define la propiedad \emph{value}, del tipo \emph{PortValue\_t}. Representa el valor a escribir o leer en un puerto.
 
-\titulo{Métodos de puerto}
-
-Para la configuración y uso de un puerto se definen los métodos básicos:
+Para la configuración y uso de un puerto se definen los métodos:
 
 \begin{verbatim}
- • init( List_t config )
- • read() : uint32_t
- • write( uint32_t value )
- • deInit()
+   • init( List_t config )
+   • read() : PortValue_t
+   • write( PortValue_t value )
+   • deInit()
 \end{verbatim}
 
 El método \emph{init()} de puerto requiere una lista de configuraciones. Los métodos \emph{read()} y \emph{write()} permiten leer y escribir el puerto completo.
@@ -71,12 +82,12 @@ El método \emph{init()} de puerto requiere una lista de configuraciones. Los m�
 Se agregan además los métodos:
 
 \begin{verbatim}
- • pins(): List_t
- • set( uint32_t mask )
- • reset( uint32_t mask )
+   • pins(): List_t
+   • set( PortValue_t mask )
+   • reset( PortValue_t mask )
 \end{verbatim}
 
-El método \emph{pins()}, devuelve una lista de pines que componen el puerto, y los métodos \emph{set()} y \emph{reset()} que permiten escribir el puerto afectado por una máscara de bits que se le pasa como parámetro.
+El método \emph{pins()}, devuelve una lista de pines que componen el puerto. Los métodos \emph{set()} y \emph{reset()} permiten escribir el puerto afectado por una máscara de bits que se le pasa como parámetro.
 
 % Para implementacion ver:
 

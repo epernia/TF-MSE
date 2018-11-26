@@ -1,10 +1,11 @@
 %------------------------------------------------------------------------------
 \subsection{Módulo I2C}
 
-I2C: modela un periférico de comunicación serie I2C.
+El módulo I2C modela un periférico para comunicaciones serie entre circuitos integrados\footnote{En inglés \emph{Inter-Integrated Circuit}, cuyas siglas son IIC, o $I^{2}C$.}. Al igual que SPI, es un bus sincrónico y permite conectarse a memorias, sensores y otros periféricos externos. El bus I2C requiere únicamente dos terminales para su funcionamiento, uno para la señal de reloj y otro para el envío y recepción de datos. Cada dispositivo conectado al bus dispone de una dirección distinta que se utiliza para su acceso, evitando de esta forma la necesidad de agregar una línea de conexión selector de esclavo por cada periférico conectado al bus, siendo una ventaja frente a SPI.
 
-Events:
-I2C
+
+
+
 
 
 %   void i2cSoftwareDelay( tick_t duration );
@@ -19,3 +20,5 @@ I2C
 %   bool_t i2cSoftwareMasterWriteByte( uint8_t dataByte );
 %
 %	uint8_t i2cSoftwareMasterReadByte( bool_t ack );
+
+

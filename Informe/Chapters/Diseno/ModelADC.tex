@@ -7,7 +7,7 @@ El módulo ADC modela un periférico Conversor Analógico-Digital. Este perifér
 
 \begin{itemize}
 \item
-\emph{conversionRate}, del tipo \emph{uint32\_t}, representa la tasa de conversión en Hertz. Los valores posibles dependen de cada plataforma. Se pueden utilizar alternativamente los valores genéricos: \emph{LOW}, \emph{MEDIUM}, \emph{HIGH} y \emph{VERY\_HIGH}.
+\emph{conversionRate}, del tipo \emph{int\_t}, representa la tasa de conversión en Hertz. Los valores posibles dependen de cada plataforma. Se pueden utilizar alternativamente los valores genéricos: \emph{LOW}, \emph{MEDIUM}, \emph{HIGH} y \emph{VERY\_HIGH}.
 \item
 \emph{conversionMode}, del tipo \emph{AdcConvMode\_t}, con valores: \emph{SINGLE} (activado por software desde el programa de usuario), \emph{CONTINUOUS} (conversion periódica disparada por hardware a tasa \emph{conversionRate}).% y \emph{EXTERNAL\_TRIGGERED} (Timer Match signal o GPIO).
 \item
@@ -25,53 +25,53 @@ El módulo ADC modela un periférico Conversor Analógico-Digital. Este perifér
 Inicialización y restablecimiento de un periférico ADC:
 
 \begin{verbatim}
- • init( uint32_t conversionRate | 
-         conversionMode |
-         voltageReferece |
-         resolution |
-         channelsMode |
-         location
-       )
- • deInit()
+   • init( AdcInit_t conversionRate | 
+           conversionMode |
+           voltageReferece |
+           resolution |
+           channelsMode |
+           location
+         )
+   • deInit()
 \end{verbatim}
 
-Todos los parámetros del método \emph{init()} son opcionales y si no se aplican se inicializa por defecto con:
+Todos los valores de configuración del método \emph{init()} son opcionales y los que no se aplican se inicializan por defecto con:
 
 \begin{verbatim}
- • conversionRate = VERY_HIGH
- • voltageReferece = VCC
- • conversionMode = SINGLE
- • resolution = VERY_HIGH
- • channelMode = SINGLE
- • loacation = LOCATION0
+   • conversionRate = VERY_HIGH
+   • voltageReferece = VCC
+   • conversionMode = SINGLE
+   • resolution = VERY_HIGH
+   • channelMode = SINGLE
+   • loacation = LOCATION0
 \end{verbatim}
 
 Habilitación/deshabilitación de un canal particular del ADC (configuración de una entrada analógica):
 
 \begin{verbatim}
- • channel( AdcChannel_t channel, bool_t enable )
+   • channel( AdcChannel_t channel, bool_t enable )
 \end{verbatim}
 
 Para conocer los canales disponibles de un ADC existe el método 
 \emph{channelsGet()} que devuelve la lista de canales del ADC. Esta lista se reduce a la mitad si el modo \emph{channelsMode} es \emph{DIFFERENTIAL)}
 
 \begin{verbatim}
- • channelsGet() : List_t
+   • channelsGet() : List_t
 \end{verbatim}
 
 Si el ADC tiene configurado \emph{conversionMode = CONTINUOUS} muestrea automáticamente los canales habilitados. El método\emph{startConversion()} comienza el muestreo automático, para parar el muestreo se utiliza \emph{stopConversion()}. Si en cambio \emph{conversionMode = SINGLE}, la lectura se debe lanzar mediante el método \emph{startConversion()} que recibe un canal como parámetro. 
 Una conversión se puede abortar con \emph{stopConversion()}.
 
 \begin{verbatim}
- • startConversion( AdcChannel_t channel )
- • stopConversion()
+   • startConversion( AdcChannel_t channel )
+   • stopConversion()
 \end{verbatim}
 
 Existen 2 formas de leer los valores convertidos del ADC, por encuesta, o por interrupción. En el primer caso se debe chequear si finalizó la conversión con el método \emph{conversionStatus()}, que retorna un un valor del tipo \emph{AdcConvStatus\_t}. Si se realizó la conversión correctamente se puede leer el valor convertido con el método \emph{read()}.
 
 \begin{verbatim}
- • conversionStatus() : AdcConvStatus_t
- • read() : uint32_t
+   • conversionStatus() : AdcConvStatus_t
+   • read() : AdcValue_t
 \end{verbatim}
 
 Los valores posibles de \emph{AdcConvStatus\_t} son: 
@@ -79,19 +79,18 @@ Los valores posibles de \emph{AdcConvStatus\_t} son:
 %\emph{CONVERTING}, \emph{CONVERSION\_COMPLETE}, \emph{CONVERSION\_COMPLETE\_OVERRUN}, \emph{CONVERSION\_ADC\_ERROR}, \emph{CONVERSION- \_TIMEOUT}. 
 
 \begin{verbatim}
- • CONVERTING
- • CONVERSION_COMPLETE
- • CONVERSION_COMPLETE_OVERRUN
- • CONVERSION_ADC_ERROR
- • CONVERSION_TIMEOUT
+   • READY
+   • BUSY
+   • ERROR
+   • ERROR_TIMEOUT
 \end{verbatim}
 
 Para leer un canal por interrupción se debe primero establecer una función de \emph{callback} al evento \emph{CONVERSION\_COMPLETE} y otra al evento  \emph{CONVERSION\_ERROR} y luego activar la interrupción del periférico. Esto se realiza con los métodos:
 
 \begin{verbatim}
- • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
- • eventCallbackClear( ChannelEvent_t evt )
- • interrupt( bool_t enable )
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+   • eventCallbackClear( ChannelEvent_t evt )
+   • interrupt( bool_t enable )
 \end{verbatim}
 
 Al completar la conversión se ejecutará una de las dos funciones.
@@ -101,18 +100,18 @@ Al completar la conversión se ejecutará una de las dos funciones.
 Como alternativa, existen métodos que aplican a cierto canal de ADC y proveen un mayor nivel de abstracción:
 
 \begin{verbatim}
- • read() : uint32_t
- • readSync( uint32_t data, 
-             Time_ms_t timout 
-           ) : AdcConvStatus_t
- • readAsync( Callback_t sucess, 
-              Callback_t error 
-            )
+   • read() : AdcValue_t
+   • readSync( AdcValue_t data, 
+               Time_t timout 
+             ) : AdcConvStatus_t
+   • readAsync( Callback_t sucess, 
+                Callback_t error 
+              )
 \end{verbatim}
 
-Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} en fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. {readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data} que recibe como parámetro.
+Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} en fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. \emph{readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data} que recibe como parámetro.
 
-\emph{readAsync()} realiza una lectura no bloqueante. Recibe como parámetros dos funciones de \emph{callback}, una que lanza en caso de conversión exitosa (si esto ocurre le pasa como parámnetro el valor convertido) y otra en caso de error (le pasa el estado de conversión).
+\emph{readAsync()} realiza una lectura no bloqueante. Recibe como parámetros dos funciones de \emph{callback}, una que lanza en caso de conversión exitosa (si esto ocurre le pasa como parámetro el valor convertido) y otra en caso de error (le pasa el estado de conversión).
 
 Este módulo no define método \emph{write()}.
 

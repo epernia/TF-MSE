@@ -17,7 +17,151 @@ Mantener baja la extensión de la definición de la API.
 Dar soporte a la programación de núcleos de procesamiento y periféricos, utilizando los modos más comunes de funcionamiento de los mismos, con un nivel de abstracción suficiente para independizarse del hardware, pero manteniendo la identidad y conceptos de cada cada periférico.
 \item
 Debe especificar las dependencias entre módulos de la biblioteca, y el uso de recursos físicos en cada implementación particular.
+\item
+La definición de los módulos se realiza independiente del lenguaje de programación.
 \end{itemize}
+
+Para el diseño de la API se llevó a cabo un estudio exhaustivo sobre arquitecturas de núcleos de procesamiento y periféricos, así como de las bibliotecas disponibles. Entre las bibliotecas relevadas se destacan:
+
+\begin{itemize}
+\item
+MicroPython libraries []. % https://docs.micropython.org/en/latest/library/machine.html
+\item
+STM32 HAL []. % https://www.st.com/resource/en/user_manual/dm00105879.pdf
+\item
+RUST Embedded HAL []. % https://docs.rs/embedded-hal/0.2.2/embedded_hal/
+\item
+Mbed OS drivers API []. % https://os.mbed.com/docs/v5.10/
+\item
+ChibiOS/HAL []. % http://www.chibios.org/dokuwiki/doku.php?id=chibios:product:hal:start
+\item
+CMSIS [].
+\item
+LPCOpen [].
+\item
+MCUXpresso [].
+\item
+EMLIB []. % https://siliconlabs.github.io/Gecko_SDK_Doc/efm32hg/html/index.html
+\end{itemize}
+
+Se realizó un rediseño completo de la API, mejorando y apliando muchas características, pero provocando un quiebre en la compatibilidad con versiones anteriores de sAPI.
+
+%------------------------------------------------------------------------------
+\subsection{Definiciones de abstractas de sAPI}
+
+Para la creación de módulos de sAPI independientes del lenguaje de programación se definen tipos de datos, constantes y modos de acceso de parámetros de funciones abstractos, cuya implementación luego dependerá de lenguaje particular. 
+
+En esta sección se definen las constantes y tipos de datos comunes a todos los módulos. Luego, cada módulo agrega sus propias definiciones.
+
+\titulo{Constantes}
+
+Los nombres de las constantes se escriben en mayúsculas y con guiones bajos para separar palabras múltiples. 
+
+\begin{itemize}
+\item
+Estados lógicos: \emph{TRUE} y \emph{FALSE}.
+\item
+Estados funcionales: \emph{ON} y \emph{OFF}.
+\item
+Estados eléctricos: \emph{HIGH} y \emph{LOW}.
+\item
+Estados de habilitación: \emph{ENABLE} y \emph{DISABLE}.
+\item
+Valor nulo: \emph{NULL}.
+%\item
+%Valor indefinido: \emph{UNDEFINED}.
+\end{itemize}
+
+\titulo{Tipos de datos}
+
+Los tipos de datos se indican con el sufijo \emph{\_t} para que se distinga a simple vista los tipos de datos de las variables o parámetros formales de los métodos.
+
+Tipos de datos primitivos:
+
+\begin{itemize}
+\item
+Booleano: \emph{bool\_t}. 
+%Cualquiera de las constantes definidas previamente se considera un valor booleano válido, además de 0 y !0 (cualquier valor distinto de 0).
+\item
+Entero: \emph{int\_t}.
+\item
+Flotante: \emph{float\_t}.
+\item
+Byte: \emph{byte\_t}.
+\end{itemize}
+
+Tipo de datos para manejo de cadenas de caracteres:
+
+\begin{itemize}
+\item
+\emph{String\_t}.
+\end{itemize}
+
+Arreglos:
+
+\begin{itemize}
+\item
+\emph{Array\_t}. Permite guardar elementos ordenados. Longitud fija.
+\item
+\emph{List\_t}. Permite guardar elementos ordenados. Longitud variable.
+\item
+\emph{Set\_t}. Permite guardar elementos sin orden. Longitud variable.
+\item
+\emph{ByteArray\_t}. Arreglo de bytes.
+\end{itemize}
+
+%\item
+%Enteros con signo, tienen un rango de valores de $-2^{(N-1)}$ a $2^{(N-1)} - 1$, (donde N = número de bits) y formato complemento a 2. Estos son: \emph{int8\_t}, \emph{int16\_t}, \emph{int32\_t} e \emph{int64\_t}.
+%\item
+%Enteros sin signo, con rango de valores de $0$ a $2^{N} - 1$. Estos son: \emph{uint8\_t} (\emph{byte\_t}), \emph{uint16\_t} (\emph{word\_t}), \emph{uint32\_t} (\emph{lword\_t}) y \emph{uint64\_t} (\emph{dword\_t}).
+%\item
+%Floatantes: representa valores con punto flotante IEEE-754. Estos son \emph{float32\_t} y \emph{float64\_t}.
+
+
+%\item
+%Vacío: \emph{void\_t}. Representa el nulo de los tipos de datos. Se utiliza para los métodos que no retornan nada.
+%\item
+%Error: \emph{Error\_t}. Representa valores de error.
+
+Tipos de datos para temporización:
+
+\begin{itemize}
+\item
+\emph{Time\_t}, representa una duración de tiempo en días horas, minutos, segundos y milisegundos.
+\item
+\emph{TimeOfDay\_t}, representa un valor de tiempo absoluto en horas, minutos, segundos y milisegundos. El rango es de $00:00:00.000$ a $23:59:59.999$.
+\item
+\emph{Date\_t}, representa una fecha (año, mes y día).
+\item
+\emph{DateAndTime\_t}, que contiene ambos valores anteriores.
+\end{itemize}
+
+Tipo de datos para manejo de eventos:
+
+\begin{itemize}
+\item
+\emph{Callback}: \emph{Callback\_t}. Representa a una función a llamar en respuesta a un evento.
+\end{itemize}
+
+%\item
+%Parámetros de \emph{Callback}: \emph{CallbackParams\_t}. Representa los parámetros de una función a llamar en respuesta a un evento.
+
+\titulo{Modificadores}
+
+Tanto para las variables como parámetros formales se definen los siguientes modificadores:
+
+\begin{itemize}
+\item
+\emph{in}: la variable o parámetro que se precede con el modificador \emph{in} sólo puede ser leída.
+\item
+\emph{out}: la variable o parámetro que se precede con el modificador \emph{out} es de solo escritura. 
+\item
+\emph{inOut}: la variable o parámetro que se precede con el modificador \emph{inOut} puede ser tanto leída como escrita.
+\item
+\emph{const}: la variable o parámetro que se precede con el modificador \emph{const} no se puede modificar.
+\end{itemize}
+
+En caso de no especificar un modificador el comportamiento por defecto es que las variables se comportan como \emph{inOut}, mientras que los parámetros formales de métodos se comportan como \emph{in} dentro del mismo.
 
 %------------------------------------------------------------------------------
 \subsection{Módulo de sAPI}
@@ -46,7 +190,7 @@ En los módulos de sAPI se encuentran las siguientes categorías de propiedades 
 
 \begin{itemize}
 \item
-Confiuración: corresponde a las propiedades para la configuración de modos de funcionamiento de un módulo. Por ejemplo, \emph{power}, \emph{clockSource}, etc.
+Configuración: corresponde a las propiedades para la configuración de modos de funcionamiento de un módulo. Por ejemplo, \emph{power}, \emph{clockSource}, etc.
 \item
 Valor: un cierto valor que se puede leer o escribir en un módulo.
 \item
@@ -73,73 +217,9 @@ Todos los módulos poseen los siguientes métodos:
 \emph{getters y setters} de cada propiedad.
 \end{itemize}
 
-Se destaca que en los lenguajes no orientados a objetos en lugar de métodos se tiene funciones y, por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método.
+Se destaca que en una implementación de la biblioteca para lenguajes no orientados a objetos, en lugar de métodos se tiene funciones y por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método.
 
 %------------------------------------------------------------------------------
-\subsection{Módulo DataTypes}
-
-Define constantes y tipos de datos primitivos, debido a eso todos los demás módulos de la biblioteca sAPI dependen de este módulo.
-
-Constantes:
-
-\begin{itemize}
-\item
-Estados lógicos: \emph{TRUE} y \emph{FALSE}.
-\item
-Estados funcionales: \emph{ON} y \emph{OFF}.
-\item
-Estados eléctricos: \emph{HIGH} y \emph{LOW}.
-\item
-Estados de habilitación: \emph{ENABLE} y \emph{DISABLE}.
-\end{itemize}
-
-Tipos de datos primitivos: 
-
-\begin{itemize}
-\item
-Booleano: \emph{bool\_t}. Cualquiera de las constantes definidas previamente se considera un valor booleano válido, además de 0 y !0 (cualquier valor distinto de 0).
-\item
-Enteros con signo, tienen un rango de valores de $-2^{(N-1)}$ a $2^{(N-1)} - 1$, (donde N = número de bits) y formato complemento a 2. Estos son: \emph{int8\_t}, \emph{int16\_t}, \emph{int32\_t} e \emph{int64\_t}.
-\item
-Enteros sin signo, con rango de valores de $0$ a $2^{N} - 1$. Estos son: \emph{uint8\_t} (\emph{byte\_t}), \emph{uint16\_t} (\emph{word\_t}), \emph{uint32\_t} (\emph{lword\_t}) y \emph{uint64\_t} (\emph{dword\_t}).
-\item
-Floatantes: representa valores con punto flotante IEEE-754. Estos son \emph{float32\_t} y \emph{float64\_t}.
-%\item
-%Vacío: \emph{void\_t}. Representa el nulo de los tipos de datos. Se utiliza para los métodos que no retornan nada.
-%\item
-%Error: \emph{Error\_t}. Representa valores de error.
-\end{itemize}
-
-Tipos de datos para temporización:
-
-\begin{itemize}
-\item
-\emph{Time\_ms\_t}, representa un lapso de tiempo (duración) en milisegundos (se almacena internamente como uint64\_t).
-\item
-\emph{Time\_ns\_t}, representa un lapso de tiempo en nanosegundos (se almacena internamente como uint64\_t).
-\item
-\emph{TimeOfDay\_t}, representa un valor de tiempo absoluto en horas, minutos, segundos y milisegundos. El rango es de $00:00:00.000$ a $23:59:59.999$.
-\item
-\emph{Date\_t}, representa una fecha (año, mes y día).
-\item
-\emph{DateAndTime\_t}, que contiene ambos valores anteriores.
-\end{itemize}
-
-Tipo de datos para manejo de eventos:
-
-\begin{itemize}
-\item
-\emph{Callback}: \emph{Callback\_t}. Representa a una función a llamar en respuesta a un evento.
-\item
-Parámetros de \emph{Callback}: \emph{CallbackParams\_t}. Representa los parámetros de una función a llamar en respuesta a un evento.
-\end{itemize}
-
-Tipo de datos para manejo de cadenas de caracteres:
-
-\begin{itemize}
-\item
-\emph{String\_t}.
-\end{itemize}
 
 \input{Chapters/Diseno/ModelGPIO}
 
