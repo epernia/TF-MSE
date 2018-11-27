@@ -133,26 +133,36 @@ Posibles eventos de I2C:
 
 \titulo{Métodos de I2C de alto nivel}
 
-Transferencia de arreglo de bytes:
+Transferencia de arreglo de bytes (sólo en modo \emph{MASTER}):
 
 \begin{verbatim}
    • transferByteArray( int_t slaveAddress,
                         const ByteArray_t send,
                         inOut size_t sendSize,
+                        bool_t sendRepeatedStart,
                         inOut ByteArray_t receive,
                         inOut size_t dataSize
                       )
    • transferByteArraySync( int_t slaveAddress,
                             const ByteArray_t send,
                             inOut size_t sendSize,
+                            bool_t sendWriteStop,
                             inOut ByteArray_t receive,
                             inOut size_t dataSize
+                            Time_t timeout
                           ) : I2cStatus_t
    • transferByteArrayAsync( int_t slaveAddress,
                              const ByteArray_t send,
                              inOut size_t sendSize,
+                             bool_t sendWriteStop,
                              inOut ByteArray_t receive,
+                             inOut ByteArray_t receive
                              Callback_t sucess,
                              Callback_t error 
                            )
 \end{verbatim}
+
+Si \emph{sendRepeatedStart} es verdadero se genera una condición de \emph{REPEATED\_START} y vuelve a enviar la dirección del esclavo, luego del último byte a escribir y antes de comenzar a recibir.
+
+% https://www.silabs.com/community/blog.entry.html/2016/03/09/chapter_10_2_contro-l8qA
+ 

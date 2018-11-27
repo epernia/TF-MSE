@@ -117,7 +117,7 @@ Lectura de arreglo de bytes:
                   )
    • readByteArraySync( inOut ByteArray_t data,
                         inOut size_t dataSize,
-                        Time_t timout
+                        Time_t timeout
                       ) : SpiStatus_t
    • readByteArrayAsync( inOut ByteArray_t data, 
                          inOut size_t dataSize,
@@ -134,7 +134,7 @@ Escritura de arreglo de bytes:
                    )
    • writeByteArraySync( const ByteArray_t data,
                          inOut size_t dataSize,
-                         Time_t timout
+                         Time_t timeout
                        ) : SpiStatus_t
    • writeByteArrayAsync( const ByteArray_t data, 
                           inOut size_t dataSize,
@@ -154,7 +154,8 @@ Transferencia de arreglo de bytes:
    • transferByteArraySync( const ByteArray_t send,
                             inOut size_t sendSize,
                             inOut ByteArray_t receive,
-                            inOut size_t dataSize
+                            inOut size_t dataSize,
+                            Time_t timeout
                           ) : SpiStatus_t
    • transferByteArrayAsync( const ByteArray_t send,
                              inOut size_t sendSize,
