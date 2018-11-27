@@ -11,7 +11,7 @@ El módulo I2C modela un periférico para comunicaciones serie entre circuitos i
 \item
 \emph{addressMode}, del tipo \emph{I2cAddrMode\_t}, representa el modo de direccionamiento del bus, con posibles valores: \emph{ADDR\_MODE7} o \emph{ADDR\_MODE10} (7 o 10 bits de dirección).
 \item
-\emph{clockDuty}, del tipo \emph{I2cClockDuty\_t}, que establece la relación del tiempo en alto y tiempo en bajo del reloj, con valores dependientes de la arquitectura. Se definen los posibles valores: \emph{CLK\_DUTY\_SYMMETRIC}, \emph{CLK\_DUTY\_ASYMMETRIC} o \emph{CLK\_DUTY\_FAST}.
+\emph{clockDuty}, del tipo \emph{I2cClockDuty\_t}, que establece la relación del tiempo en alto y tiempo en bajo del reloj, con valores dependientes de la arquitectura. Se definen los posibles valores: \emph{CLK\_DUTY\_SYMMETRIC}, \emph{CLK\_DUTY\_ASYM-METRIC} o \emph{CLK\_DUTY\_FAST}.
 \item
 \emph{generateAck}, del tipo \emph{bool\_t}. Habilita o deshabilita el envío de ACK, de no estar habilitado (\emph{true}) el periférico I2C estará virtualmente desconectado del bus.
 \item
