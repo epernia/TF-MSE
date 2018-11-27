@@ -217,7 +217,21 @@ Todos los módulos poseen los siguientes métodos:
 \emph{getters y setters} de cada propiedad.
 \end{itemize}
 
-Se destaca que en una implementación de la biblioteca para lenguajes no orientados a objetos, en lugar de métodos se tiene funciones y por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método.
+Se destaca que en una implementación de la biblioteca para lenguajes no orientados a objetos, en lugar de métodos se tiene funciones y por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método. Por ejemplo, en un lenguaje con objetos como \emph{JavaScript} tendremos,
+
+\begin{verbatim}
+   • uart0.init( 9600 )
+     <objeto>.<método>( <parámetros> )
+\end{verbatim}  
+
+mientras que en un lenguaje sin objetos como \emph{C},
+
+\begin{verbatim}
+   • uartInit( UART0, 9600 )
+     <función>( <objeto>, <parámetros> )
+\end{verbatim}
+
+donde además, por problemas de espacio de nombres, se debe agregar un prefijo con el nombre del periférico.
 
 %------------------------------------------------------------------------------
 

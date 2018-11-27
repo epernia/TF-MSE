@@ -23,13 +23,15 @@ El módulo DAC modela un periférico Conversor Digital-Analógico. Este perifér
 Inicialización y restablecimiento de un periférico DAC:
 
 \begin{verbatim}
-   • init( DacInit_t conversionRate | 
-           conversionMode | 
-           voltageReferece | 
-           resolution |
-           location
-         )
+   • init()
+   • init( int_t conversionRate, DacInit_t init )
    • deInit()
+\end{verbatim}
+
+Los valores posibles del parámetro \emph{init} se forman con valores de:
+
+\begin{verbatim}
+   • conversionMode | voltageReferece | resolution | location
 \end{verbatim}
 
 Todos los valores de inicialización son opcionales y si no se aplican se aplican utiliza por defecto:
@@ -42,7 +44,7 @@ Todos los valores de inicialización son opcionales y si no se aplican se aplica
    • loacation = LOCATION0
 \end{verbatim}
 
-El resto de la API también es muy similar a la del ADC con la diferencia que en lugar de métodos para leer (no define el método \emph{read()}) define métodos para escribir el DAC:
+El resto de la API también es muy similar a la del ADC con la diferencia que define métodos para escribir el DAC en lugar de métodos para leer (no define el método \emph{read()}):
 
 \begin{verbatim}
    • channel( DacChannel_t channel, bool_t enable )
@@ -50,8 +52,8 @@ El resto de la API también es muy similar a la del ADC con la diferencia que en
    • write( DacValue_t value )
    • startConversion( DacChannel_t channel )
    • stopConversion()
-   • conversionStatus() : DacConvStatus_t
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+   • status() : DacStatus_t
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
    • eventCallbackClear( ChannelEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
@@ -60,9 +62,8 @@ El resto de la API también es muy similar a la del ADC con la diferencia que en
 
 \begin{verbatim}
    • write( DacValue_t value )
-   • writeSync( DacValue_t value, 
-                Time_t timout 
-              ) : DacConvStatus_t
+   • writeSync( DacValue_t value, Time_t timout ) 
+                : DacStatus_t
    • writeAsync( DacValue_t value, 
                  Callback_t sucess, 
                  Callback_t error 

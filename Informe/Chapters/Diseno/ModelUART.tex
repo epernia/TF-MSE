@@ -33,16 +33,17 @@ El módulo UART modela un periférico de comunicación serie transmisor/receptor
 Inicialización y restablecimiento de un periférico UART:
 
 \begin{verbatim}
-   • init( UartInit_t baudRate | 
-           dataBits | 
-           parity | 
-           stopBits | 
-           flowControl |
-           enableTransmitter | 
-           bool_t enableReceiver |
-           location
-         )
+   • init()
+   • init( int_t baudRate )
+   • init( int_t baudRate, UartInit init )
    • deInit()
+\end{verbatim}
+
+Los valores posibles del parámetro \emph{init} se forman con valores de:
+
+\begin{verbatim}
+   • dataBits | parity | stopBits | flowControl |
+     enableTransmitter | enableReceiver | location
 \end{verbatim}
 
 Todos los valores del método \emph{init()} son opcionales. En caso de no inicializarlos los valores por defecto son:
@@ -64,7 +65,7 @@ Se puede transmitir o recibir un byte usando el módulo UART tanto por encuesta 
    • status() : UartStatus_t
    • send( const byte_t value )
    • receive() : byte_t
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
    • eventCallbackClear( ChannelEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
@@ -84,7 +85,7 @@ Los posibles valores de \emph{UartStatus\_t} son:
    • ERROR_TIMEOUT
 \end{verbatim}
 
-Y los posibles eventos:
+Eventos:
 
 %\emph{TRANSMIT\_COMPLETE}, \emph{RECEIVE\_COMPLETE}, \emph{TRANSMIT\_ERROR}, \emph{RECEIVE\_ERROR} 
 
@@ -108,21 +109,17 @@ Métodos de lectura de byte:
 
 \begin{verbatim}
    • readByte() : byte_t
-   • readByteSync( inOut byte_t value, 
-                   Time_t timout
-                 ) : UartStatus_t
-   • readByteAsync( Callback_t sucess, 
-                    Callback_t error 
-                  )
+   • readByteSync( inOut byte_t value, Time_t timout )
+                   : UartStatus_t
+   • readByteAsync( Callback_t sucess, Callback_t error )
 \end{verbatim}
 
 Métodos de escritura de byte:
 
 \begin{verbatim}
    • writeByte( const byte_t value )
-   • writeByteSync( const byte_t value, 
-                    Time_t timout 
-                  ) : UartStatus_t
+   • writeByteSync( const byte_t value, Time_t timout )
+                    : UartStatus_t
    • writeByteAsync( const byte_t value, 
                      Callback_t sucess,
                      Callback_t error 
@@ -140,7 +137,7 @@ Métodos de lectura de \emph{String}:
                      inOut size_t dataSize,
                      String_t terminator,
                      Time_t timout 
-                  ) : UartStatus_t
+                   ) : UartStatus_t
    • readStringAsync( inOut String_t data,
                       inOut size_t dataSize,
    	                  String_t terminator,

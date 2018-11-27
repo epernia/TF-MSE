@@ -31,15 +31,17 @@ Modela un bus de serie para interfaz con periféricos (bus SPI). El periférico 
 Inicialización y restablecimiento de un periférico SPI:
 
 \begin{verbatim}
-   • init( SpiInit_t mode |
-           clockFrequency |
-           clockPolarity |
-           clockPhase |
-           dataOrder |
-           dataBits |
-           location
-         )
+   • init()
+   • init( SpiInit_t init )
+   • init( SpiInit_t init, int_t clockFrequency )
    • deInit()
+\end{verbatim}
+
+Los valores posibles del parámetro \emph{init} se forman con valores de:
+
+\begin{verbatim}
+   • mode | clockPolarity | clockPhase | dataOrder |
+     dataBits | location
 \end{verbatim}
 
 Los valores de configuración son opcionales, con valores por defecto:
@@ -54,7 +56,13 @@ Los valores de configuración son opcionales, con valores por defecto:
    • location = LOCATION0
 \end{verbatim}
 
-En caso de seleccionar modo \emph{MASTER} se debe configurar al menos un pin como selector de esclavo con:
+En caso de seleccionar modo \emph{MASTER} se debe configurar la frecuencia de reloj y al menos un pin como selector de esclavo. La frecuencia de reloj puede configurarse usando el método \emph{init()} de 2 parámetros, o bien, mediante:
+
+\begin{verbatim}
+   • clockFrequencySet( int_t clockFrequency )
+\end{verbatim}
+
+Utilizando \emph{initSSPin()} se configura un pin como selector de esclavo:
 
 \begin{verbatim}
    • initSSPin( Pin_t pin )
@@ -63,33 +71,34 @@ En caso de seleccionar modo \emph{MASTER} se debe configurar al menos un pin com
 Luego para elegir que esclavo habilitar o deshabilitar se utiliza:
 
 \begin{verbatim}
-   • slaveSet( Pin_t pin, bool_t enable )
+   • slaveSelect( Pin_t pin, bool_t enable )
 \end{verbatim}
 
 Permite realizar envío, recepción o transferencia de datos (que envía y recibe simultáneamente). Estas operaciones pueden realizarse por encuesta o interrupción con los siguientes métodos:
 
 \begin{verbatim}
-   • transferStatus() : SpiStatus_t
+   • status() : SpiStatus_t
    • send( const ByteArray_t data )
    • receive( inOut ByteArray_t receive )
    • transfer( const ByteArray_t send, 
                inOut ByteArray_t receive
              ) : SpiStatus_t
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t c )
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
    • eventCallbackClear( ChannelEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
 
-Los posibles valores de \emph{SPIStatus\_t} son:
+Los posibles valores de \emph{SpiStatus\_t} son:
 
 \begin{verbatim}
    • READY
    • BUSY
+   • TRANSFER_COMPLETE
    • ERROR
    • ERROR_TIMEOUT
 \end{verbatim}
 
-Y los posibles eventos:
+Eventos:
 
 \begin{verbatim}
    • TRANSFER_COMPLETE
@@ -149,7 +158,7 @@ Transferencia de arreglo de bytes:
                           ) : SpiStatus_t
    • transferByteArrayAsync( const ByteArray_t send,
                              inOut size_t sendSize,
-                             inOut ByteArray_t receive,,
+                             inOut ByteArray_t receive,
                              Callback_t sucess,
                              Callback_t error 
                            )

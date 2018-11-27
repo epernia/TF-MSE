@@ -1,24 +1,158 @@
 %------------------------------------------------------------------------------
 \subsection{Módulo I2C}
 
-El módulo I2C modela un periférico para comunicaciones serie entre circuitos integrados\footnote{En inglés \emph{Inter-Integrated Circuit}, cuyas siglas son IIC, o $I^{2}C$.}. Al igual que SPI, es un bus sincrónico y permite conectarse a memorias, sensores y otros periféricos externos. El bus I2C requiere únicamente dos terminales para su funcionamiento, uno para la señal de reloj y otro para el envío y recepción de datos. Cada dispositivo conectado al bus dispone de una dirección distinta que se utiliza para su acceso, evitando de esta forma la necesidad de agregar una línea de conexión selector de esclavo por cada periférico conectado al bus, siendo una ventaja frente a SPI.
+El módulo I2C modela un periférico para comunicaciones serie entre circuitos integrados\footnote{En inglés \emph{Inter-Integrated Circuit}, cuyas siglas son IIC, o $I^{2}C$.}. Al igual que SPI, es un bus sincrónico y permite conectarse a memorias, sensores y otros periféricos externos. El bus I2C requiere únicamente dos terminales para su funcionamiento, uno para la señal de reloj y otro para el envío y recepción de datos. Cada dispositivo conectado al bus dispone de una dirección distinta que se utiliza para su acceso. De esta forma, evita la necesidad de agregar una línea de conexión extra por cada periférico conectado al bus como sucede en el bus SPI.
 
+\titulo{Propiedades de I2C}
 
+\begin{itemize}
+\item
+\emph{mode}, del tipo \emph{I2cMode\_t}, que representa el modo de funcionamiento del periférico I2C, al igual que SPI perimite los valores \emph{MASTER} o \emph{SLAVE}.
+\item
+\emph{addressMode}, del tipo \emph{I2cAddrMode\_t}, representa el modo de direccionamiento del bus, con posibles valores: \emph{ADDR\_MODE7} o \emph{ADDR\_MODE10} (7 o 10 bits de dirección).
+\item
+\emph{clockDuty}, del tipo \emph{I2cClockDuty\_t}, que establece la relación del tiempo en alto y tiempo en bajo del reloj, con valores dependientes de la arquitectura. Se definen los posibles valores: \emph{CLK\_DUTY\_SYMMETRIC}, \emph{CLK\_DUTY\_ASYMMETRIC} o \emph{CLK\_DUTY\_FAST}.
+\item
+\emph{generateAck}, del tipo \emph{bool\_t}. Habilita o deshabilita el envío de ACK, de no estar habilitado (\emph{true}) el periférico I2C estará virtualmente desconectado del bus.
+\item
+\emph{acceptGlobalCalls}, del tipo \emph{bool\_t}. En modo \emph{SLAVE} permite responder a solicitudes a la dirección $0x00$.
+\item
+\emph{address}, del tipo \emph{int\_t}, es la dirección del periférico I2C cuando se utiliza en modo esclavo.
+\item
+\emph{clockFrequency}, del tipo \emph{int\_t}, es la frecuencia de reloj (en Hz) del BUS I2C (solo tiene sentido en modo \emph{MASTER}). Alternativamente pueden utilizarse los valores \emph{CLK\_STD\_MODE} (100 kHz), \emph{CLK\_FAST\_MODE} (400 kHz) y \emph{CLK\_FAST\_MODE\_PLUS} (1 MHz).
+\item
+\emph{location}, del tipo \emph{Location\_t}.
+\item
+\emph{value}, del tipo \emph{byte\_t}. Representa el registro de transferencia.
+\end{itemize}
 
+\titulo{Métodos de I2C}
 
+Inicialización y restablecimiento de un periférico I2C:
 
+\begin{verbatim}
+   • init()
+   • init( I2cInit_t config )
+   • init( I2cInit_t config, int_t freqOrAddr )
+   • deInit()
+\end{verbatim}
 
-%   void i2cSoftwareDelay( tick_t duration );
-%
-%   void i2cSoftwareMasterWriteStart( void );
-%
-%   void i2cSoftwareMasterWriteStop( void );
-%
-%   bool_t i2cSoftwareMasterWriteAddress( uint8_t i2cSlaveAddress,
-%                                         I2C_Software_rw_t readOrWrite );
-%
-%   bool_t i2cSoftwareMasterWriteByte( uint8_t dataByte );
-%
-%	uint8_t i2cSoftwareMasterReadByte( bool_t ack );
+Los valores posibles del parámetro \emph{config} se forman con valores de:
 
+\begin{verbatim}
+   • mode | addressMode | clockDuty | generateAck |
+     acceptGlobalCalls | location
+\end{verbatim}
 
+El parámetro \emph{freqOrAddr} permite establecer la frecuencia de reloj si se configura en modo \emph{MASTER}, o la dirección del dispositivo en modo \emph{SLAVE}. Alternativamente se pueden utilizar los métodos:
+
+\begin{verbatim}
+   • clockFrequencySet( int_t clockFrequency )
+   • addressSet( int_t address )
+\end{verbatim}
+
+Todos los valores de configuración son opcionales, con valores por defecto:
+
+\begin{verbatim}
+   • mode = MASTER
+   • addressMode = ADDR_MODE7
+   • clockDuty = CLK_DUTY_SYMMETRIC
+   • generateAck = TRUE
+   • acceptGlobalCalls = FALSE
+   • location = LOCATION0
+   • clockFrequency = CLK_STD_MODE
+   • address = 0xEC
+\end{verbatim}
+
+Permite realizar envío o recepción de datos en ambos modos. Asimismo, estas operaciones pueden realizarse por encuesta o interrupción, se utilizan los siguientes métodos:
+
+\begin{verbatim}
+   • status() : I2cStatus_t
+   • sendStart()
+   • sendStop()
+   • sendCommandTo( I2cCommand_t, int_t slaveAddress )
+   • busReset()
+   • holdClock( bool_t enable )
+   • sendData( const byte_t data )
+   • startReception( I2cAck_t ackOrNack )
+   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
+   • eventCallbackClear( ChannelEvent_t evt )
+   • interrupt( bool_t enable )
+\end{verbatim}
+
+En modo \emph{MASTER} se utilizan los métodos \emph{sendStart()}, que realiza el envío de una condición de \emph{start}) al bus, \emph{sendStop()}, envía una condición de \emph{stop}, \emph{sendCommandTo()} que envía un comando de lectura/escritura a la dirección de un esclavo) y \emph{busReset()} la cual genera una secuencia para volver el bus al estado \emph{READY}, con las líneas \emph{SCL} y \emph{SDA} en estado alto.
+
+Para \emph{I2cCommand\_t} existen los valores:
+
+\begin{verbatim}
+   • READ
+   • WRITE
+\end{verbatim}
+
+En modo \emph{SLAVE} se utilza \emph{holdClock()} para causar un estiramiento de reloj en el bus.
+
+Los siguientes métodos son válidos en ambos modos:
+
+\begin{verbatim}
+   • status() : I2cStatus_t
+   • sendData( const byte_t data )
+   • startReception( I2cAck_t ackOrNack )
+\end{verbatim}
+
+Los posibles valores de \emph{I2cStatus\_t} son:
+
+\begin{verbatim}
+   • READY
+   • BUSY
+   • TRANSFER_COMPLETE
+   • SLAVE_NAK 
+   • ERROR_NACK_RECEIVED
+   • ERROR_BUS
+   • ERROR_ARB_LOST
+   • ERROR
+   • ERROR_TIMEOUT
+   • REQUEST_TO_SEND
+   • REQUEST_TO_RECEIVE
+\end{verbatim}
+
+\emph{startReception()} comienza una recepción de un byte en el bus, el parámetro del tipo \emph{I2cAck\_t} define si envía un \emph{acknowledgement}, o no, al finalizar la recepción, con valores:
+
+\begin{verbatim}
+   • ACK
+   • NACK
+\end{verbatim}
+
+Posibles eventos de I2C:
+
+\begin{verbatim}
+   • TRANSFER_COMPLETE
+   • REQUEST_TO_SEND
+   • REQUEST_TO_RECEIVE
+   • ERROR
+\end{verbatim}
+
+\titulo{Métodos de I2C de alto nivel}
+
+Transferencia de arreglo de bytes:
+
+\begin{verbatim}
+   • transferByteArray( int_t slaveAddress,
+                        const ByteArray_t send,
+                        inOut size_t sendSize,
+                        inOut ByteArray_t receive,
+                        inOut size_t dataSize
+                      )
+   • transferByteArraySync( int_t slaveAddress,
+                            const ByteArray_t send,
+                            inOut size_t sendSize,
+                            inOut ByteArray_t receive,
+                            inOut size_t dataSize
+                          ) : I2cStatus_t
+   • transferByteArrayAsync( int_t slaveAddress,
+                             const ByteArray_t send,
+                             inOut size_t sendSize,
+                             inOut ByteArray_t receive,
+                             Callback_t sucess,
+                             Callback_t error 
+                           )
+\end{verbatim}

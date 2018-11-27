@@ -32,7 +32,7 @@ La cantidad de pines que forman un puerto depende de la arquitectura.
 Los métodos básicos de configuración y uso de un pin son:
 
 \begin{verbatim}
-   • init( PintInit_t mode | pull )
+   • init( PintInit_t init )
    • read() : bool_t
    • write( bool_t value )
    • deInit()
@@ -44,7 +44,12 @@ Los métodos básicos de configuración y uso de un pin son:
 %GPIO_SPEED_FAST
 %GPIO_SPEED_HIGH
 
-El valor \emph{mode} es requerido mientras que \emph{pull} es opcional. Notar que los valores de configuración del método \emph{init()} se acumulan mediante el operador ''$|$''.
+El parámetro \emph{init} se debe completar con un valor posible de \emph{mode}, y opcionalmente, un valor de \emph{pull} separados con $|$, por ejemplo:
+
+\begin{verbatim}
+   • init( INPUT )
+   • init( INPUT | PULL_UP )
+\end{verbatim}
 
 Contiene además el método \emph{toggle()} intercambia el valor del pin si el mismo está configurado como salida.:
 
@@ -55,7 +60,7 @@ Contiene además el método \emph{toggle()} intercambia el valor del pin si el m
 Para establecer una interrupción en un pin ante cierto evento define los métodos: 
 
 \begin{verbatim}
-   • eventCallbackSet( PinEvent_t evt, Callback_t c )
+   • eventCallbackSet( PinEvent_t evt, Callback_t func )
    • eventCallbackClear( PinEvent_t evt )
    • interrupt( bool_t enable ) : PinStatus_t
  \end{verbatim} 
