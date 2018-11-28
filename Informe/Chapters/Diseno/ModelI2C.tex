@@ -75,8 +75,8 @@ Permite realizar envío o recepción de datos en ambos modos. Asimismo, estas op
    • holdClock( bool_t enable )
    • sendData( const byte_t data )
    • startReception( I2cAck_t ackOrNack )
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
-   • eventCallbackClear( ChannelEvent_t evt )
+   • eventCallbackSet( I2cEvent_t evt, Callback_t func )
+   • eventCallbackClear( I2cEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
 
@@ -122,7 +122,7 @@ Los posibles valores de \emph{I2cStatus\_t} son:
    • NACK
 \end{verbatim}
 
-Posibles eventos de I2C:
+Eventos de I2C (tipo \emph{I2cEvent\_t})::
 
 \begin{verbatim}
    • TRANSFER_COMPLETE

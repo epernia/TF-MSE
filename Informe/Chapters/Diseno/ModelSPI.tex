@@ -44,7 +44,7 @@ Los valores posibles del parámetro \emph{init} se forman con valores de:
      dataBits | location
 \end{verbatim}
 
-Los valores de configuración son opcionales, con valores por defecto:
+Son todos opcionales, con valores por defecto:
 
 \begin{verbatim}
    • mode = MASTER
@@ -83,8 +83,8 @@ Permite realizar envío, recepción o transferencia de datos (que envía y recib
    • transfer( const ByteArray_t send, 
                inOut ByteArray_t receive
              ) : SpiStatus_t
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
-   • eventCallbackClear( ChannelEvent_t evt )
+   • eventCallbackSet( SpiEvent_t evt, Callback_t func )
+   • eventCallbackClear( SpiEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
 
@@ -98,7 +98,7 @@ Los posibles valores de \emph{SpiStatus\_t} son:
    • ERROR_TIMEOUT
 \end{verbatim}
 
-Eventos:
+Eventos (tipo \emph{SpiEvent\_t}):
 
 \begin{verbatim}
    • TRANSFER_COMPLETE

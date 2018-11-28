@@ -65,8 +65,8 @@ Se puede transmitir o recibir un byte usando el módulo UART tanto por encuesta 
    • status() : UartStatus_t
    • send( const byte_t value )
    • receive() : byte_t
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
-   • eventCallbackClear( ChannelEvent_t evt )
+   • eventCallbackSet( UartEvent_t evt, Callback_t func )
+   • eventCallbackClear( UartEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
   
@@ -85,7 +85,7 @@ Los posibles valores de \emph{UartStatus\_t} son:
    • ERROR_TIMEOUT
 \end{verbatim}
 
-Eventos:
+Eventos (tipo \emph{UartEvent\_t}):
 
 %\emph{TRANSMIT\_COMPLETE}, \emph{RECEIVE\_COMPLETE}, \emph{TRANSMIT\_ERROR}, \emph{RECEIVE\_ERROR} 
 

@@ -1,29 +1,226 @@
 %------------------------------------------------------------------------------
 \subsection{Módulo Timer}
 
-Este módulo modela un periférico contador/temporizador. Este periférico se utiliza para medición de tiempo, generación de retardos, conteo de eventos, generación de señales, etc.
+Este módulo modela un periférico contador/temporizador. Este periférico se utiliza para medición de tiempo, generación de retardos, conteo de eventos, generación de señales, etc. Es el periférico que más variedad de modos tiene según la arquitectura. En consecuencia, la documentación de implementación de la biblioteca para cada plataforma, debe indicar qué modos, propiedades, métodos y eventos soporta, de forma clara.
 
-Es el periférico que más variedad de modos tiene según la arquitectura. Debido a esto la documentación de implementación de la biblioteca para cada plataforma debe indicar qué modos soporta de forma clara.
+\titulo{Propiedades de TIMER}
 
+Propiedad \emph{mode}, del tipo \emph{TimerMode\_t}. Permite establecer el modo de funcionamiento del contador/temporizador, existen los siguientes modos:
 
+\begin{itemize}
+\item
+\emph{STOP}. Contador del temporizador detenido.
+\item
+\emph{OVERFLOW}. Contar hasta desborde.
+\item
+\emph{COMPARE\_OUTPUT}. Contar hasta alcanzar un valor de comparación.
+\item
+\emph{INPUT\_CAPTURE}. Almacenar valor del contador ante eventos de entrada de captura.
+\item
+\emph{PWM}. Genera una, o varias salidas digitales moduladas por ancho de pulso, contiene dos sub-modos (del tipo \emph{TimerPwmMode\_t}):
+\begin{itemize}
+\item
+\emph{FAST\_PWM} (se puede establecer también con el valor \emph{EDGE\_PWM}). Este modo de PWM alcanza las mayores frecuencias. 
+\item
+\emph{PHASE\_CORRECT\_PWM} (o también \emph{CENTER\_ALIGNED\_PWM}). Permite generar PWM con frecuencias de la mitad del valor máximo del modo \emph{fast}, pero tiene la ventaja que  mantiene la señal generada, siendo un comportamiento deseado al controlar motores de corriente continua.
+\emph{PHASE\_CORRECT} = \emph{CENTER\_ALIGNED\_PWM}
+\end{itemize}
+\end{itemize}
 
+Propiedades del reloj de entrada:
 
+\begin{itemize}
+\item
+\emph{clockSource}, del tipo \emph{TimerClockSource\_t}. Establece la fuente de reloj del temporizador, la cual se divide por el pre-escalador para obtener el reloj del temporizador. Con valores: \emph{INTERNAL\_CPU\_CLK}, \emph{INTERNAL\_CLK0}, \emph{INTERNAL\_CLK01}, \emph{INTERNAL\_CLK2}, \emph{EXTERNAL\_CLK0}, \emph{EXTERNAL\_CLK1}, \emph{EXTERNAL\_CLK2} o \emph{EXTERNAL\_CLK2}, que se deben definir para cada arquitectura.
+\item
+\emph{prescale}, del tipo \emph{TimerPresc\_t}. Permite establecer el valor de pre-escalador del reloj del \emph{timer}, es decir, el valor por el cual se dividirá, los valores que puede tomar son: \emph{PRESC\_DIV1}, \emph{PRESC\_DIV2}, \emph{PRESC\_DIV4}, \emph{PRESC\_DIV8}, \emph{PRESC\_DIV16}, \emph{PRESC\_DIV32}, \emph{PRESC\_DIV64}, \emph{PRESC\_DIV128}, \emph{PRESC\_DIV-256}, \emph{PRESC\_DIV512} o \emph{PRESC\_DIV1024}.
+\end{itemize}
 
-Duración: TIME.
+Propiedades del registro de conteo:
 
-323 Mazidi
+\begin{itemize}
+\item
+\emph{counter}, del tipo \emph{TimerCounter\_t}. Representa el registro de conteo del temporizador.
+\item
+\emph{counterSize}, del tipo \emph{TimerCounterSize\_t}. Define el tamaño del registro de conteo, en general podemos encontrar registros de 8, 16, 24 o 32 bits (valores \emph{COUNTER\_BIT8}, \emph{COUNTER\_BIT16}, \emph{COUNTER\_BIT24}, \emph{COUNTER\_BIT32}).
+\item
+\emph{counterMode}, del tipo \emph{TimerCounterMode\_t}. Establece el modo de contep del \emph{timer}, con valores \emph{COUNT\_UP}, \emph{COUNT\_DOWN} y \emph{COUNT\_UP\_DOWN}.
+\end{itemize}
 
-TIMER: modela un periférico Timer/Counter.
+Propiedades que configuran el comportamiento del contador ante eventos (todos del tipo \emph{TimerCounterBehavior\_t}):  
 
-Time/Counterl Capture Event OOOC
-Time/Counterl Compare Match A OOOE
-Time/Counterl Compare Match B 001 0
-Time/Counterl Overflow 001 2
+\begin{itemize}
+\item
+\emph{onOverflowEvent} evento de desborde del vlaor de conteo. Permite usar los valores: \emph{RESET\_COUNTER}, \emph{INVERT\_COUNTER} o \emph{STOP\_COUNTER}.
+\item
+\emph{onCompareMatchEvent0, ..., onCompareMatchEventN}, evento de comparación exitosa con valor de comparación. Además de los valores ateriores agrega \emph{DO\_NOTHING}.
+\item
+\emph{onCaptureEvent0, ..., onCaptureEventN}, evento de entrada de captura. Permite los valores anteriores con el agregado de \emph{START\_COUNTER} y\emph{RELOAD-\_AND\_START\_COUNTER}.
+\end{itemize}
 
+Propiedades de captura y comparación:
 
-\emph{Tick\_t}, representa un valor de conteo de un lapso de tiempo adimencional lapso de tiempo en ticks (se almacena internamente como \emph{uint64\_t}).
+\begin{itemize}
+\item
+\emph{captureInputPin0, ..., captureInputPinN}, del tipo \emph{TimerCaptureInputPin\_t}, representan los pines de entrada de captura. Un cambio de estado en éstos define si ocurre un evento de entrada de captura según la configuración del temporizador.
+\item
+\emph{captueValue0, ..., captueValueN}, del tipo \emph{TimerCounter\_t}, se utilizan para guardar los valores de conteo del timer cuando ocurre un evento de captura.
+\item
+\emph{compareValue0, ..., compareValueN}, del tipo \emph{TimerCounter\_t}, en estos se setean los valores que se utilizarán para comparar con el contador del timer.
+\item
+\emph{compareOutputPin0, ..., compareOutputPinN}, del tipo \emph{TimeCompareOutputPin\_t}, representan los pines de salida de comparación. En base a las configuraciones se pueden generar señales digitales en los mismos ante eventos de comparación o desborde.
+\end{itemize}
 
-Como evento posible se define: \emph{CONVERSION\_COMPLETE} que genera una interrupción cuando se completa la conversión. El método \emph{interrupt()} habilita  o deshabilita todas las interrupciones del periférico.
+Propiedades de PWM:
+
+\begin{itemize}
+\item
+\emph{inverted}, del tipo \emph{bool\_t}, establece si en modo PWM la salida es invertida.
+\item
+\emph{pwmMode}, del tipo \emph{\emph{TimerPwmMode\_t}}.
+\end{itemize}
+
+Propiedad \emph{location}, del tipo \emph{Location\_t}.
+
+\titulo{Propiedad de cada pin de entrada de captura del temporizador}
+
+\begin{itemize}
+\item
+\emph{onCaptureEvent0, ..., onCaptureEventN}, del tipo \emph{TimerCaptureInputPinEvent\_t}. Configura ante qué eventos del pin de entrada se captura el valor de conteo del temporizador, con valores posibles \emph{RISING\_EDGE}, \emph{FALLING\_EDGE} o \emph{BOTH\_EDGES}. 
+\end{itemize}
+
+\titulo{Propiedad de cada pin de salida de comparación del temporizador}
+
+\begin{itemize}
+\item
+\emph{onCompareMatchEvent0, ..., onCompareMatchEventN}, del tipo \emph{TimerCompareOutputPinEvent\_t}. Configura el comportamiento del pin de salida ante eventos de comparación, con valores posibles \emph{DO\_NOTHING}, \emph{TOGGLE\_OUTPUT}, \emph{SET\_OUTPUT} o \emph{CLEAR\_OUTPUT}.
+\end{itemize}
+
+\titulo{Métodos de TIMER}
+
+Inicialización y restablecimiento de un periférico TIMER:
+
+\begin{verbatim}
+   • init()
+   • init( TimerInit_t config )
+   • deInit()
+\end{verbatim}
+
+Los valores posibles del parámetro \emph{config} se forman con valores de:
+
+\begin{verbatim}
+   • mode | clockSource | prescale | location
+\end{verbatim}
+
+Todos los valores de configuración son opcionales, con valores por defecto:
+
+\begin{verbatim}
+   • mode = STOP
+   • clockSource = INTERNAL_CPU_CLK
+   • prescale = PRESC_DIV1
+   • location = LOCATION0   
+\end{verbatim}
+
+Métodos para utilizar el temporizador por encuesta o interrupción:
+
+\begin{verbatim}
+   • isOverflow() : bool_t
+   • isCompareMatch( int_t n ) : bool_t
+   • isCapture( int_t n ) : bool_t
+   • eventCallbackSet( TimerEvent_t evt, Callback_t func )
+   • eventCallbackClear( TimerEvent_t evt )
+   • interrupt( bool_t enable )
+\end{verbatim}
+
+Los posibles eventos del temporizador (valores de \emph{TimerEvent\_t}) son:
+
+\begin{verbatim}
+   • OVERFLOW
+   • COMPARE_MATCH_0, ..., COMPARE_MATCH_N
+   • INPUT_CAPTURE_0, ..., INPUT_CAPTURE_N
+   • ERROR
+\end{verbatim}
+
+\titulo{Métodos de TIMER de alto nivel}
+
+Generar retardo bloqueante:
+
+\begin{verbatim}
+   • delaySync( Time_t duration )
+\end{verbatim}
+
+Generar retardo no bloqueante:
+
+\begin{verbatim}
+   • delayAsync( Time_t duration, Callback_t func )
+\end{verbatim}
+
+Modo \emph{ticker}, para generar interrupciones periódicas (base de tiempo):
+
+\begin{verbatim}
+   • initTicker() // Por defecto: 1 ms
+   • initTicker( Time_t periodicity )
+   • tickerCallbackSet( Callback_t func )
+   • tickerCallbackClear()
+   • tickCounterGet() : Tick_t
+   • tickCounterSet( Tick_t value )
+\end{verbatim}
+
+\emph{Tick\_t}, representa un valor de conteo de un lapso de tiempo adimencional (en ticks).
+
+Modo \emph{PWM}:
+
+\begin{verbatim}
+   • initPWM() // Por defecto: Fast PWM, 1 kHz, no inv (ni).
+   • initPWM( int_t frequency ) // Por defecto: Fast PWM, ni.
+   • initPWM( int_t frequency, TimerPwmMode_t pwmMode ) // ni.
+   • initPWM( int_t frequency, 
+              TimerPwmMode_t pwmMode, 
+              bool_t inverted 
+            )
+\end{verbatim}
+
+En este modo se definen pines de salida PWM del tipo \emph{PwmPin\_t} que tienen los métodos:
+
+\begin{verbatim}
+   • enable( bool_t enable )
+   • dutyCycleSet( TimerPwmDuty_t value )
+   • dutyCycleGet() : TimerPwmDuty_t
+\end{verbatim}
+
+El valor del tipo \emph{TimerPwmDuty\_t}, permite establecer el porcentaje de ciclo de trabajo del PWM.
+
+Modo de temporizador \emph{input capture}:
+
+\begin{verbatim}
+   • initInputCapture( int_t frequency, 
+                       TimerCaptureInputPin_t pin,
+                       TimerCaptureInputPinEvent_t captureOn
+                     )
+   • inputCaptureCallbackSet( TimerCaptureInputPin_t pin,
+                              Callback_t func
+                            )
+   • inputCaptureCallbackClear( TimerCaptureInputPin_t pin )
+\end{verbatim}
+
+Modo de temporizador \emph{output compare}:
+
+\begin{verbatim}
+   • initOutputCompare( int_t frequency,
+                        int_t compareNumber,
+                        TimerCounter_t compareValue
+                     )
+   • initOutputCompare( int_t frequency,
+                        int_t compareNumber,
+                        TimerCounter_t compareValue,
+                        TimerCompareOutputPinEvent_t onMatch
+                     )
+   • outputCompareCallbackSet( int_t compareNumber,
+   							   Callback_t func
+                             )
+   • outputCompareCallbackClear( int_t compareNumber )
+\end{verbatim}
+
 
 % Para implementacion ver:
 

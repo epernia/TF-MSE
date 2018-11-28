@@ -44,7 +44,7 @@ Todos los valores de inicialización son opcionales y si no se aplican se aplica
    • loacation = LOCATION0
 \end{verbatim}
 
-El resto de la API también es muy similar a la del ADC con la diferencia que define métodos para escribir el DAC en lugar de métodos para leer (no define el método \emph{read()}):
+El resto de la API también es muy similar a la del ADC, con la diferencia que define métodos para escribir el DAC en lugar de métodos para leer (no define el método \emph{read()}):
 
 \begin{verbatim}
    • channel( DacChannel_t channel, bool_t enable )
@@ -57,6 +57,8 @@ El resto de la API también es muy similar a la del ADC con la diferencia que de
    • eventCallbackClear( ChannelEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
+
+Los estados y eventos son los mismos que los presentados para ADC, aunque del tipo \emph{DacStatus\_t} y \emph{DacEvent\_t}, respectivamente.
 
 \titulo{Métodos de Canal de DAC}
 

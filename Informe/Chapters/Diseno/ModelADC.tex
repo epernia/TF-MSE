@@ -88,7 +88,7 @@ Los valores posibles de \emph{AdcStatus\_t} son:
    • ERROR_TIMEOUT
 \end{verbatim}
 
-Para leer un canal por interrupción se debe primero establecer una función de \emph{callback} al evento \emph{CONVERSION\_COMPLETE} y otra al evento  \emph{ERROR} y luego activar la interrupción del periférico. Esto se realiza con los métodos:
+Para leer un canal por interrupción se debe primero establecer una función de \emph{callback} al evento \emph{CONVERSION\_COMPLETE}, otra al evento \emph{ERROR} y luego activar la interrupción del periférico. Esto se realiza con los métodos:
 
 \begin{verbatim}
    • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
@@ -96,7 +96,7 @@ Para leer un canal por interrupción se debe primero establecer una función de 
    • interrupt( bool_t enable )
 \end{verbatim}
 
-Al completar la conversión se ejecutará una de las dos funciones.
+Los eventos del ADC son del tipo \emph{AdcEvent\_t}. Al completar la conversión se ejecutará una de las dos funciones.
 
 \titulo{Métodos de Canal de ADC}
 
@@ -109,7 +109,7 @@ Como alternativa, existen métodos que aplican a cierto canal de ADC y proveen u
    • readAsync( Callback_t sucess, Callback_t error )
 \end{verbatim}
 
-Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} en fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. \emph{readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data} que recibe como parámetro.
+Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} en fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. \emph{readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data}, que recibe como parámetro. Si se establece en 0 el valor de \emph{timeout} en el método con sufijo \emph{Sync} entonces el tiempo de \texttt{timeout} será considerado infinito. Lo mismo sucede con todos los métodos que cuenten con dicho sufijo que se describen que se describen en esta sección.
 
 \emph{readAsync()} realiza una lectura no bloqueante. Recibe como parámetros dos funciones de \emph{callback}, una que lanza en caso de conversión exitosa (si esto ocurre le pasa como parámetro el valor convertido) y otra en caso de error (le pasa el estado de conversión).
 

@@ -35,8 +35,8 @@ La lectura del RTC se realiza con el método \emph{read()}, que retorna la fecha
 Para establecer una interrupción en un RTC ante cierto evento define los métodos: 
 
 \begin{verbatim}
-   • eventCallbackSet( ChannelEvent_t evt, Callback_t func )
-   • eventCallbackClear( ChannelEvent_t evt )
+   • eventCallbackSet( RtcEvent_t evt, Callback_t func )
+   • eventCallbackClear( RtcEvent_t evt )
    • interrupt( bool_t enable )
 \end{verbatim}
 
