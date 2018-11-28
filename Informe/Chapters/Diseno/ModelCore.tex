@@ -1,8 +1,76 @@
 %------------------------------------------------------------------------------
 \subsection{Módulo Core}
 
-Events:
-Reset
+Este módulo modela un núcleo de procesamiento.
+
+\titulo{Propiedades de CORE}
+
+\begin{itemize}
+\item
+\emph{clockSource}, del tipo \emph{CoreClockSource\_t}. Permite elegir la fuente de reloj.
+\item
+\emph{clockFrequency}, del tipo \emph{int\_t}. Permite elegir la frecuencia del reloj.
+\end{itemize}
+
+\titulo{Métodos de CORE}
+
+Métodos de inicialización:
+
+\begin{verbatim}
+   • init()
+   • init( int_t clockFrequency )
+   • init( int_t clockFrequency, CoreClockSource_t clockSource )
+\end{verbatim} 
+
+Métodos para control de interrupciones:
+
+\begin{verbatim}
+   • interrupt( bool_t enable )
+   • peripheralInterrupts( bool_t enable )
+   • enterCritical()
+   • leaveCritical()
+\end{verbatim}  
+
+Métodos de control de reseteo:
+
+\begin{verbatim}
+   • reset()
+   • resetCause() : CoreResetCauseEvent_t
+   • onReset( CoreResetCauseEvent_t evt,
+              Callback_t func
+            )
+\end{verbatim}
+
+Los posibles valores de \emph{CoreResetCauseEvent\_t} son:
+
+\begin{verbatim}
+   • HARD_RESET
+   • SOFT_RESET
+   • DEEPSLEEP_RESET
+   • WDT_RESET
+\end{verbatim} 
+
+Métodos de control de modos bajo consumo:
+
+\begin{verbatim}
+   • init()
+   • sleepUntil( CoreWakeupEvent_t evt )
+   • wakeupReason() : CoreWakeupEvent_t
+   • onWakeup( CoreWakeupEvent_t evt,
+               Callback_t func
+             )
+   • deepSleep()
+\end{verbatim}  
+
+Los posibles valores de \emph{CoreWakeupEvent\_t} son:
+
+\begin{verbatim}
+   • INTERRUPT_WAKEUP
+   • PIN_WAKEUP
+   • RTC_WAKEUP
+\end{verbatim} 
+
+%Events:
 %void ResetISR(void);
 %WEAK void NMI_Handler(void);
 %WEAK void HardFault_Handler(void);
@@ -15,10 +83,6 @@ Reset
 %WEAK void SysTick_Handler(void);
 %WEAK void IntDefaultHandler(void);
 
-
-sleep(UntilNextInterrupt)?
-sleep(UntilGPIOPinIsHigh)
-
 % Para implementacion ver:
 
 % https://github.com/epernia/sAPI/blob/develop/sapi1Project/libs/sapi_soc_cores/inc/sapi_core.h
@@ -29,15 +93,23 @@ sleep(UntilGPIOPinIsHigh)
 %Control the frequency using pyb.freq(30000000)  set CPU frequency to 30MHz
 
 
-
-
 %------------------------------------------------------------------------------
-\subsection{Módulo SoC}
+\subsection{Módulos SoC y Board}
 
+\emph{SoC} modela el chip completo, mientras que \emph{Board} define la plataforma. Estos módulos contienen todos los mapas de periféricos, que en la implemetación se extraen del modelo de \emph{board}.
 
-%------------------------------------------------------------------------------
-\subsection{Módulo Board}
+\titulo{Métodos de SOC}
 
+\begin{verbatim}
+   • init()
+   • uniqueId()
+\end{verbatim} 
+
+\titulo{Métodos de BOARD}
+
+\begin{verbatim}
+   • init()
+\end{verbatim} 
 
 
 %void M0CORE_IRQHandler(void) ALIAS(IntDefaultHandler);
