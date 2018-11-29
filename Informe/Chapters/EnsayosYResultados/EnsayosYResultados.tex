@@ -95,5 +95,27 @@
 %y han sido adoptadas por un número importante de usuarios y
 %docentes.
 
+
+%------------------------------------------------------------------------------
+%	SECTION
+%------------------------------------------------------------------------------
+\section{Características de la implementación de sAPI en lenguaje C}
+\label{sec:codeImplemC}
+
+Un usuario de la biblioteca sAPI puede elegir el nivel de abstracción deseado a la hora de programar su aplicación. De menor a mayor abstracción tendremos programas:
+
+\begin{enumerate}
+\item
+Dependientes del chip: utilizando la API genérica y los nombres de los pines y periféricos del \emph{chip}, definidos por el fabricante (opcionalmente con el agregado de funciones específicas de periféricos de cierto \emph{chip}).
+\item
+Dependientes de la placa: mediante la API genérica y los nombres de la serigrafía de la placa, incluyendo pines y periféricos del chip, así como otros componentes de la placa (por ejemplo, otros chips, conectores, puertos de comunicación).
+\item
+Portables entre placas compatibles: usando la API genérica y los nombres genéricos para todos.
+\item
+Totalmente portables: Mediante la API genérica y es responsabilidad del usuario agregar un archivo de nombres, por ejemplo, remap.h donde elija los nombres de los nombres genéricos para todo lo que va a usar.
+\end{enumerate}
+
+VER SI PONGO ALGUNOS EJEMPLOS
+
 \input{Chapters/Implementacion/DocYDif}
 

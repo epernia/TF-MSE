@@ -4,24 +4,33 @@
 \section{Generador de sAPI en lenguaje C}
 \label{sec:modelGenerator}
 
-El generador de sAPI en lenguaje C toma como entrada el una instancia de \emph{board} y \emph{drivers} específicos, junto con los módulos sAPI, y genera como resultado una estructura de archivos y carpetas con la biblioteca sAPI en lenguaje C para una plataforma particular.
- 
+El generador de sAPI en lenguaje C toma como entrada el una instancia de \emph{board} y \emph{drivers} específicos, junto con los \emph{módulos sAPI}, y genera como resultado una estructura de archivos y carpetas con la biblioteca sAPI en lenguaje C para una plataforma particular. También permite generación de documentación a partir del mismo modelo.
 
+Para su diseño se debió estandarizar la forma de generar un módulo de código en lenguaje C.
+%(sección \ref{sec:moduloEnC}). 
+Una vez realizado, se modelaron las clases para generar un módulo en lenguaje C a partir de los modelos desciptos.
+%(\ref{sec:modelModuloEnC}). 
 
 %------------------------------------------------------------------------------
 \subsection{Módulo de sAPI en lenguaje C}
+\label{sec:moduloEnC}
 
-sdfsd fds fdsfds fds f
+Un módulo de código en lenguaje C posee 
+
+%------------------------------------------------------------------------------
+\subsection{Modelo de módulo en lenguaje C}
+\label{sec:modelModuloEnC}
 
 %------------------------------------------------------------------------------
 \subsubsection{Generación automática de código fuente}
-
+\label{sec:genCIndep}
 
 Generación de código en lenguaje C independiente del hardware.
 
 
 %------------------------------------------------------------------------------
 \subsection{Generación de documentación en base al modelo}
+\label{sec:genDoc}
 
 
 
