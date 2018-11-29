@@ -4,14 +4,14 @@
 \section{Plataformas del Proyecto CIAA}
 \label{sec:ciaaBoards}
 
-Todos los desarrollos de hardware realizados en el marco del proyecto CIAA han sido publicados con licencia BSD de tres cláusulas con el espíritu de que sean utilizadas como base tanto para diseños abiertos como para diseños cerrados. Los mismos pueden descargarse del repositorio oficial del proyecto CIAA nombrado ''CIAA Hardware'' [].
+Todos los desarrollos de hardware realizados en el marco del proyecto CIAA han sido publicados con licencia BSD de tres cláusulas con el espíritu de que sean utilizadas como base tanto para diseños abiertos como para diseños cerrados. Los mismos pueden descargarse del repositorio oficial del proyecto CIAA nombrado ''CIAA Hardware'' \citep{ciaaHW}.
 
 Las plataformas sobre las cuales se decide realizar el presente trabajo son aquellas que han logrado pasar de la fase de prototipo y se pueden hallar como producto en el mercado. Cabe destacar que el proyecto CIAA no se beneficia económicamente de la venta de plataformas.
 % y fomenta la libre competencia.
 
 \subsection{CIAA-NXP}
 
-La plataforma CIAA-NXP (figura \ref{fig:ciaaNxp}) fue la primer paltaforma desarrollada en el marco del proyecto CIAA. Consiste en una computadora para uso industrial basada en el microcontrolador NXP LPC4337 JDB144 [] \emph{dual-core} asimétrico, formado por un procesador Cortex-M4F y un Cortex-M0 (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 204MHz; con 1 MB de memoria Flash y 136 KB de memoria SRAM.
+La plataforma CIAA-NXP (figura \ref{fig:ciaaNxp}) fue la primer paltaforma desarrollada en el marco del proyecto CIAA. Consiste en una computadora para uso industrial basada en el microcontrolador NXP LPC4337 JDB144 \citep{LPC4337} \emph{dual-core} asimétrico, formado por un procesador Cortex-M4F y un Cortex-M0 (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 204MHz; con 1 MB de memoria Flash y 136 KB de memoria SRAM.
 
 
 \begin{figure}[!htbp]
@@ -29,9 +29,9 @@ Interfaces de entrada/salida: 8 entradas digitales (opto-aisladas 24VDC), 4 entr
 \item
 Interfaces de comunicación: 1 Ethernet, 2 USB On-The-Go, 1 RS232, 1 RS485, 1 CAN, 1 SPI, 1 I2C.
 \item
-Uso de Linux: Posee memorias RAM y Flash externas que posibilitan ejecutar Linux sobre esta plataforma. Exite un \emph{port} de Linux para la misma que puede hallarse en [].
+Uso de Linux: Posee memorias RAM y Flash externas que posibilitan ejecutar Linux sobre esta plataforma.
 \item
-Incluye \emph{debugger}: Esta plataforma incluye el circuito que permite depuración en tiempo real del programa que corre en la plataforma desde la PC. Se basa en el chip FTDI FT2232H [].
+Incluye \emph{debugger}: Esta plataforma incluye el circuito que permite depuración en tiempo real del programa que corre en la plataforma desde la PC. Se basa en el chip FTDI FT2232H \cite{FT2232H}.
 \end{itemize}
 
 %Es fabricada y distribuida al por mayor por EXO S.A. [], y distribuida al por menor por Electrocomponentes S.A. []. Se puede comprar en Argentina por AR\$ 11.310,04 (precio de noviembre 2018).
@@ -57,9 +57,9 @@ Los pines no utilizados por las interfaces anteriores se disponen en los conecto
 
 \subsection{PicoCIAA}
 
-La PicoCIAA [] (figura \ref{fig:picoCiaa}) es una placa en formato mini PCI Express, pensada para ser utilizada como un módulo de cómputo y/o adquisición en una plataforma mayor.
+La PicoCIAA \citep{PicoCIAA} (figura \ref{fig:picoCiaa}) es una placa en formato mini PCI Express, pensada para ser utilizada como un módulo de cómputo y/o adquisición en una plataforma mayor.
 
-Se basa en el microcontrolador NXP LPC54102J512BD64 [], otro microcontrolador \emph{dual-core} asimétrico formado por un procesador Cortex-M4F y un Cortex-M0+ (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 100 MHz; con 512 KB de memoria Flash y 104 KB de SRAM .
+Se basa en el microcontrolador NXP LPC54102J512BD64 \citep{LPC54102J512BD64}, otro microcontrolador \emph{dual-core} asimétrico formado por un procesador Cortex-M4F y un Cortex-M0+ (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 100 MHz; con 512 KB de memoria Flash y 104 KB de SRAM .
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
@@ -68,7 +68,7 @@ Se basa en el microcontrolador NXP LPC54102J512BD64 [], otro microcontrolador \e
 \end{center}
 \end{figure}
 
-Incluye circuito de depuración USB vía un microcontrolador NXP LPC11U35 [] programable.
+Incluye circuito de depuración USB vía un microcontrolador NXP LPC11U35 \citep{LPC11U35} programable.
 
 Posee diversos puertos de comunicación, entre ellos USB, mini PCI Express, UART, SPI, I2C y soporte para PWM y entradas y salidas digitales de propósito general. Su tamaño reducido (51 x 30 mm) es ideal en Single Board Computers.
 
@@ -77,7 +77,7 @@ Posee diversos puertos de comunicación, entre ellos USB, mini PCI Express, UART
 \subsection{CIAA-Z3R0}
 \label{sec:CIAA-Z3R0}
 
-La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIAA. Esta plataforma es ideal para aplicaciones de bajo consumo (como sensores de IoT) y proyectos de robótica educativa. Está diseñada para ser utilizada como componente en un diseño mayor debido a su tamaño (19.8 x 51.8 mm), soldada a través de su borde de agujeros para montaje \emph{castellated}[], o bien, conectándola mediante tiras de pines.
+La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIAA. Esta plataforma es ideal para aplicaciones de bajo consumo (como sensores de IoT) y proyectos de robótica educativa. Está diseñada para ser utilizada como componente en un diseño mayor debido a su tamaño (19.8 x 51.8 mm), soldada a través de su borde de agujeros para montaje \emph{castellated}, o bien, conectándola mediante tiras de pines.
 %\footnote{Este tipo de terminación de borde de pin del PCB permite soldar una placa sobre otra, para más información ver [].}
 
 \begin{figure}[!htbp]
@@ -87,7 +87,7 @@ La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIA
 \end{center}
 \end{figure}
 
-Posee la mayoría de los periféricos que se encuentran en la EDU-CIAA-NXP pero utiliza un microcontrolador siete veces más económico que esta última, de la empresa Silicon Labs, modelo EFM32HG322F64 (QFP48) [] con núcleo ARM Cortex-M0+ a una frecuencia máxima de 25 MHz; 64 KB de memoria Flash y 8 KB de memoria SRAM, que es suficiente para que un alumno entre en el mundo de los microcontroladores modernos de 32 bits.
+Posee la mayoría de los periféricos que se encuentran en la EDU-CIAA-NXP pero utiliza un microcontrolador siete veces más económico que esta última, de la empresa Silicon Labs, modelo EFM32HG322F64 (QFP48) \citep{EFM32HG322F64} con núcleo ARM Cortex-M0+ a una frecuencia máxima de 25 MHz; 64 KB de memoria Flash y 8 KB de memoria SRAM, que es suficiente para que un alumno entre en el mundo de los microcontroladores modernos de 32 bits.
 
 El \emph{debugger} se debe comprar por separado, sin embargo, mediante un único dispositivo de depuración se pueden programar muchas plataformas CIAA-Z3R0.
 
@@ -95,7 +95,7 @@ El \emph{debugger} se debe comprar por separado, sin embargo, mediante un único
 
 \subsection{Material provisto por los fabricantes}
 
-De las secciones anteriores, se advierte que las cuatro plataformas de hardware presentadas poseen núcleos de procesamiento diseñados por la empresa ARM [] los cuales son licenciados a diversos fabricantes.
+De las secciones anteriores, se advierte que las cuatro plataformas de hardware presentadas poseen núcleos de procesamiento diseñados por la empresa ARM \citep{ARM} los cuales son licenciados a diversos fabricantes.
 
 ARM ofrece manuales acerca de sus núcleos de procesamiento y diversas bibliotecas para su programación.
 
@@ -139,17 +139,17 @@ Para los tres microcontroladores de este trabajo existe soporte completo para la
 
 \titulo{Mbed de ARM}
 
-Mbed es una plataforma de drivers y sistema operativo para prototipado rápido, enfocada en dispositivos IoT basados en mcirocontroladores ARM. Es un proyecto de código abierto, también disponible en github [], desarrollado colaborativamente por ARM y sus socios tecnológicos.
+Mbed es una plataforma de drivers y sistema operativo para prototipado rápido, enfocada en dispositivos IoT basados en mcirocontroladores ARM. Es un proyecto de código abierto, también disponible en github \citep{MbedGit}, desarrollado colaborativamente por ARM y sus socios tecnológicos.
 
 Provee abstracción del hardware pero se limita a plataformas del ecosistema ARM. A diferencia de CMSIS, en este caso se provee soporte para plataformas de hardware completas en lugar de solamente ocuparse del microcontrolador. De esta forma muchas empresas añaden soporte a mbed a sus kit de desarrollo con microcontroladores ARM Cortex-M. 
 
-Existen kits de desarrollo que contienen los microcontroladores LPC4337 y EFM32 HG322 con soporte de mbed, los cuales son LPCXpresso4337 [] y EFM32 USB-enabled Happy Gecko [] respectivamente. Para el LPC54102 no existe un kit de desarrollo soportado por mbed, pero existe el kit LPCXpresso54114 [] que posee un  microcontrolador de la misma familia.
+Existen kits de desarrollo que contienen los microcontroladores LPC4337 y EFM32 HG322 con soporte de mbed, los cuales son LPCXpresso4337 \citep{LPCXpresso4337board} y EFM32 USB-enabled Happy Gecko \citep{EFM32HGboard} respectivamente. Para el LPC54102 no existe un kit de desarrollo soportado por mbed, pero existe el kit LPCXpresso54114 \citep{LPCXpresso54114board} que posee un  microcontrolador de la misma familia.
 
 Las plataformas soportadas por Mbed se programan mediante un entorno de desarrollo on line. Las diferentes bibliotecas para microcontroladores provistas en el marco de mbed están escritas en su mayoría en lenguaje C++.
 
 \titulo{LPCOpen y MCUXpresso de NXP}
 
-NXP provee para su línea de microcontroladores LPC las bibliotecas LPCOpen [], que incluyen drivers para sus microcontroladores, bibliotecas \emph{middelware} de terceros y programas de ejemplo. 
+NXP provee para su línea de microcontroladores LPC las bibliotecas LPCOpen \citep{LPCOpenNXP}, que incluyen drivers para sus microcontroladores, bibliotecas \emph{middelware} de terceros y programas de ejemplo. 
 
 Se puede descargar de forma gratuita de la web de NXP sin registrarse.
 
@@ -170,11 +170,11 @@ Para la incialización del sistema utiliza la parte de CMSIS Core que inicializa
 
 Si bien contiene ejemplos para comenzar a utilizar los microcontroladores LPC, sus drivers de periféricos están relacionados directamente con su arquitectura de hardware y proveen una muy baja abstracción de la misma. Además, tiene código duplicado de las bibliotecas de periféricos para cada núcleo de procesamiento de un mismo microcontrolador restándole mantenibilidad.
 
-MCUXpresso de NXP es la evolución de LPCOpen luego de que NXP adquiera a Freescale,  agregando soporte a las líneas de microcontroladores Kinetis [] e i.MX RT []. Requiere registrarse para tener acceso a la misma. Posee soporte únicamente para el microcontrolador LPC54102 de este trabajo.
+MCUXpresso \citep{MCUXpresso} de NXP es la evolución de LPCOpen luego de que NXP adquiera a Freescale,  agregando soporte a las líneas de microcontroladores Kinetis e i.MX RT. Requiere registrarse para tener acceso a la misma. Posee soporte únicamente para el microcontrolador LPC54102 de este trabajo.
 
 \titulo{Bibliotecas de Silicon Labs}
 
-Para el mcirocontrolador EFM32HG322 Silicon Labs ofrece las siguientes bibliotecas []:
+Para el mcirocontrolador EFM32HG322 Silicon Labs ofrece las siguientes bibliotecas \citep{EmLibSiliconLabs}
 
 \begin{itemize}
 \item

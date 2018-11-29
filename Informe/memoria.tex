@@ -45,7 +45,8 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{palatino} % Use the Palatino font by default
 %,style=authoryear
-\usepackage[backend=bibtex,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,natbib=true,sorting=none]{biblatex} % @Ale Celery
+%\usepackage[backend=bibtex,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{references.bib} % The filename of the bibliography
 
@@ -391,7 +392,7 @@ En este capítulo se explican los detalles para comprender las decisiones de dis
 \chapter{Diseño e implementación}
 \label{ChapterDiseno}
 
-En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \emph{top-down}. Se exponen los principios de diseño adoptados, la descripción de una aplicación donde se utiliza la biblioteca, la arquitectura general de la biblioteca, el modelo abstracto de un módulo de biblioteca, el diseño de los módulos de biblioteca de una plataforma de hardware genérica, su verificación y un diseño de archivo de texto para la descripción de una cierta plataforma concreta.
+En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \emph{top-down}. Se expone la descripción general del desarrollo. Se presenta el diseño de un modelo de plataforma de hardware y módulos de biblioteca sAPI, junto a su verificación. Se describe la implementación del código C dependiente del hardware y se presenta el diseño e implementación del generador de código de la biblioteca.
 
 \input{Chapters/Diseno/DescripcionGeneral}
 
@@ -441,7 +442,7 @@ En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \e
 %------------------------------------------------------------------------------
 
 % indicativo para indicarle a LaTeX los siguientes "capítulos" son apéndices
-\appendix 
+%\appendix 
 
 % Incluir los apéndices de la memoria como archivos separadas desde la carpeta
 % Appendices

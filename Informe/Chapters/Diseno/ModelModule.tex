@@ -25,26 +25,26 @@ Para el diseño de la API se llevó a cabo un estudio exhaustivo sobre arquitect
 
 \begin{itemize}
 \item
-MicroPython libraries []. % https://docs.micropython.org/en/latest/library/machine.html
+MicroPython libraries \citep{MicroPythonLib}. % https://docs.micropython.org/en/latest/library/machine.html
 \item
-STM32 HAL []. % https://www.st.com/resource/en/user_manual/dm00105879.pdf
+STM32 HAL \citep{STM32hal}. % https://www.st.com/resource/en/user_manual/dm00105879.pdf
 \item
-RUST Embedded HAL []. % https://docs.rs/embedded-hal/0.2.2/embedded_hal/
+RUST Embedded HAL\citep{RUSTEmbeddedHAL}. % https://docs.rs/embedded-hal/0.2.2/embedded_hal/
 \item
-Mbed OS drivers API []. % https://os.mbed.com/docs/v5.10/
+Mbed OS drivers API \citep{MbedOSdrivers}. % https://os.mbed.com/docs/v5.10/
 \item
-ChibiOS/HAL []. % http://www.chibios.org/dokuwiki/doku.php?id=chibios:product:hal:start
+ChibiOS/HAL \citep{ChibiOShal}. % http://www.chibios.org/dokuwiki/doku.php?id=chibios:product:hal:start
 \item
-CMSIS [].
+CMSIS.
 \item
-LPCOpen [].
+LPCOpen.
 \item
-MCUXpresso [].
+MCUXpresso.
 \item
-EMLIB []. % https://siliconlabs.github.io/Gecko_SDK_Doc/efm32hg/html/index.html
+EMLIB. % https://siliconlabs.github.io/Gecko_SDK_Doc/efm32hg/html/index.html
 \end{itemize}
 
-Se realizó un rediseño completo de la API, mejorando y apliando muchas características, pero provocando un quiebre en la compatibilidad con versiones anteriores de sAPI.
+Se realizó un rediseño completo de la API, mejorando y ampliando muchas características, pero provocando un quiebre en la compatibilidad con versiones anteriores de sAPI.
 
 %------------------------------------------------------------------------------
 \subsection{Definiciones de abstractas de sAPI}
@@ -176,7 +176,7 @@ Versión del módulo. Se utiliza versionado semántico [].
 \item
 Autor del módulo. Se debe completar nombres, apellidos y dirección de correo electrónico del autor. 
 \item
-Licencia. Se puede completar con el texto completo de la licencia del módulo o un enlace a la misma. Los módulos sAPI utilizan la licencia de código abierto \emph{BSD-3clause} [].
+Licencia. Se puede completar con el texto completo de la licencia del módulo o un enlace a la misma. Los módulos sAPI utilizan la licencia de código abierto \emph{BSD-3clause}.
 \item
 Dependencias. Una lista de los módulos de sAPI de los cuales depende el módulo actual. Se puede además exigir que la dependencia sea a una versión específica, a partir de una versión mínima o hasta cierta versión máxima.
 \end{itemize}

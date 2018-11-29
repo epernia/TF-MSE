@@ -47,7 +47,6 @@ Conector: representa los conectores físicos de la placa, como ser, tira de pine
 
 %------------------------------------------------------------------------------
 \subsection{Modelo de SoC}
-\label{sec:modelSoC}
 
 Un SoC describe un sistema completo dentro de un chip. Este término se utiliza para describir tanto microcontroladores (que incluyen núcleos de procesamiento, memorias y diversos periféricos), como sistemas que incluyen además lógica programable (FPGA) o módulos analógicos de radiofrecuencia complejos como ser Bluetooth y Wi-Fi.
 
@@ -62,7 +61,6 @@ En la figura \ref{fig:ModelSoC} se muestra el modelo de SoC, el cual se compone 
 
 %------------------------------------------------------------------------------
 \subsection{Modelo de IP core}
-\label{sec:modelSoC}
 
 Para modelar núcleos de procesamiento, periféricos y memorias se utiliza el concepto de \emph{IP core}. Un núcleo de propiedad intelectual es un bloque de lógica o datos reutilizable, para definir un diseño de hardware de forma abstracta. Normalmente se utilizan en electrónica como componentes en un diseño de hardware ya sea en una FPGA o ASIC. Define una interfaz de señales y comportamiento interno.
 
@@ -88,7 +86,7 @@ Las clases \emph{Memory} e \emph{IPCoreExtended} heredan de la clase \emph{IPCor
 %------------------------------------------------------------------------------
 \subsection{Archivos para la descripción de una plataforma de hardware}
 
-Para definir una plataforma de hardware se utilizan archivos de texto en formato \emph{JSON} [], de esta manera se puede definir cada una de las entidades presentadas por separado y referenciarlas. 
+Para definir una plataforma de hardware se utilizan archivos de texto en formato \emph{JSON} \citep{JSON}, de esta manera se puede definir cada una de las entidades presentadas por separado y referenciarlas. 
 
 Como ejemplo, se expone a continuación los archivos propuestos para una pequeña plataforma de hardware ficticia nombrada ''fake-board-v1'' (se ilustra en la figura \ref{fig:fakeBoard}). 
 
