@@ -388,7 +388,7 @@ En este capítulo se explican los detalles para comprender las decisiones de dis
 \input{Chapters/IntroEspecifica/Planificacion} 
 
 % Diseño
-\chapter{Diseño}
+\chapter{Diseño e implementación}
 \label{ChapterDiseno}
 
 En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \emph{top-down}. Se exponen los principios de diseño adoptados, la descripción de una aplicación donde se utiliza la biblioteca, la arquitectura general de la biblioteca, el modelo abstracto de un módulo de biblioteca, el diseño de los módulos de biblioteca de una plataforma de hardware genérica, su verificación y un diseño de archivo de texto para la descripción de una cierta plataforma concreta.
@@ -397,42 +397,41 @@ En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \e
 
 % Board
 \input{Chapters/Diseno/ModelBoard}
+
 % Modulos sAPI
 \input{Chapters/Diseno/ModelModule} 
-% Generador de sAPI
-\input{Chapters/Diseno/ModelGenerator} 
+
 
 \input{Chapters/Diseno/ModelVerification}
 
-\input{Chapters/Diseno/ModelFileDesign}
+% Generador de sAPI
+\input{Chapters/Diseno/ModelGenerator} 
+
+%\input{Chapters/Diseno/ModelFileDesign}
 
 % Implementación
-\chapter{Implementación}
-\label{ChapterImplementacion}
+%\chapter{Implementación}
+%\label{ChapterImplementacion}
 
-\input{Chapters/Implementacion/ImplementacionDescripGeneral}
-\input{Chapters/Implementacion/CIAA_NXP_BoardFile}
-\input{Chapters/Implementacion/EDU_CIAA_NXP_BoardFile}
-\input{Chapters/Implementacion/PicoCIAA_BoardFile}
-\input{Chapters/Implementacion/CIAA_Z3R0_BoardFile}
+%\input{Chapters/Implementacion/ImplementacionDescripGeneral}
+%\input{Chapters/Implementacion/CIAA_NXP_BoardFile}
+%\input{Chapters/Implementacion/EDU_CIAA_NXP_BoardFile}
+%\input{Chapters/Implementacion/PicoCIAA_BoardFile}
+%\input{Chapters/Implementacion/CIAA_Z3R0_BoardFile}
 
-\input{Chapters/Implementacion/CodeGeneration}
 \input{Chapters/Implementacion/Codemplementation}
-
-\input{Chapters/Implementacion/LibExamples}
-
-\input{Chapters/Implementacion/DocYDif}
 
 % Ensayos y Resultados
 \chapter{Ensayos y Resultados}
 \label{ChapterEnsayosYResultados}
 
-\input{Chapters/EnsayosYResultados/Chapter4}
+\input{Chapters/EnsayosYResultados/EnsayosYResultados}
 
 % Conclusiones
 \chapter{Conclusiones} % Main chapter title
-\label{ChapterConclusiones} % Change X to a consecutive number; for referencing
-                            % this chapter elsewhere, use \ref{ChapterX}
+\label{ChapterConclusiones} 
+% Change X to a consecutive number; for referencing
+% this chapter elsewhere, use \ref{ChapterX}
 
 \input{Chapters/Conclusiones/Conclusiones} 
 

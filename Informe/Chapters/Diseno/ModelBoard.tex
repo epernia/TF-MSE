@@ -84,3 +84,118 @@ Las clases \emph{Memory} e \emph{IPCoreExtended} heredan de la clase \emph{IPCor
 \emph{IPCoreExtended} contiene registros e interrupciones. Los registros se modelan tanto para fines de documentación, como para poder realizar \emph{tests} sobre valores de los mismos. Las interrupciones son necesarias para conocer cuales tenemos disponibles físicamente y a qué evento responden. De la clase \emph{IPCoreExtended} heredan \emph{Core} y \emph{Peripheral}. La primera modela un núcleo de procesamiento y la segunda un periférico. 
 
 \emph{Peripheral} contiene una lista ordenada de \emph{Locations} (ubicaciones). Una ubicación define un conjunto de conexiones entre señales del periférico y terminales del SoC. Esto permite modelar las posibles configuraciones de pines de un dado periférico.
+
+%------------------------------------------------------------------------------
+\subsection{Archivos para la descripción de una plataforma de hardware}
+
+Para definir una plataforma de hardware se utilizan archivos de texto en formato \emph{JSON} [], de esta manera se puede definir cada una de las entidades presentadas por separado y referenciarlas. 
+
+Como ejemplo, se expone a continuación los archivos propuestos para una pequeña plataforma de hardware ficticia nombrada ''fake-board-v1'' (se ilustra en la figura \ref{fig:fakeBoard}). 
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=8cm]{Figures/FakeBoard-01.pdf}
+\par\caption{Fake-board-v1.}\label{fig:fakeBoard}
+\end{center}
+\end{figure}
+
+Archivo de descripción de \emph{board} nombrado \emph{fakeBoard.json}:
+
+\begin{verbatim}
+{
+  "type": "Board",
+  "name": "fake-board-v1",
+  "components": [
+    {
+      "type": "@/vendor1/soc/fakeSoc.json",
+      "name": "SOC0"
+    },
+    {
+      "type": "@/vendor2/phy/fakePhy232.json",
+      "name": "PHY0"
+    },
+    {
+      "name": "RS232",
+      "type": "@/vendor3/connector/fakeDb9Male.json"
+    }
+  ],
+  "connections": [
+    [ "#/SOC0/P1", "#/PHY0/RX_LVL" ],
+    [ "#/SOC0/P2", "#/PHY0/TX_LVL" ],
+    [ "#/SOC0/P3", "#/PHY0/GND" ],
+    [ "#/PHY0/RX_232", "#/RS232/P2" ],
+    [ "#/PHY0/TX_232", "#/RS232/P3" ],
+    [ "#/PHY0/GND", "#/RS232/P5" ]
+  ]
+}
+\end{verbatim}
+
+''@'' indica una referencia a un archivo externo con el path incluido, mientras que ''\#'' indica una referencia a un terminal de un componente.
+
+Archivo de descripción de \emph{SoC} nombrado \emph{fakeSoc.json}:
+
+\begin{verbatim}
+{
+  "type": "SystemOnChip",
+  "name": "fake-board-v1",
+  "cores": [
+    {
+      "type": "@/arch/arm/armv7m.json",
+      "name": "CORTEXM4"
+    }
+  ],
+  "peripherals": [
+    {
+      "type": "@/vendor1/ipcore/uart.json",
+      "name": "UART0"
+    }
+  ],
+  "memories": [
+    {
+      "type": "@/vendor1/mem/sram8kb.json",
+      "name": "RAM"
+    },
+    {
+      "type": "@/vendor1/mem/flash32kb.json",
+      "name": "FLASH"
+    }
+  ],
+  "terminals": [ "P1", "P2", "P3" ]
+}
+\end{verbatim}
+
+Archivo de descripción de un chip de capa física para RS-232  nombrado \emph{fakePhy232.json}:
+
+\begin{verbatim}
+{
+  "type": "ComponentWithDriver",
+  "name": "phy-rs232",
+  "terminals": [ 
+    "RX_LVL", "TX_LVL", "GND",
+    "RX_232", "TX_232"
+  ],
+  "drivers": [
+    {
+      "lang":"c",
+      "files": [
+        "@/driver/c/vendor2/phy/fakePhy232.h",
+        "@/driver/c/vendor2/phy/fakePhy232.c"      
+	  ]      
+    }
+  ]
+}
+\end{verbatim}
+
+Archivo de descripción de un conector \emph{DB-9} nombrado \emph{fakeDb9Male.json}:
+
+\begin{verbatim}
+{
+  "type": "Connector",
+  "name": "DB9-male",
+  "terminals": [ 
+    "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"
+  ]
+}
+\end{verbatim}
+
+Cabe destacar que el ejemplo presentado es válido solamente para describir la estructura de los archivos y filosofía de diseño adoptada, sin embargo, los archivos de implementación poseen más propiedades y niveles de anidamiento en sus entidades.
