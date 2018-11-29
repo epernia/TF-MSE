@@ -1,42 +1,64 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\section{Generador de sAPI en lenguaje C}
+\section{Generador de sAPI}
 \label{sec:modelGenerator}
 
-El generador de sAPI en lenguaje C toma como entrada el una instancia de \emph{board} y \emph{drivers} específicos, junto con los \emph{módulos sAPI}, y genera como resultado una estructura de archivos y carpetas con la biblioteca sAPI en lenguaje C para una plataforma particular. También permite generación de documentación a partir del mismo modelo.
+El generador de sAPI toma como entrada el una instancia de \emph{board} y \emph{drivers} específicos, junto con los \emph{módulos sAPI}, y genera como resultado una estructura de archivos y carpetas con la biblioteca sAPI en lenguaje C para una plataforma particular. También permite generación de documentación a partir del mismo modelo.
 
-Para su diseño se debió estandarizar la forma de generar un módulo de código en lenguaje C.
-%(sección \ref{sec:moduloEnC}). 
-Una vez realizado, se modelaron las clases para generar un módulo en lenguaje C a partir de los modelos desciptos.
-%(\ref{sec:modelModuloEnC}). 
+Para su diseño se estudió una forma sistematizada de generar un módulo de código en lenguaje C. Un módulo de biblioteca en lenguaje C se compone de al menos dos archivos, uno con extensión .h (\emph{header}) que contiene declaraciones y se utiliza para incluir el código del módulo en otro archivo; y otro de extensión .c (\emph{c code}) que contiene las implementaciones. 
 
-%------------------------------------------------------------------------------
-\subsection{Módulo de sAPI en lenguaje C}
-\label{sec:moduloEnC}
+Para la implementación de los módulos de biblioteca sAPI se utilizan  tres archivos por módulo, un archivo \emph{module.h} que contiene la siguiente estructura:
 
-Un módulo de código en lenguaje C posee 
+\begin{verbatim}
+  Evitar inclusión multiple{
+    Inclusiones de dependencias de funciones publicas
+    CPlusPlus (para cuando se usa este módulo desde C++) {
+      Macros de definición de constantes publicas.
+      Macros "estilo función" publicas.
+      Definiciones de tipos de datos públicos.
+      Prototipos de funciones publicas.
+    }
+  }
+\end{verbatim}
 
-%------------------------------------------------------------------------------
-\subsection{Modelo de módulo en lenguaje C}
-\label{sec:modelModuloEnC}
+Un archivo \emph{module\_private.h} con:
 
-%------------------------------------------------------------------------------
-\subsubsection{Generación automática de código fuente}
-\label{sec:genCIndep}
+\begin{verbatim}
+  Inclusiones de dependencias de funciones privadas.
+  Macros de definición de constantes privadas.
+  Macros "estilo función" privadas.
+  Definiciones de tipos de datos privados.
+  Prototipos de funciones privadas.
+\end{verbatim}
 
-Generación de código en lenguaje C independiente del hardware.
+Y un archivo \emph{module.c} con:
 
+\begin{verbatim}
+  Definiciones de variables globales públicas externas (extern).
+  Definiciones de variables globales públicas.
+  Definiciones de variables globales privadas (static).
+  Implementaciones de funciones públicas.
+  Implementaciones de funciones privadas.
+\end{verbatim}
 
-%------------------------------------------------------------------------------
-\subsection{Generación de documentación en base al modelo}
-\label{sec:genDoc}
+En los módulos de sAPI no se utilizan variables globales públicas y variables públicas externas para mantenerlos desacoplados.
 
+Con esta estructura se definen las clases para formar un módulo de biblioteca en lenguaje C.
 
+Además, se definen las clases para generar en lenguaje C todos los tipos de datos, constantes y modificadores de acceso y objetos definidos en los módulos de biblioteca sAPI.
 
-%------------------------------------------------------------------------------
-\subsection{Implementación del generador}
+A partir de todas estas clases se formo el generador de código en lenguaje C y documentación.
 
-Se elige para la implementación el lenguaje \emph{Javascrip} [] y el entorno de ejecución \emph{NodeJS} []. El motivo principal de esta decisión es permitir en un futuro realizar la definición de plataformas y generación de código desde una plataforma web. Estas herramientas permiten generar aplicaciones de escritorio, web o móviles con mínimos esfuerzos.
+Para la implementación tanto del del generador de biblioteca sAPI como de las clases que definen el modelo se utilizó el lenguaje \emph{Javascrip} [] y el entorno de ejecución \emph{NodeJS} []. El motivo principal de esta decisión es permitir en un futuro realizar la definición de plataformas y generación de código desde una plataforma web. Estas herramientas permiten generar aplicaciones de escritorio, web o móviles con mínimos esfuerzos.
 
-Para llevarlo a cabo se implementaron en lenguaje \emph{Javascrip} todas las clases presentadas en las secciones \ref{sec:modelHardware} y \ref{sec:modelLibrary}, así como las clases que definen al generador de la biblioteca en lenguaje C.
+De esta forma para utilizar el generador se debe primero definir los archivos dependientes de la plataforma y luego ejecutar el generador desde una terminal con NodeJS como se esquematiza en figura \ref{fig:fullSapiGen}), que resume el producto de este trabajo final.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14.5cm]{Figures/sapi_gen2.pdf}
+\par\caption{Generador de la biblioteca sAPI.}\label{fig:fullSapiGen}
+\end{center}
+\end{figure}
+
+Tomado los campos de descripción que incluye cada entidad del modelo genera la documentación en lenguaje \emph{Markdown}. 
