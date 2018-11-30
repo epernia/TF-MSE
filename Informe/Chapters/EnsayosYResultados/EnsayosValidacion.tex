@@ -1,35 +1,33 @@
-\emph{Pruebas funcionales del hardware: La idea de esta sección es explicar cómo se hicieron los ensayos, qué resultados se obtuvieron y analizarlos.}
-
-
-\input{Chapters/Implementacion/LibExamples}
-
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\section{Testeo Unitario}
-\label{sec:unitTest}
+\section{Validación}
+\label{sec:validacion}
 
-
-%------------------------------------------------------------------------------
-%	SECTION
-%------------------------------------------------------------------------------
-\section{Banco de pruebas de hardware}
-\label{sec:testBench}
 
 
 %------------------------------------------------------------------------------
-%	SECTION
-%------------------------------------------------------------------------------
-\section{Integración continua}
-\label{sec:ci}
+\subsection{Ejemplos de uso de la biblioteca}
+\label{sec:libExamples}
+
+Realización de ejemplos funcionales para cada periférico utilizando la biblioteca
+
+REQ.3.3. Desarrollar ejemplos de utilización.
+   
+   
+%En esta sección se exponen los ejmplos de uso de la biblioteca realizados y los criterios para realizarlos independientes de las plataforma de hardware.
 
 
 %------------------------------------------------------------------------------
-%	SECTION
-%------------------------------------------------------------------------------
-\section{Utilización de la biblioteca para la enseñanza de programación de Sistemas Embebidos}
+
+\subsection{Utilización de la biblioteca por estudiantes}
 \label{sec:teach}
 
+Durante el desarrollo de el presente trabajo se han compartido módulos de sAPI diseñados en el marco de este trabajo a alumnos de la CESE. Los mismos los han utilizado en sus proyectos de las diferentes materias.
+
+Se agregó Trais en el repo cese-edu-ciaa-template
+
+Utilización de la biblioteca por estudiantes de CAPSE, UNQ y CESE
 
 %----------------------------------------------
 %
@@ -94,28 +92,4 @@
 %forma gratuita en la cuenta web de github del Proyecto CIAA
 %y han sido adoptadas por un número importante de usuarios y
 %docentes.
-
-
-%------------------------------------------------------------------------------
-%	SECTION
-%------------------------------------------------------------------------------
-\section{Características de la implementación de sAPI en lenguaje C}
-\label{sec:codeImplemC}
-
-Un usuario de la biblioteca sAPI puede elegir el nivel de abstracción deseado a la hora de programar su aplicación. De menor a mayor abstracción tendremos programas:
-
-\begin{enumerate}
-\item
-Dependientes del chip: utilizando la API genérica y los nombres de los pines y periféricos del \emph{chip}, definidos por el fabricante (opcionalmente con el agregado de funciones específicas de periféricos de cierto \emph{chip}).
-\item
-Dependientes de la placa: mediante la API genérica y los nombres de la serigrafía de la placa, incluyendo pines y periféricos del chip, así como otros componentes de la placa (por ejemplo, otros chips, conectores, puertos de comunicación).
-\item
-Portables entre placas compatibles: usando la API genérica y los nombres genéricos para todos.
-\item
-Totalmente portables: Mediante la API genérica y es responsabilidad del usuario agregar un archivo de nombres, por ejemplo, remap.h donde elija los nombres de los nombres genéricos para todo lo que va a usar.
-\end{enumerate}
-
-VER SI PONGO ALGUNOS EJEMPLOS
-
-\input{Chapters/Implementacion/DocYDif}
 

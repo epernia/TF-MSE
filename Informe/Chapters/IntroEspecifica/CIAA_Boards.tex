@@ -11,7 +11,7 @@ Las plataformas sobre las cuales se decide realizar el presente trabajo son aque
 
 \subsection{CIAA-NXP}
 
-La plataforma CIAA-NXP (figura \ref{fig:ciaaNxp}) fue la primer paltaforma desarrollada en el marco del proyecto CIAA. Consiste en una computadora para uso industrial basada en el microcontrolador NXP LPC4337 JDB144 \citep{LPC4337} \emph{dual-core} asimétrico, formado por un procesador Cortex-M4F y un Cortex-M0 (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 204MHz; con 1 MB de memoria Flash y 136 KB de memoria SRAM.
+La plataforma CIAA-NXP (figura \ref{fig:ciaaNxp}) fue la primer plataforma desarrollada en el marco del proyecto CIAA. Consiste en una computadora para uso industrial basada en el microcontrolador NXP LPC4337 JDB144 \citep{LPC4337} \emph{dual-core} asimétrico, formado por un procesador Cortex-M4F y un Cortex-M0 (ambos de 32 bits), que corren con una frecuencia de sistema máxima de 204MHz; con 1 MB de memoria Flash y 136 KB de memoria SRAM.
 
 
 \begin{figure}[!htbp]
@@ -77,7 +77,7 @@ Posee diversos puertos de comunicación, entre ellos USB, mini PCI Express, UART
 \subsection{CIAA-Z3R0}
 \label{sec:CIAA-Z3R0}
 
-La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIAA. Esta plataforma es ideal para aplicaciones de bajo consumo (como sensores de IoT) y proyectos de robótica educativa. Está diseñada para ser utilizada como componente en un diseño mayor debido a su tamaño (19.8 x 51.8 mm), soldada a través de su borde de agujeros para montaje \emph{castellated}, o bien, conectándola mediante tiras de pines.
+La CIAA-Z3R0 se diseñó para ser la plataforma más económica del proyecto CIAA, siendo ideal para aplicaciones de bajo consumo (como sensores de IoT) y proyectos de robótica educativa. Está diseñada para ser utilizada como componente en un diseño mayor debido a su tamaño (19.8 x 51.8 mm), soldada a través de su borde de agujeros para montaje \emph{castellated}, o bien, conectándola mediante tiras de pines.
 %\footnote{Este tipo de terminación de borde de pin del PCB permite soldar una placa sobre otra, para más información ver [].}
 
 \begin{figure}[!htbp]
@@ -99,7 +99,7 @@ De las secciones anteriores, se advierte que las cuatro plataformas de hardware 
 
 ARM ofrece manuales acerca de sus núcleos de procesamiento y diversas bibliotecas para su programación.
 
-Además, tres de estas paltaformas poseen microcontroladores fabricados por la empresa NXP (CIAA-NXP, EDU-CIAA-NXP con LPC4337 y PicoCIAA con LPC5410) y una por Silicon Labs (EFM32HG). 
+Además, tres de estas plataformas poseen microcontroladores fabricados por la empresa NXP (CIAA-NXP, EDU-CIAA-NXP con LPC4337 y PicoCIAA con LPC5410) y una por Silicon Labs (EFM32HG). 
 
 Tanto NXP como Silicon Labs ofrecen hojas de datos, manuales del sistema y notas de aplicación y bibliotecas para sus microcontroladores.
 
@@ -107,7 +107,7 @@ Se exponen a continuación las principales bibliotecas provistas por las empresa
 
 \titulo{CMSIS de ARM}
 
-CMSIS son las siglas de \emph{''Cortex Microcontroller Software Interface Standard''}, es decir, interfaz de software para microcontroladores Cortex. Mediante este conjunto de bibliotecas, la empresa ARM intenta estandarizar cómo se programan los microcontroladores que ofrecen las empresas proveedores de silicio licenciantes de sus núcleos de procesamiento Cortex-M. CMSIS se desarrolla públicamente en GitHub. 
+CMSIS \citep{CMSIS} son las siglas de \emph{''Cortex Microcontroller Software Interface Standard''}, es decir, interfaz de software para microcontroladores Cortex. Mediante este conjunto de bibliotecas, la empresa ARM intenta estandarizar cómo se programan los microcontroladores que ofrecen las empresas proveedores de silicio licenciantes de sus núcleos de procesamiento Cortex-M. CMSIS se desarrolla públicamente en GitHub. 
 
 Las principales bibliotecas que posee están realizadas en su mayoría lenguaje C y son:
 
@@ -130,7 +130,7 @@ CMSIS-Pack: define la estructura de un paquete de software que contiene componen
 \item
 CMSIS-SVD: son archivos que habilitan vistas detalladas a los periféricos del dispositivo, que muestran el estado actual de cada registro, y aseguran que la vista del depurador coincida con la implementación real de los periféricos del dispositivo.
 \item
-CMSIS-DAP: una interfaz estandarizada para el puerto de acceso de depuración de Cortex (DAP) y es utilizada por muchos kits de de desarrollo, siendo compatible con varios dispositivos de hardware para depuración.
+CMSIS-DAP: una interfaz estandarizada para el acceso al puerto de depuración de Cortex (DAP) y es utilizada por muchos kits de desarrollo, siendo compatible con varios dispositivos de hardware para depuración.
 \item
 CMSIS-NN: es una colección de núcleos de redes neuronales eficientes desarrollada para maximizar el rendimiento y minimizar la huella de memoria de las redes neuronales para núcleos Cortex-M.
 \end{itemize}
@@ -166,7 +166,7 @@ Uso de LPCOpen junto a un RTOS: Incluye ejemplos para utilizar LPCOpen con FreeR
 Ejemplos: incluye un extenso conjunto de ejemplos diseñados para ilustrar cómo usar las funciones de la biblioteca del controlador central y el \emph{middleware}.
 \end{itemize}
 
-Para la incialización del sistema utiliza la parte de CMSIS Core que inicializa cada uno de sus núcleos de procesamiento.
+Para la inicialización del sistema utiliza la parte de CMSIS Core.
 
 Si bien contiene ejemplos para comenzar a utilizar los microcontroladores LPC, sus drivers de periféricos están relacionados directamente con su arquitectura de hardware y proveen una muy baja abstracción de la misma. Además, tiene código duplicado de las bibliotecas de periféricos para cada núcleo de procesamiento de un mismo microcontrolador restándole mantenibilidad.
 

@@ -6,13 +6,13 @@
 
 Los requerimientos se establecieron en base a los objetivos expuestos en la sección \ref{sec:objetivosAlance}, reuniones con desarrolladores del Proyecto CIAA y el director del presente trabajo. Además se tuvieron en cuenta las opiniones de alumnos de grado de UNQ, posgrado de FIUBA y cursos CAPSE. Estos son:
 
-\begin{enumerate}
-\item Fecha de finalización: 19/11/2018.
-\item Diseño de la biblioteca.
-\begin{enumerate}%[label*=\arabic*.]
-\item Realizar un diseño independiente del hardware y lenguaje de programación, teniendo en cuenta los conceptos familiares al programador de Sistemas Embebidos.
-\item Debe estar modelada con objetos y contar con una descripción mediante diagramas UML.
-\item Debe modelar al menos: CORE, GPIO, ADC, DAC, TIMER, RTC, UART, SPI e I2C.
+\begin{itemize} %[label={}]
+\item REQ.1. Fecha de finalización: 19/11/2018.
+\item REQ.2. Diseño de la biblioteca.
+\begin{itemize}%[label*=\arabic*.]
+\item REQ.2.1. Realizar un diseño independiente del hardware y lenguaje de programación, teniendo en cuenta los conceptos familiares al programador de Sistemas Embebidos.
+\item REQ.2.2. Debe estar modelada con objetos y contar con una descripción mediante diagramas UML.
+\item REQ.2.3. Modelar al menos: CORE, GPIO, ADC, DAC, TIMER, RTC, UART, SPI e I2C.
 %\begin{enumerate}
 %\item CORE: un núcleo de procesamiento.
 %\item GPIO: periférico que consiste en un único pin de entrada/salida de propósito general (\emph{pin}), así como un grupo de pines (\emph{port}).
@@ -24,21 +24,21 @@ Los requerimientos se establecieron en base a los objetivos expuestos en la secc
 %\item SPI: periférico interfaz serie sincrónica.
 %\item I2C: periférico de comunicación serie entre circuitos integrados.
 %\end{enumerate}
-\end{enumerate}
-\item Implementación de la biblioteca.
-\begin{enumerate}
-\item Utilizar un sistema de control de versiones con repositorios on line.
-\item Programar en lenguaje C la biblioteca para cada plataforma de hardware particular utilizando como plantilla los archivos generados.
-\item Desarrollar ejemplos de utilización para las diferentes plataformas.
-\end{enumerate}
-\item Documentación y difusión.
-\begin{enumerate}
-\item Confeccionar un manual de referencia de la API de la biblioteca.
-\item Desarrollar un tutorial de instalación de las herramientas para utilizar la biblioteca con las plataformas de hardware citadas.
-\item Publicación on line del código fuente.
-\item Informar a la comunidad del Proyecto CIAA y a la comunidad de programadores de Sistemas Embebidos.
-\end{enumerate}
-\end{enumerate}
+\end{itemize}
+\item REQ.3. Implementación de la biblioteca.
+\begin{itemize}
+\item REQ.3.1. Utilizar un sistema de control de versiones \emph{on line}, desarrollar \emph{tests} unitarios y de integración.
+\item REQ.3.2. Programar en lenguaje C la biblioteca para cada plataforma de hardware particular utilizando como plantilla los archivos generados.
+\item REQ.3.3. Desarrollar ejemplos de utilización.
+\end{itemize}
+\item REQ.4. Documentación y difusión.
+\begin{itemize}
+\item REQ.4.1. Confeccionar un manual de referencia de la biblioteca.
+\item REQ.4.2. Desarrollar un tutorial de instalación de las herramientas para utilizar la biblioteca.
+\item REQ 4.3. Publicación \emph{on line} del código fuente.
+\item REQ 4.4. Informar a la comunidad del Proyecto CIAA y a la comunidad de programadores de Sistemas Embebidos.
+\end{itemize}
+\end{itemize} %enumerate
 
 % \subsection{Entregables principales del trabajo}
 % 

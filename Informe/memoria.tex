@@ -279,17 +279,10 @@ Jurados:\\
 %the title too\ldots
 \centering
 
-En esta memoria se presenta el diseño de una biblioteca para la programación de
-sistemas embebidos portable entre plataformas de hardware y lenguajes de
-programación. Se realizó una implementación de referencia en lenguaje C para
-las plataformas del Proyecto CIAA. Se realizó un banco de pruebas de hardware,
-junto a la utilización de testeo unitario e integración contínua para la
-validación.
+En esta memoria se presenta el diseño de una biblioteca para la programación de sistemas embebidos portable entre plataformas de hardware y lenguajes de programación. Se realizó una implementación de referencia en lenguaje C para las plataformas del Proyecto CIAA. Se realizó un banco de pruebas de hardware, junto a la utilización de testeo unitario e integración continua para la validación.
 
 Además de la biblioteca, se creó una herramienta de código abierto para
-desarrolladores que automatiza la implemetación de bibliotecas a partir de un
-modelo que las describe. De esta manera se facilita la futura ampliación de la
-biblioteca y su implementación en otras plataformas de hardware.
+desarrolladores que automatiza la implemetación de bibliotecas a partir de un modelo que las describe. De esta manera se facilita la futura ampliación de la biblioteca y su implementación en otras plataformas de hardware.
 
 \end{abstract}
 
@@ -392,7 +385,7 @@ En este capítulo se explican los detalles para comprender las decisiones de dis
 \chapter{Diseño e implementación}
 \label{ChapterDiseno}
 
-En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \emph{top-down}. Se expone la descripción general del desarrollo. Se presenta el diseño de un modelo de plataforma de hardware y módulos de biblioteca sAPI, junto a su verificación. Se describe la implementación del código C dependiente del hardware y se presenta el diseño e implementación del generador de código de la biblioteca.
+En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \emph{top-down}. Se expone la descripción general del desarrollo. Se presenta el diseño de un modelo de plataforma de hardware y módulos de biblioteca sAPI. Se describe la implementación del código C dependiente del hardware y se presenta el diseño e implementación del generador de código de la biblioteca.
 
 \input{Chapters/Diseno/DescripcionGeneral}
 
@@ -401,9 +394,6 @@ En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \e
 
 % Modulos sAPI
 \input{Chapters/Diseno/ModelModule} 
-
-% Verificacion del modelo
-\input{Chapters/Diseno/ModelVerification}
 
 % Codigo C dependiente de la plataforma
 \input{Chapters/Implementacion/Codemplementation}
@@ -427,7 +417,21 @@ En este capítulo se presenta el diseño de la biblioteca sAPI con un enfoque \e
 \chapter{Ensayos y Resultados}
 \label{ChapterEnsayosYResultados}
 
-\input{Chapters/EnsayosYResultados/EnsayosYResultados}
+En este capítulo se presentan los ensayos realizados para la verificación del modelo y de la implementación, la validación del trabajo realizado y los resultados obtenidos.
+
+%\emph{Pruebas funcionales del hardware: La idea de esta sección es explicar cómo se hicieron los ensayos, qué resultados se obtuvieron y analizarlos.}
+
+% Verificacion del modelo
+\input{Chapters/Diseno/ModelVerification}
+
+% Ensayos Implemptacion
+\input{Chapters/EnsayosYResultados/EnsayosImplemptacion}
+
+% Validación
+\input{Chapters/EnsayosYResultados/EnsayosValidacion}
+
+% Resultados
+\input{Chapters/EnsayosYResultados/Resultados}
 
 % Conclusiones
 \chapter{Conclusiones} % Main chapter title
