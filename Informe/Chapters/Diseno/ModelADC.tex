@@ -109,9 +109,9 @@ Como alternativa, existen métodos que aplican a cierto canal de ADC y proveen u
    • readAsync( Callback_t sucess, Callback_t error )
 \end{verbatim}
 
-Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} en fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. \emph{readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data}, que recibe como parámetro. Si se establece en 0 el valor de \emph{timeout} en el método con sufijo \emph{Sync} entonces el tiempo de \texttt{timeout} será considerado infinito. Lo mismo sucede con todos los métodos que cuenten con dicho sufijo que se describen que se describen en esta sección.
+Tanto \emph{read()} como \emph{readSync()} realizan una lectura bloqueante, en consecuencia, es necesario establecer un tiempo de \textit{time out} para que no bloquee indefinidamente. \emph{read()} fija automáticamente el \emph{timeout} al doble del \emph{conversionRate}, siempre retorna un valor, que a veces puede ser inválido. \emph{readSync()} devuelve el estado de conversión, para que el usuario chequee si valor convertido es válido, en ese caso lo carga en la variable \emph{data}, que recibe como parámetro. Si se establece en 0 el valor de \emph{timeout} en el método con sufijo \emph{Sync} entonces el tiempo de \texttt{timeout} será considerado infinito. Lo mismo sucede con todos los métodos que cuenten con dicho sufijo que se describen que se describen en esta sección.
 
-\emph{readAsync()} realiza una lectura no bloqueante. Recibe como parámetros dos funciones de \emph{callback}, una que lanza en caso de conversión exitosa (si esto ocurre le pasa como parámetro el valor convertido) y otra en caso de error (le pasa el estado de conversión).
+El método \emph{readAsync()} realiza una lectura no bloqueante. Recibe como parámetros dos funciones de \emph{callback}, una que lanza en caso de conversión exitosa (si esto ocurre le pasa como parámetro el valor convertido) y otra en caso de error (le pasa el estado de conversión).
 
 Este módulo no define método \emph{write()}.
 

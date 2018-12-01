@@ -4,30 +4,85 @@
 \section{Validación}
 \label{sec:validacion}
 
-
+La validación de la biblioteca se llevó a cabo mediante la realización de ejemplos funcionales, los cuales fueron utilizados por alumnos y docentes, como se describe en las siguientes secciones.
 
 %------------------------------------------------------------------------------
 \subsection{Ejemplos de uso de la biblioteca}
 \label{sec:libExamples}
 
-Realización de ejemplos funcionales para cada periférico utilizando la biblioteca
+Los ejemplos fueron diseñados independientes de la arquitectura, de esta manera con que exista al menos un periférico de cada tipo en la plataforma particular se podrán ejecutar sin cambios. Éstos son:
 
-REQ.3.3. Desarrollar ejemplos de utilización.
-   
-   
-%En esta sección se exponen los ejmplos de uso de la biblioteca realizados y los criterios para realizarlos independientes de las plataforma de hardware.
+\begin{itemize}
+\item
+GPIO
+\begin{itemize}
+\item \emph{gpio\_switche\_led}: pulsador controlando el estado de un LED.
+\item \emph{gpio\_blinky}: LED destellando con retardo bloqueante.
+\item \emph{gpio\_blinky\_switch}: LED destellando con retardo no bloqueante que permite leer el estado del pulsador en simultáneo.
+\item \emph{gpio\_led\_sequences}: secuencia de LEDs usando retardo no bloqueante.
+\item \emph{dht11\_temp\_humidity}: sensor de humedad y temperatura.
+\item \emph{keypad\_7segment}: teclado matricial y display 7 segmentos.
+\item \emph{lcd}: display LCD alfanumérico.
+\end{itemize}
+\item
+ADC
+\begin{itemize}
+\item \emph{adc}: ADC.
+\item \emph{dac}: DAC.
+\item \emph{adc\_dac}: ADC y DAC.
+\end{itemize}
+\item
+UART
+\begin{itemize}
+\item \emph{uart\_echo}: eco por UART, el periférico responde lo mismo que se le envía.
+\item \emph{uart\_receive\_string\_blocking}: esperar hasta recibir un cierto patrón de \emph{String} o expire el tiempo de \emph{timeout}.
+\item \emph{uart\_receive\_string\_non\_blocking}: esperar hasta recibir un cierto patrón de \emph{String} de manera no bloqueante.
+\item \emph{bluetooth\_ble\_hm10}: módulo \emph{Bluetoth} BLE HM10 con comandos AT.
+\item \emph{wifi\_esp8266}: módulo \emph{Wi-Fi} ESP01 (ESP8266) con comandos AT.
+\item \emph{wifi\_esp8266\_02\_thingspeak}: módulo ESP01 (ESP8266), envío de datos al servidor IoT \emph{ThingSpeak}.
+\end{itemize}
+\item
+SPI: \emph{eeprom\_at25fs010}: memoria EEPROM SPI.
+\item
+I2C
+\begin{itemize}
+\item \emph{imu\_mpu9250}: IMU MPU9250 de 9 grados de libertad (giróscopo, acelerómetro, magnetómetro) y temperatura.
+\item \emph{magnetometer\_hmc5883l}: magnetómetro HMC5883L. 
+\item \emph{magnetometer\_qmc5883l}: magnetómetro QMC5883L.
+\end{itemize}
+\item
+RTC: \emph{rtc}: establecimiento y lectura de fecha/hora.
+\item
+TIMER
+\begin{itemize}
+\item \emph{pwm\_led}: PWM aplicado a LEDs.
+\item \emph{pwm\_rgb}: tres salidas PWM aplicadas a un LED RGB.
+\item \emph{servo}: PWM para control de servomotor angular.
+\item \emph{ultrasonic\_sensor\_hcsr04}: sensor ultrasónico de distancia HC-SR04 (modo entrada de captura).
+\end{itemize}
+\end{itemize}
 
+Para su utilización se debe revisar la la documentación de la plataforma particular, observando la ubicación física de cada periférico definido en la biblioteca y sus terminales de conexión. Con el afán de facilitar la labor, se realizó un diagrama gráfico que mapea periféricos definidos en la biblioteca, a ubicación y conexiones para cada plataforma, un ejemplo para la plataforma CIAA-Z3R0 se expone en la figura \ref{fig:mapaSapiBoard}.
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/mapaSapiBoard.pdf}
+\par\caption{Diagrama de biblioteca sAPI para la plataforma CIAA-Z3R0.}\label{fig:mapaSapiBoard}
+\end{center}
+\end{figure}
+
+En todas las plataformas se utilizó un diodo LED y un pulsador (SW) ubicando sus pines como IO0 e IO1, respectivamente. Además, en los periféricos se observa el ''\#'' para indicar el valor de \emph{location} del periférico definido en la biblioteca, en este caso particular se dan dos posibles pares de pines por los que se puede utilizar el periférico \emph{UART0}.
 
 %------------------------------------------------------------------------------
 
-\subsection{Utilización de la biblioteca por estudiantes}
+\subsection{Utilización de la biblioteca}
 \label{sec:teach}
 
-Durante el desarrollo de el presente trabajo se han compartido módulos de sAPI diseñados en el marco de este trabajo a alumnos de la CESE. Los mismos los han utilizado en sus proyectos de las diferentes materias.
+Desde marzo de 2017 el autor mantiene el repositorio \emph{cese-edu-ciaa-template} \citep{repoCESE} para la utilización de alumnos y docentes de la CESE de FIUBA (posgrado) e IACI de UNQ \citep{IACI} (grado) en sus diferentes asignaturas. 
 
-Se agregó Trais en el repo cese-edu-ciaa-template
+Cada nueva funcionalidad de la  biblioteca se volcó en ese repositorio, de forma de mantener actualizados a los usuarios. Se prestó atención en mantener la coherencia de la API a lo largo del ciclo lectivo, evitando volcar los cambios que afecten la compatibilidad con versiones previas. En casos muy particulares, donde los cambios se justificaban se informó a todos los usuarios por correo electrónico.
 
-Utilización de la biblioteca por estudiantes de CAPSE, UNQ y CESE
+Los alumnos han utilizado la biblioteca tanto para trabajos prácticos de materias, como para sus trabajos finales de carrera, con resultados excelentes. El entusiasmo de los mismos se plasmó, en algunos casos, en la contribución de \emph{drivers} realizados sobre la biblioteca, los cuales fueron incluidos al repositorio. Sus experiencias y propuestas, junto con las de sus respectivos docentes se han volcado en revisiones de la biblioteca.
 
 %----------------------------------------------
 %

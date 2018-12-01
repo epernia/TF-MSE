@@ -1,36 +1,42 @@
 %------------------------------------------------------------------------------
 %	SECTION
 %------------------------------------------------------------------------------
-\subsection{Documentación y difusión}
+\section{Documentación y difusión}
 \label{sec:documentation}
 
-Verificación del cumplimiento de los requerimientos del grupo \emph{REQ.4.}
+Se exponen los documentos y actividades realizados para cumplir con requerimientos del grupo \emph{REQ.4.}.
 
-REQ.4. Documentación y difusión.
+\subsection{Documentación}
 
-Producción de código y su documentación: escribir la documentación a la par del código fuente.
+La documentación desarrollada se divide en dos grupos:
 
-Documentación general en lenguaje \emph{Markdown} \citep{MARKDOWN}, que permite exportar el contenido a \emph{html}, \LaTeX, \emph{pdf}, entre otros.
+\titulo{Documentos para usuario final}
 
-Definir un documento de estilo del código fuente.
+\begin{itemize}
+\item
+Manual de referencia de la biblioteca (\emph{REQ.4.1}), incluye la documentación completa de la implementación de sAPI en lenguaje C, de forma independiente de la plataforma.
+\item
+Manuales de referencia de la biblioteca para cada plataforma con sus particularidades.
+\item
+Esquemas de mapeo de la biblioteca para para cada plataforma. Estos incluyen el mapeo a nivel de \emph{SoC} y \emph{board}.
+\item
+Tutorial de instalación de las herramientas para utilizar la biblioteca (\emph{REQ.4.2}).
+\end{itemize}
+
+\titulo{Documentos para desarrolladores}
+
+Se enfocan en los usuarios avanzados que desean colaborar con la biblioteca y sus herramientas asociadas:
+
+\begin{itemize}
+\item
+Memoria del trabajo final.
+\item
+Documento de estilo del código fuente para el desarrollo de código dependiente del hardware.
+\end{itemize}
+
+Todos estos documentos se han escrito en lenguaje \emph{Markdown}. Los gráficos se realizaron de forma vectorial y se distribuyen en pdf de manera que puedan ser editados en caso de ser necesario. 
 
 %------------------------------------------------------------------------------
-\titulo{Manual de referencia de la API}
+\section{Difusión}
 
-REQ.4.1. Confeccionar un manual de referencia de la biblioteca.
-
-
-%------------------------------------------------------------------------------
-\titulo{Tutoriales de instalación y uso}
-
-REQ.4.2. Desarrollar un tutorial de instalación de las herramientas para utilizar la biblioteca.
-
-
-%------------------------------------------------------------------------------
-\titulo{Difusión}
-
-Difusión a la comunidad del Proyecto CIAA y Embebidos32
-
-REQ.4.3. Publicación on line del código fuente.
-
-REQ.4.4. Informar a la comunidad del Proyecto CIAA y a la comunidad de programadores de Sistemas Embebidos.
+Debido a retrasos en la implementación, la publicación \emph{on line} de la versión de la biblioteca presentada en este documento (\emph{release} de \emph{Github} en cumplimiento de \emph{REQ.4.3}); así como la difusión a la comunidad del Proyecto CIAA y Embebidos 32 (\emph{REQ.4.4}), se posponen para el 30 de diciembre de 2018.

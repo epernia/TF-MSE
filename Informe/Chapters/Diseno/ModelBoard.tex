@@ -97,74 +97,81 @@ Como ejemplo, se expone a continuación los archivos propuestos para una pequeñ
 \end{center}
 \end{figure}
 
-Archivo de descripción de \emph{board} nombrado \emph{fakeBoard.json}:
+\lstset{
+    string=[s]{"}{"},
+    stringstyle=\color{blue},
+    comment=[l]{:},
+    commentstyle=\color{black},
+}
 
-\begin{verbatim}
+%Archivo de descripción de \emph{board} nombrado \emph{fakeBoard.json}:
+
+\begin{lstlisting}[caption=Archivo de descripción de \emph{board} nombrado \emph{fakeBoard.json}]
 {
   "type": "Board",
   "name": "fake-board-v1",
   "components": [
     {
-      "type": "@/vendor1/soc/fakeSoc.json",
+      "type": { "$ref": "../vendor1/soc/fakeSoc.json" },
       "name": "SOC0"
     },
     {
-      "type": "@/vendor2/phy/fakePhy232.json",
+      "type": { "$ref": "../vendor2/phy/fakePhy232.json" },
       "name": "PHY0"
     },
     {
-      "name": "RS232",
-      "type": "@/vendor3/connector/fakeDb9Male.json"
+      "type": { "$ref": "../vendor3/connector/fakeDb9Male.json" },
+      "name": "RS232"
     }
   ],
   "connections": [
-    [ "#/SOC0/P1", "#/PHY0/RX_LVL" ],
-    [ "#/SOC0/P2", "#/PHY0/TX_LVL" ],
-    [ "#/SOC0/P3", "#/PHY0/GND" ],
-    [ "#/PHY0/RX_232", "#/RS232/P2" ],
-    [ "#/PHY0/TX_232", "#/RS232/P3" ],
-    [ "#/PHY0/GND", "#/RS232/P5" ]
+    [ "SOC0/P1", "PHY0/RX_LVL" ],
+    [ "SOC0/P2", "PHY0/TX_LVL" ],
+    [ "SOC0/P3", "PHY0/GND" ],
+    [ "PHY0/RX_232", "RS232/P2" ],
+    [ "PHY0/TX_232", "RS232/P3" ],
+    [ "PHY0/GND", "RS232/P5" ]
   ]
 }
-\end{verbatim}
+\end{lstlisting}
 
-''@'' indica una referencia a un archivo externo con el path incluido, mientras que ''\#'' indica una referencia a un terminal de un componente.
+''\emph{\$ref}'' indica una referencia a un archivo externo con la definición del objeto a incluir. Las conexiones se especifican como un par de valores en un vector con formato \emph{COMPONENTE/TERMINAL}.
 
-Archivo de descripción de \emph{SoC} nombrado \emph{fakeSoc.json}:
+%Archivo de descripción de \emph{SoC} nombrado \emph{fakeSoc.json}:
 
-\begin{verbatim}
+\begin{lstlisting}[caption=Archivo de descripción de \emph{SoC} nombrado \emph{fakeSoc.json}]
 {
   "type": "SystemOnChip",
   "name": "fake-board-v1",
   "cores": [
     {
-      "type": "@/arch/arm/armv7m.json",
+      "type": { "$ref": "../arch/arm/armv7m.json" },
       "name": "CORTEXM4"
     }
   ],
   "peripherals": [
     {
-      "type": "@/vendor1/ipcore/uart.json",
+      "type": { "$ref": "../vendor1/ipcore/uart.json" },
       "name": "UART0"
     }
   ],
   "memories": [
     {
-      "type": "@/vendor1/mem/sram8kb.json",
+      "type": { "$ref": "../vendor1/mem/sram8kb.json" },
       "name": "RAM"
     },
     {
-      "type": "@/vendor1/mem/flash32kb.json",
+      "type": { "$ref": "../vendor1/mem/flash32kb.json" },
       "name": "FLASH"
     }
   ],
   "terminals": [ "P1", "P2", "P3" ]
 }
-\end{verbatim}
+\end{lstlisting}
 
-Archivo de descripción de un chip de capa física para RS-232  nombrado \emph{fakePhy232.json}:
+%Archivo de descripción de un chip de capa física para RS-232  nombrado \emph{fakePhy232.json}:
 
-\begin{verbatim}
+\begin{lstlisting}[caption=Archivo de descripción de un chip de capa física para RS-232  nombrado \emph{fakePhy232.json}]
 {
   "type": "ComponentWithDriver",
   "name": "phy-rs232",
@@ -172,25 +179,21 @@ Archivo de descripción de un chip de capa física para RS-232  nombrado \emph{f
     "RX_LVL", "TX_LVL", "GND",
     "RX_232", "TX_232"
   ],
-\end{verbatim}
-
-\pagebreak 
-\begin{verbatim}
   "drivers": [
     {
       "lang":"c",
       "files": [
-        "@/driver/c/vendor2/phy/fakePhy232.h",
-        "@/driver/c/vendor2/phy/fakePhy232.c"      
+        "/driver/c/vendor2/phy/fakePhy232.h",
+        "/driver/c/vendor2/phy/fakePhy232.c"      
       ]      
     }
   ]
 }
-\end{verbatim}
+\end{lstlisting}
 
-Archivo de descripción de un conector \emph{DB-9} nombrado \emph{fakeDb9Male.json}:
+%Archivo de descripción de un conector \emph{DB-9} nombrado \emph{fakeDb9Male.json}:
 
-\begin{verbatim}
+\begin{lstlisting}[caption=Archivo de descripción de un conector \emph{DB-9} nombrado \emph{fakeDb9Male.json}]
 {
   "type": "Connector",
   "name": "DB9-male",
@@ -198,6 +201,6 @@ Archivo de descripción de un conector \emph{DB-9} nombrado \emph{fakeDb9Male.js
     "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"
   ]
 }
-\end{verbatim}
+\end{lstlisting}
 
 Cabe destacar que el ejemplo presentado es válido solamente para describir la estructura de los archivos y filosofía de diseño adoptada, sin embargo, los archivos de implementación poseen más propiedades y niveles de anidamiento en sus entidades.

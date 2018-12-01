@@ -20,10 +20,9 @@ Propiedad \emph{mode}, del tipo \emph{TimerMode\_t}. Permite establecer el modo 
 \emph{PWM}. Genera una, o varias salidas digitales moduladas por ancho de pulso, contiene dos sub-modos (del tipo \emph{TimerPwmMode\_t}):
 \begin{itemize}
 \item
-\emph{FAST\_PWM} (se puede establecer también con el valor \emph{EDGE\_PWM}). Este modo de PWM alcanza las mayores frecuencias. 
+\emph{FAST} (se puede establecer también con el valor \emph{EDGE}). Este modo de PWM alcanza las mayores frecuencias.
 \item
-\emph{PHASE\_CORRECT\_PWM} (o también \emph{CENTER\_ALIGNED\_PWM}). Permite generar PWM con frecuencias de la mitad del valor máximo del modo \emph{fast}, pero tiene la ventaja que  mantiene la señal generada, siendo un comportamiento deseado al controlar motores de corriente continua.
-\emph{PHASE\_CORRECT} = \emph{CENTER\_ALIGNED\_PWM}
+\emph{PHASE\_CORRECT} (o también \emph{CENTER\_ALIGNED}). Permite generar PWM con frecuencias de la mitad del valor máximo del modo \emph{fast}, pero con la ventaja que  mantiene la fase de la señal generada, siendo un comportamiento deseado al controlar motores de corriente continua.
 \end{itemize}
 \end{itemize}
 
@@ -44,7 +43,7 @@ Propiedades del registro de conteo:
 \item
 \emph{counterSize}, del tipo \emph{TimerCounterSize\_t}. Define el tamaño del registro de conteo, en general podemos encontrar registros de 8, 16, 24 o 32 bits (valores \emph{COUNTER\_BIT8}, \emph{COUNTER\_BIT16}, \emph{COUNTER\_BIT24}, \emph{COUNTER\_BIT32}).
 \item
-\emph{counterMode}, del tipo \emph{TimerCounterMode\_t}. Establece el modo de contep del \emph{timer}, con valores \emph{COUNT\_UP}, \emph{COUNT\_DOWN} y \emph{COUNT\_UP\_DOWN}.
+\emph{counterMode}, del tipo \emph{TimerCounterMode\_t}. Establece el modo de conteo del \emph{timer}, con valores \emph{COUNT\_UP}, \emph{COUNT\_DOWN} y \emph{COUNT\_UP\_DOWN}.
 \end{itemize}
 
 Propiedades que configuran el comportamiento del contador ante eventos (todos del tipo \emph{TimerCounterBehavior\_t}):  
@@ -166,12 +165,12 @@ Modo \emph{ticker}, para generar interrupciones periódicas (base de tiempo):
    • tickCounterSet( Tick_t value )
 \end{verbatim}
 
-\emph{Tick\_t}, representa un valor de conteo de un lapso de tiempo adimencional (en ticks).
+\emph{Tick\_t}, representa un valor de conteo de un lapso de tiempo adimensional (en ticks).
 
 Modo \emph{PWM}:
 
 \begin{verbatim}
-   • initPWM() // Por defecto: Fast PWM, 1 kHz, no inv (ni).
+   • initPWM() // Por defecto: Fast PWM, 1 kHz, no invertido (ni).
    • initPWM( int_t frequency ) // Por defecto: Fast PWM, ni.
    • initPWM( int_t frequency, TimerPwmMode_t pwmMode ) // ni.
    • initPWM( int_t frequency, 

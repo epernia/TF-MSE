@@ -64,65 +64,6 @@ headsepline, % Uncomment to get a line under the header
 % Paquete para código en algún lenguaje de programación
 \usepackage{listings} % @Eric for Syntax Highlighting
 
-% Defino el sintaxhighlight para lenguaje C
-\lstdefinestyle{customc}{
-	frame=Ltb,
-    framerule=0pt,
-    aboveskip=0.5cm,
-    framextopmargin=3pt,
-    framexbottommargin=3pt,
-    framexleftmargin=0.4cm,
-    framesep=0pt,
-    rulesep=.4pt,
-    %backgroundcolor=\color{gray97},
-    rulesepcolor=\color{black},
-    %
-    %stringstyle=\ttfamily,
-    showstringspaces = false,
-    basicstyle=\small\ttfamily,
-    %commentstyle=\color{gray45},
-    %keywordstyle=\bfseries,
-    %
-    numbers=left,
-    numbersep=15pt,
-    numberstyle=\tiny,
-    numberfirstline = false,
-    breaklines=true,
-    %
-    %     
-  belowcaptionskip=1\baselineskip,
-  %breaklines=true,
-  %frame=L,
-  xleftmargin=\parindent,
-  language=C,
-  %showstringspaces=false,
-  %basicstyle=\footnotesize\ttfamily,
-  keywordstyle=\bfseries\color{purple!80!black},
-  commentstyle=\itshape\color{green!40!black},
-  identifierstyle=\color{blue},
-  stringstyle=\color{orange},
-  %numbers=left, % where to put the line-numbers; values are (none, left, right)
-  %numbersep=10pt,   % how far the line-numbers are from the code
-  %numberstyle=\tiny % the style that is used for the line-numbers
-}	
-\lstset{escapechar=@,style=customc}	
-
-% Defino el sintaxhighlight para lenguaje Smalltalk
-
-\lstdefinelanguage{Smalltalk}{
-  morekeywords={true,false,self,super,nil},
-  sensitive=true,
-  morecomment=[s]{"}{"},
-  morestring=[d]',
-  %style=SmalltalkStyle
-}
-%\lstdefinestyle{SmalltalkStyle}{
-%  literate={:=}{{$\gets$}}1{^}{{$\uparrow$}}1
-%} 
-
-
-
-
 %\usepackage[hyphens]{url}
 %\usepackage[hidelinks]{hyperref}
 %\hypersetup{breaklinks=true}
@@ -157,8 +98,8 @@ la programación de sistemas embebidos} % El títulos de la memoria, se usa en l
 \supervisor{MSc. Ing. Félix Gustavo Emilio Safar (UNQ)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \supname
 \degree{Magíster en Sistemas Embebidos} % Nombre del grado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \author{Esp. Ing. Eric Nicolás Pernia} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
-\juradoUNO{Dr. Ing. Pablo Martín Gómez (UBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
-\juradoDOS{Mg. Ing. Pablo Oscar Ridolfi (UTN FRBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
+\juradoUNO{Dr. Ing. Pablo Martín Gómez (FIUBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
+\juradoDOS{Mg. Ing. Pablo Oscar Ridolfi (UTN-FRBA, FIUBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
 \juradoTRES{Ing. Juan Manuel Cruz (FIUBA,UTN-FRBA)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 \fechaINICIO{marzo de 2018}
 \fechaFINAL{diciembre de 2018}
@@ -279,10 +220,10 @@ Jurados:\\
 %the title too\ldots
 \centering
 
-En esta memoria se presenta el diseño de una biblioteca para la programación de sistemas embebidos portable entre plataformas de hardware y lenguajes de programación. Se realizó una implementación de referencia en lenguaje C para las plataformas del Proyecto CIAA. Se realizó un banco de pruebas de hardware, junto a la utilización de testeo unitario e integración continua para la validación.
+En esta memoria se presenta el diseño de una biblioteca para la programación de sistemas embebidos portable entre plataformas de hardware y lenguajes de programación. Se realizó una implementación de referencia en lenguaje C para las plataformas del Proyecto CIAA. Se desarrollaron ejemplos funcionales y se utilizaron \emph{tests} unitarios e integración continua para su validación.
 
-Además de la biblioteca, se creó una herramienta de código abierto para
-desarrolladores que automatiza la implemetación de bibliotecas a partir de un modelo que las describe. De esta manera se facilita la futura ampliación de la biblioteca y su implementación en otras plataformas de hardware.
+
+Además de la biblioteca, se creó una herramienta de código abierto para desarrolladores que automatiza la implemetación de bibliotecas a partir de un modelo que las describe. De esta manera se facilita la futura ampliación de la biblioteca y su implementación en otras plataformas de hardware.
 
 \end{abstract}
 
@@ -356,7 +297,7 @@ No vale poner anti-agradecimientos (este trabajo fue posible a pesar de...)
 \chapter{Introducción General}
 \label{ChapterIntroGral}
 
-En este capítulo se presenta el contexto y justificación de este trabajo final, la motivación para llevarlo a cabo, sus objetivos y alcance.
+En este capítulo se presenta el contexto y justificación de este trabajo, la motivación para llevarlo a cabo, sus objetivos y su alcance.
 %(\ref{sec:contextoYJustificacion})
 %(\ref{sec:motivacion})
 %(\ref{sec:objetivosAlance})
@@ -431,7 +372,10 @@ En este capítulo se presentan los ensayos realizados para la verificación del 
 \input{Chapters/EnsayosYResultados/EnsayosValidacion}
 
 % Resultados
-\input{Chapters/EnsayosYResultados/Resultados}
+%\input{Chapters/EnsayosYResultados/Resultados}
+
+% Documentacion
+\input{Chapters/EnsayosYResultados/DocYDif}
 
 % Conclusiones
 \chapter{Conclusiones} % Main chapter title

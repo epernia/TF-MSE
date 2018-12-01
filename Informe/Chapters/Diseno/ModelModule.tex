@@ -44,7 +44,7 @@ MCUXpresso.
 EMLIB. % https://siliconlabs.github.io/Gecko_SDK_Doc/efm32hg/html/index.html
 \end{itemize}
 
-Se realizó un rediseño completo de la API, mejorando y ampliando muchas características, pero provocando un quiebre en la compatibilidad con versiones anteriores de sAPI.
+Se realizó un rediseño completo de la API, mejorando y ampliando muchas características, lo que provocó un quiebre en la compatibilidad con versiones anteriores de sAPI.
 
 %------------------------------------------------------------------------------
 \subsection{Definiciones de abstractas de sAPI}
@@ -172,7 +172,7 @@ Nombre del módulo.
 \item
 Descripción. Se utiliza para la generación de documentación.
 \item
-Versión del módulo. Se utiliza versionado semántico [].
+Versión del módulo. Se utiliza versionado semántico \citep{SEMVER}.
 \item
 Autor del módulo. Se debe completar nombres, apellidos y dirección de correo electrónico del autor. 
 \item
@@ -182,7 +182,7 @@ Dependencias. Una lista de los módulos de sAPI de los cuales depende el módulo
 \end{itemize}
 % falta inherits y métodos de clases
 
-Además, define un conjunto de tipos de datos, constantes, propiedades y métodos.
+Además, cada módulo de biblioteca sAPI define un conjunto de tipos de datos, constantes, propiedades y métodos.
 
 En los módulos de sAPI se encuentran las siguientes categorías de propiedades (o atributos):
 
@@ -215,7 +215,7 @@ Además poseen los siguientes métodos:
 \emph{getters y setters} de cada propiedad.
 \end{itemize}
 
-Se destaca que en una implementación de la biblioteca para lenguajes no orientados a objetos, en lugar de métodos se tiene funciones y por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método. Por ejemplo, en un lenguaje con objetos como \emph{JavaScript} tendremos,
+Se destaca que en una implementación de la biblioteca para lenguajes no orientados a objetos, en lugar de métodos se tiene funciones y por lo tanto, se deberá agregar en cada una el parámetro \emph{this} que corresponde a una referencia al objeto sobre el cual se ejecuta el método. Por ejemplo, en un lenguaje con objetos como \emph{JavaScript} se tendrá,
 
 \begin{verbatim}
    • uart0.init( 9600 )

@@ -7,11 +7,11 @@
 %------------------------------------------------------------------------------
 %\subsection{}
 
-En la implementación para las plataformas del proyecto CIAA, del código dependiente del hardware, que forma parte de la biblioteca sAPI, se utilizaron las bibliotecas de drivers provistas por los fabricantes. En particular, para los microcontroladores de la empresa NXP se utilizó LPCOpen, en la version 3.02 para el LPC4337 y versión 3.04 para el LPC54102. Para el microcontrolador EFM32HG322 de Siicon Labs se utilizó la biblioteca EMLIB versión 5.1.2 (todas en sus últimas versiones al momento de la realización de este trabajo).
+En la implementación para las plataformas del proyecto CIAA, del código dependiente del hardware, que forma parte de la biblioteca sAPI, se utilizaron las bibliotecas de \emph{drivers} provistas por los fabricantes. En particular, para los microcontroladores de la empresa NXP se utilizó LPCOpen, en la version 3.02 para el LPC4337 y versión 3.04 para el LPC54102. Para el microcontrolador EFM32HG322 de Silicon Labs se utilizó la biblioteca EMLIB versión 5.1.2 (todas en sus últimas versiones al momento de la realización de este trabajo).
 
 Por otra parte, se reutilizó parte del código desarrollado en versiones anteriores de la biblioteca sAPI para las plataformas EDU-CIAA-NXP y CIAA-Z3R0 y parte del código de PicoFirmware \citep{PicoAPI} para la implementación en la plataforma PicoCIAA.
 
-Una aplicación de embebidos típica que utiliza la biblioteca sAPI, se puede combinar con un sistema operativo de tiempo real, \emph{stracks} y \emph{middelware} resultando una arquitectura de capas de software típica en aplicaciones de sistemas embebidos como se ilustra en la figura \ref{fig:sapiCapas2}.
+Una aplicación de embebidos típica que utiliza la biblioteca sAPI, se puede combinar con un sistema operativo de tiempo real, \emph{stacks} y \emph{middelware} resultando una arquitectura de capas de software típica en aplicaciones de sistemas embebidos como se ilustra en la figura \ref{fig:sapiCapas2}.
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
