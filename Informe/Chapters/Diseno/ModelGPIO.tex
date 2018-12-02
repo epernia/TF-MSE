@@ -20,12 +20,48 @@ La cantidad de pines que forman un puerto depende de la arquitectura.
 
 \begin{itemize}
 \item
-\emph{mode}, del tipo \emph{PinMode\_t}, cuyos valores posibles son: \emph{DISABLE} (deshabilidato), \emph{INPUT} (pin configurado como entrada) y \emph{OUTPUT} u \emph{OUTPUT\_PUSHPULL} (pin configurado como salida, modo \emph{push-pull}), \emph{OUTPUT\_OPEN\_DRAIN} (pin como salida, en modo drenador abierto).
+\emph{mode}, del tipo \emph{PinMode\_t}, cuyos valores posibles se listan en la tabla \ref{tab:PinModeT}.
 \item
-\emph{pull}, del tipo \emph{PinPull\_t} cuyos valores posibles son: \emph{NONE} (modo por defecto, pin flotante), \emph{PULL\_UP} (con resistencia de \emph{pull-up}), \emph{PULL\_DOWN} (con resistencia de \emph{pull-down}), \emph{PULL\_BOTH} (con ambas resistencias).
+\emph{pull}, del tipo \emph{PinPull\_t}. Los valores posibles se listan en la tabla \ref{tab:PullT}.
 \item
 \emph{value}, del tipo \emph{bool\_t}. Representa el valor a escribir o leer de un pin.
 \end{itemize}
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{Valor} 	    & \textbf{Descripción}  \\
+		\midrule
+		DISABLE	 & Deshabilidato \\		
+		INPUT	    & Pin configurado como entrada	\\
+		OUTPUT	 & Pin configurado como salida, modo \emph{push-pull}	\\
+		OUTPUT\_PUSHPULL & Pin configurado como salida, modo \emph{push-pull}	\\
+		OUTPUT\_OPEN\_DRAIN	 & Pin como salida, en modo drenador abierto	\\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles del tipo \emph{PinMode\_t}.]{Valores posibles del tipo \emph{PinMode\_t} y su descripción.}
+	\label{tab:PinModeT}
+\end{table}
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{Valor} 	    & \textbf{Descripción} \\
+		\midrule
+		NONE	       & Modo por defecto, pin flotante \\		
+		PULL\_UP	    & Pin con resistencia de \emph{pull-up} \\
+		PULL\_DOWN	 & Pin con resistencia de \emph{pull-down} \\
+		PULL\_BOTH	 & Pin con ambas resistencias \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles del tipo \emph{PinPull\_t}.]{Valores posibles del tipo \emph{PinPull\_t} y su descripción.}
+	\label{tab:PullT}
+\end{table}
+
 
 \titulo{Métodos de pin}
 
@@ -65,9 +101,44 @@ Para establecer una interrupción en un pin ante cierto evento define los métod
    • interrupt( bool_t enable ) : PinStatus_t
  \end{verbatim} 
 
-\emph{eventCallbackSet()} establece el evento ante el cual se interrumpe, junto a una función de \emph{callback} que se ejecutará ante su ocurrencia. \emph{eventCallbackClear()} permite remover el \emph{callback}. Los posibles eventos son: \emph{HIGH\_LEVEL} (interrupción por nivel alto), \emph{LOW\_LEVEL} (interrupción por nivel bajo), \emph{RISING\_EDGE} (interrupción por flanco ascendente), \emph{FALLING\_EDGE} (interrupción por flanco descendente) y \emph{BOTH\_EDGES} (interrupción por flanco ascendente y descendente); todos del tipo \emph{PinEvent\_t}.
+\emph{eventCallbackSet()} establece el evento ante el cual se interrumpe, junto a una función de \emph{callback} que se ejecutará ante su ocurrencia. \emph{eventCallbackClear()} permite remover el \emph{callback}. En la tabla \ref{tab:PinEvtT} se listan los eventos del tipo \emph{PinEvent\_t}.
 
-\emph{interrupt()} permite habilitar o deshabilitar la interrupción de hardware del pin ante la ocurrencia del evento. Según la plataforma particular, existe la posibilidad que soporte interrupción en algunos pines fijos, o que exista una cierta cantidad de interrupciones de pin y se pueda elegir a qué pines se le asignan, es por eso que el método \emph{interrupt()} retorna un valor del tipo \emph{PinStatus\_t}. Este tipo de datos define los valores \emph{STATUS\_OK}, si pudo configurar la interrupción, \emph{ERROR\_NOT\_SUPPORT}, si el pin no soporta capacidad de interrupción, y \emph{ERROR\_NO\_MORE\_AVAILABLE}, si ya se configuraron todas las interrupciones de hardware disponibles. 
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{Valor} & \textbf{Descripción} \\
+		\midrule
+		HIGH\_LEVEL  & Interrupción por nivel alto \\		
+		LOW\_LEVEL   & Interrupción por nivel bajo \\
+		RISING\_EDGE & Interrupción por flanco ascendente \\
+		FALLING\_EDGE & Interrupción por flanco descendente \\
+		BOTH\_EDGES & Interrupción por flanco ascendente y descendente \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles del tipo \emph{PinEvent\_t}.]{Valores posibles del tipo \emph{PinEvent\_t} y su descripción.}
+	\label{tab:PinEvtT}
+\end{table}
+
+\emph{interrupt()} permite habilitar o deshabilitar la interrupción de hardware del pin ante la ocurrencia del evento. Según la plataforma particular, existe la posibilidad que soporte interrupción en algunos pines fijos, o que exista una cierta cantidad de interrupciones de pin y se pueda elegir a qué pines se le asignan, es por eso que el método \emph{interrupt()} retorna un valor del tipo \emph{PinStatus\_t}, cuyos valores aceptados se exponen en la tabla \ref{tab:PinStatusT}. 
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{Valor} & \textbf{Descripción} \\
+		\midrule
+		STATUS\_OK & Se pudo configurar la interrupción en el pin \\		
+		ERROR\_NOT\_SUPPORT & El pin no soporta capacidad de interrupción \\
+		ERROR\_NO\_MORE\_AVAILABLE & Si ya se configuraron todas las interrupciones\\
+		 & de hardware disponibles \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles del tipo \emph{PinStatus\_t}.]{Valores posibles del tipo \emph{PinStatus\_t} y su descripción.}
+	\label{tab:PinStatusT}
+\end{table}
 
 \titulo{Propiedades y métodos de puerto}
 

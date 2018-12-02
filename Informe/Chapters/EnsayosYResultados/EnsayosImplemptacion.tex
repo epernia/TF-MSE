@@ -1,16 +1,9 @@
 %------------------------------------------------------------------------------
 % Section
 %------------------------------------------------------------------------------
-\section{Verificaciónes de la implementación de la biblioteca}
+\section{Verificación de los requerimientos de implementación de la biblioteca}
 
-Se exponen las verificaciones realizadas para el cumplimiento de los requerimientos del grupo \emph{REQ3} sobre la implementación de la biblioteca.
-
-%------------------------------------------------------------------------------
-\subsection{Metodología y herramientas utilizadas}
-
-Para el cumplimiento del requerimiento \emph{REQ.3.1}, se utilizó el  siguiente esquema de trabajo:
-
-figura \ref{fig:ciTools}.
+Para el cumplimiento de los requerimientos del grupo \emph{REQ3}, se utilizaron las herramientas y servicios que se ilustran en la figura \ref{fig:ciTools}. Todas estas herramientas y servicios seleccionados son de código abierto y uso gratuito. Además se definió un flujo de trabajo para el desarrollo y las contribuciones.
 
 \begin{figure}[!htbp]
 \begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
@@ -19,41 +12,155 @@ figura \ref{fig:ciTools}.
 \end{center}
 \end{figure}
 
+%------------------------------------------------------------------------------
+\subsection{Herramientas de producción de software para sistemas embebidos en lenguaje \emph{C}}
+
+\begin{itemize}
+\item
+IDE\footnote{Siglas en inglés de Entorno de Desarrollo Integrado.}: \emph{GNU MCU Eclipse} \citep{GNUMCUEclipse}, una distribución de Eclipse IDE con \emph{plugins} para la programación en lenguaje C o C++ para las arquitecturas ARM y RISC-V. Permite tanto compilar como depurar el programa.
+\item
+Compilación y depuración:
+\begin{itemize}
+\item
+\emph{Make} \citep{Make}, para gestión de dependencias. Los proyectos en C son todos proyectos en base a \emph{Makefile}.
+\item
+\emph{GNU ARM Embedded} \citep{Toolchain}, herramientas para compilación cruzada para procesadores Arm Cortex-M y Cortex-R.
+\item
+\emph{OpenOCD} \citep{OpenOCD}, herramienta para depuración, programación y \emph{boundary-scan} para sistemas embebidos.
+\end{itemize}
+\item
+\emph{Tests}: \emph{Minut} \citep{Minut}, es una biblioteca mínima de pruebas unitarias para el lenguaje C.
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Herramientas para producción de software en lenguaje \emph{JavaScript}}
+
+\begin{itemize}
+\item
+IDE: \emph{Visual Studio Code} \citep{vscode}, permite su utilización con múltiples lenguajes de programación, incluyendo \emph{JavaScript}.
+\item
+Entorno de ejecución: \emph{Node.js}, permite la ejecución de programas en lenguaje \emph{JavaScript}.
+\item
+\emph{Tests}:
+\begin{itemize}
+\item
+\emph{Mocha.js} \citep{Mocha}, es un \emph{framework} de pruebas de \emph{JavaScript} que se ejecuta sobre \emph{Node.js}.
+\item
+\emph{Chai.js} \citep{Chai}, es una biblioteca de aserciones, la cual se puede utilizar con cualquier \emph{framework} de pruebas de \emph{Javascript}.
+\end{itemize}
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Servicios en la nube}
+
+Se utilizan cinco repositorios de código alojados en la nube utilizando \emph{GitHub}, uno que incluye la definición de los módulos de biblioteca independientes del lenguaje de programación, los módulos que definen las plataformas y el generador de la biblioteca; y otros cuatro para mantener la versión de biblioteca sAPI para cada plataforma del proyecto CIAA que abarca este trabajo.
+
+Cada uno de estos repositorios se integra con \emph{Travis CI} \citep{TravisCI}, que es un sistema de integración continua, gratuito para proyectos de código abierto, y en la nube. Permite construir y probar programas de forma automatizada. Ante cada \emph{push} o \emph{pull request} en \emph{GitHub}, \emph{Travis CI} ejecuta automáticamente el \emph{pipeline} definido para cada repositorio. 
+
+En el repositorio del generador de módulos de sAPI \emph{Travis CI} realiza las siguientes tareas:
+
+\begin{itemize}
+\item
+Crear un entorno de ejecución con el sistema operativo Linux \citep{GNULINUX}.
+\item
+Clonar el repositorio.
+\item
+Descargar e instalar el \emph{Node.js}.
+\item
+Descargar e instalar los paquetes de \emph{Node.js} requeridos por el proyecto (dependencias).
+\item
+Ejecutar los test unitarios y generar reporte de resultados.
+\end{itemize}
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/TravisMochaChaiTests.png}
+\par\caption{Resultado de ejecución de pruebas unitarias sobre el generador de sAPI en lenguaje \emph{JavaScript} con \emph{Travis CI}.}\label{fig:testTravisJS}
+\end{center}
+\end{figure}
+
+%mochaChaiTests
+
+En los repositorios de cada plataforma \emph{Travis CI} se encarga de realizar las siguientes tareas:
+
+\begin{itemize}
+\item
+Crear un entorno de ejecución con el sistema operativo Linux.
+\item
+Clonar el repositorio.
+\item
+Descargar e instalar el \emph{toolchain} \emph{GNU ARM Embedded}, necesario compilar código en lenguaje C para plataformas con microcontroladores que incluyen núcleos ARM Cortex-M y R.
+\item
+Ejecutar el \emph{script} de \emph{Bash} \citep{Bash} denominado \emph{test-build-all.sh}. Este \emph{script} compila todos los programas en lenguaje C del repositorio (mediante \emph{Make} y el \emph{toolchain}), recogiendo la información asociada a la compilación exitosa, o no, de de cada programa, como se expone en la figura \ref{fig:testTravisC}. De esta forma, realiza un ensayo para comprobar que todos los programas siguen compilado ante cambios en el código fuente en el repositorio.
+\end{itemize}
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/travisBuildC.png}
+\par\caption{Resultado de compilación de programas en C con \emph{Travis CI}.}\label{fig:testTravisC}
+\end{center}
+\end{figure}
+
+Los resultados de \emph{Travis CI} son plasmados dentro de una pequeña imagen conocida como ''medalla'' en los repositorios (figura \ref{fig:travisBadge}). Éstas indican de forma inmediata el estado correcto (\emph{build passing}), o no (\emph{build failing}) del ensayo llevado a cabo por \emph{Travis CI}. 
+
+\begin{figure}[!htbp]
+\begin{center}  % [width=14cm,height=8cm] [width=\textwidth]
+\includegraphics*[width=14cm]{Figures/travisBadge.png}
+\par\caption{Medalla de \emph{Travis CI} en el repositorio.}\label{fig:travisBadge}
+\end{center}
+\end{figure}
+
+%------------------------------------------------------------------------------
+\subsection{Ensayos funcionales sobre las plataformas de hardware}
+
+Como \emph{Travis CI} es un servicio en la nube, no permite ejecutar \emph{tests} programas sobre las plataformas de hardware. Para realizarlo, se debe montar un servidor propio con \emph{Travis CI} y conectarle las cuatro plataformas, contando con alta disponibilidad. Debido a los costos de mantenimiento de esta infraestructura, se realizaron ensayos sobre el hardware a demanda. Esto es, se conectan las cuatro placas en una computadora de desarrollo en forma local y se ejecuta un \emph{script} denominado \emph{tests-c-unit.sh}. Este \emph{script} realiza las siguientes tareas, repitiéndolas para cada plataforma de hardware:
+
+\begin{itemize}
+\item
+\emph{pull} del repositorio de la plataforma para actualizar el repositorio local con los cambios del repositorio remoto.
+\item
+Compilar usando \emph{Make} y el \emph{toolchain} \emph{GNU ARM Embedded}, cada uno de los programas que implementan \emph{tests} unitarios. Estos programas contienen la biblioteca de aserciones sencilla para C denominada \emph{Minut}. Se compilan para ser ejecutados en la memoria RAM del microcontrolador para evitar el desgaste de su memoria Flash.
+\item
+Descargar con \emph{Make} y \emph{OpenOCD}, cada programa a la plataforma (en RAM), ejecutarlo y almacenar el estado devuelto por el mismo, exponiendo los resultados de las pruebas por terminal. Los programas con \emph{tests} utilizan \emph{semihosting}\footnote{\emph{Semihosting} es un mecanismo que permite que el código que se ejecuta en un microcontrolador ARM se comunique y use las facilidades de entrada/salida en una computadora \emph{host} que ejecuta un depurador.} \citep{semihosting}.
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\subsection{Flujo de desarrollo}
+
+Se decide utilizar el siguiente flujo de trabajo:
+
+\begin{itemize}
+\item
+Se debe abrir un \emph{issue} en el repositorio de \emph{GitHub} correspondiente por cada característica a diseñar/mejorar.
+\item
+Cada desarrollador debe mantener actualizado su propio \emph{Fork} (copia en su propia cuenta de \emph{GitHub}) del repositorio con cual desea colaborar.
+\item
+Para enviar una contribución al repositorio oficial debe hacerlo mediante un \emph{Pull Request} a la rama \emph{develop}.
+\item
+La contribución se integra (\emph{merge}) a la rama \emph{develop} solamente si pasan todos los \emph{tests} en \emph{Travis C}. Esta tarea la realiza un encargado del repositorio.
+\item
+La contribución se integra en la rama \emph{master} (rama principal) solamente después de pasar correctamente ensayos funcionales en hardware.
+\end{itemize}
 
 
 
-  utilizaron las siguientes herramientas:
 
-
-en cumplimiento con \emph{REQ.3.3}. Los mismos
-
-repositorios \emph{Git} en el sitio \emph{Github}. 
-
-
-Además se realizaron \emph{tests} unitarios sobre el generador de bibliotecas en lenguaje \emph{JavaScript} y del código generado en lenguaje \emph{C} dependiente de la arquitectura 
-
-
-REQ.3.1. Utilizar un sistema de control de versiones on line, desarrollar tests unitarios y de integración.
-
-Sistema de control de versiones: utilización de 
-
-\emph{Workflow} de desarrollo mediante \emph{Fork} y \emph{Pull Requests} de github. Se debe abrir un \emph{issue} en \emph{Github} por cada característica a diseñar/mejorar.
 
 
 %------------------------------------------------------------------------------
-\titulo{Testeo Unitario en JavaScript}
+%\titulo{Testeo Unitario en JavaScript}
 
 
 %------------------------------------------------------------------------------
-\titulo{Testeo Unitario en JavaScript}
+%\titulo{Testeo Unitario en JavaScript}
 
 
 %------------------------------------------------------------------------------
-\titulo{Testeo Unitario en C}
+%\titulo{Testeo Unitario en C}
 
 
 %------------------------------------------------------------------------------
-\titulo{Integración continua}
+%\titulo{Integración continua}
 
 
 
@@ -66,18 +173,18 @@ Sistema de control de versiones: utilización de
 
 
 %------------------------------------------------------------------------------
-\subsection{Verificación de los archivos de descripción de una plataforma}
+%\subsection{Verificación de los archivos de descripción de una plataforma}
 
-Verificación de generación del modelo a partir de archivos json y viseversa.
-
-%------------------------------------------------------------------------------
-\subsection{Verificación del generador de código C}
+%Verificación de generación del modelo a partir de archivos json y viseversa.
 
 %------------------------------------------------------------------------------
-\subsection{Ensayos funcionales}
+%\subsection{Verificación del generador de código C}
 
-Verificación del funcionamiento de cada uno de los periféricos en cada una de las plataformas.
+%------------------------------------------------------------------------------
+%\subsection{Ensayos funcionales}
+
+%Verificación del funcionamiento de cada uno de los periféricos en cada una de las plataformas.
 
 
-REQ.3.2. Programar en lenguaje C la biblioteca para cada plataforma de hardware particular utilizando como plantilla los archivos generados.
+%REQ.3.2. Programar en lenguaje C la biblioteca para cada plataforma de hardware particular utilizando como plantilla los archivos generados.
 
