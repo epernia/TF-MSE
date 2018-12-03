@@ -11,7 +11,15 @@ El módulo I2C modela un periférico para comunicaciones serie entre circuitos i
 \item
 \emph{addressMode}, del tipo \emph{I2cAddrMode\_t}, representa el modo de direccionamiento del bus, con posibles valores: \emph{ADDR\_MODE7} o \emph{ADDR\_MODE10} (7 o 10 bits de dirección).
 \item
-\emph{clockDuty}, del tipo \emph{I2cClockDuty\_t}, que establece la relación del tiempo en alto y tiempo en bajo del reloj, con valores dependientes de la arquitectura. Se definen los posibles valores: \emph{CLK\_DUTY\_SYMMETRIC}, \emph{CLK\_DUTY\_ASYM-METRIC} o \emph{CLK\_DUTY\_FAST}.
+\emph{clockDuty}, del tipo \emph{I2cClockDuty\_t}, que establece la relación del tiempo en alto y tiempo en bajo del reloj, con valores dependientes de la arquitectura. Se definen los posibles valores:
+\begin{itemize}
+\item
+\emph{CLK\_DUTY\_SYMMETRIC}
+\item
+\emph{CLK\_DUTY\_ASYM-METRIC}
+\item
+\emph{CLK\_DUTY\_FAST}
+\end{itemize}
 \item
 \emph{generateAck}, del tipo \emph{bool\_t}. Habilita o deshabilita el envío de ACK, de no estar habilitado (\emph{true}) el periférico I2C estará virtualmente desconectado del bus.
 \item
@@ -19,7 +27,24 @@ El módulo I2C modela un periférico para comunicaciones serie entre circuitos i
 \item
 \emph{address}, del tipo \emph{int\_t}, es la dirección del periférico I2C cuando se utiliza en modo esclavo.
 \item
-\emph{clockFrequency}, del tipo \emph{int\_t}, es la frecuencia de reloj (en Hz) del BUS I2C (solo tiene sentido en modo \emph{MASTER}). Alternativamente pueden utilizarse los valores \emph{CLK\_STD\_MODE} (100 kHz), \emph{CLK\_FAST\_MODE} (400 kHz) y \emph{CLK\_FAST\_MODE\_PLUS} (1 MHz).
+\emph{clockFrequency}, del tipo \emph{int\_t}, es la frecuencia de reloj (en Hz) del BUS I2C (solo tiene sentido en modo \emph{MASTER}). Pueden utilizarse los valores de la tabla \ref{tab:i2cClockF}.
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{Valor} & \textbf{Frecuencia} \\
+		\midrule
+      CLK\_STD\_MODE        & 100 kHz \\
+      CLK\_FAST\_MODE       & 400 kHz \\
+      CLK\_FAST\_MODE\_PLUS & 1 MHz   \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles de la propiedad \emph{clockFrequency} del módulo I2C]{Valores posibles de la propiedad \emph{clockFrequency} del módulo I2C}
+	\label{tab:i2cClockF}
+\end{table}
+
 \item
 \emph{location}, del tipo \emph{Location\_t}.
 \item

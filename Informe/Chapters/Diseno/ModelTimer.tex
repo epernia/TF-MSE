@@ -30,10 +30,36 @@ Propiedades del reloj de entrada:
 
 \begin{itemize}
 \item
-\emph{clockSource}, del tipo \emph{TimerClockSource\_t}. Establece la fuente de reloj del temporizador, la cual se divide por el pre-escalador para obtener el reloj del temporizador. Con valores: \emph{INTERNAL\_CPU\_CLK}, \emph{INTERNAL\_CLK0}, \emph{INTERNAL\_CLK01}, \emph{INTERNAL\_CLK2}, \emph{EXTERNAL\_CLK0}, \emph{EXTERNAL\_CLK1}, \emph{EXTERNAL\_CLK2} o \emph{EXTERNAL\_CLK2}, que se deben definir para cada arquitectura.
+\emph{clockSource}, del tipo {TimerClockSource\_t}. Establece la fuente de reloj del temporizador, la cual se divide por el pre-escalador para obtener el reloj del temporizador. Se definen valores genéricos (en la tabla \ref{tab:timerInputClock}) los cuales se deben establecer para cada arquitectura.
 \item
-\emph{prescale}, del tipo \emph{TimerPresc\_t}. Permite establecer el valor de pre-escalador del reloj del \emph{timer}, es decir, el valor por el cual se dividirá, los valores que puede tomar son: \emph{PRESC\_DIV1}, \emph{PRESC\_DIV2}, \emph{PRESC\_DIV4}, \emph{PRESC\_DIV8}, \emph{PRESC\_DIV16}, \emph{PRESC\_DIV32}, \emph{PRESC\_DIV64}, \emph{PRESC\_DIV128}, \emph{PRESC\_DIV-256}, \emph{PRESC\_DIV512} o \emph{PRESC\_DIV1024}.
+\emph{prescale}, del tipo \emph{TimerPresc\_t}. Permite establecer el valor de pre-escalador del reloj del \emph{timer}, es decir, el valor por el cual se dividirá, los valores que puede tomar son dependientes de cada periférico temporizador, por lo tanto puede ser un subconjunto de los listados en la tabla \ref{tab:timerInputClock}.
 \end{itemize}
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{clockSource} & \textbf{prescale} \\
+		\midrule
+		\textbf{TimerClockSource\_t} & \textbf{TimerPresc\_t} \\
+		\midrule
+      INTERNAL\_CPU\_CLK & PRESC\_DIV1 \\
+      INTERNAL\_CLK0     & PRESC\_DIV2 \\
+      INTERNAL\_CLK1     & PRESC\_DIV4 \\
+      INTERNAL\_CLK2     & PRESC\_DIV8 \\
+      EXTERNAL\_CLK0     & PRESC\_DIV16 \\
+      EXTERNAL\_CLK1     & PRESC\_DIV32 \\
+      EXTERNAL\_CLK2     & PRESC\_DIV64 \\
+      EXTERNAL\_CLK2     & PRESC\_DIV128 \\
+                         & PRESC\_DIV256 \\
+                         & PRESC\_DIV512 \\
+                         & PRESC\_DIV1024 \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles de las propiedades del reloj de entrada de \emph{TIMER}]{Valores posibles de las propiedades del reloj de entrada de \emph{TIMER}}
+	\label{tab:timerInputClock}
+\end{table}
 
 Propiedades del registro de conteo:
 
@@ -41,16 +67,42 @@ Propiedades del registro de conteo:
 \item
 \emph{counter}, del tipo \emph{TimerCounter\_t}. Representa el registro de conteo del temporizador.
 \item
-\emph{counterSize}, del tipo \emph{TimerCounterSize\_t}. Define el tamaño del registro de conteo, en general podemos encontrar registros de 8, 16, 24 o 32 bits (valores \emph{COUNTER\_BIT8}, \emph{COUNTER\_BIT16}, \emph{COUNTER\_BIT24}, \emph{COUNTER\_BIT32}).
+\emph{counterSize}, del tipo \emph{TimerCounterSize\_t}. Define el tamaño del registro de conteo, en general podemos encontrar registros de 8, 16, 24 o 32 bits, correspondientes a los valores listados en la tabla \ref{tab:PropRegConteoTimer} respectivamente.
 \item
-\emph{counterMode}, del tipo \emph{TimerCounterMode\_t}. Establece el modo de conteo del \emph{timer}, con valores \emph{COUNT\_UP}, \emph{COUNT\_DOWN} y \emph{COUNT\_UP\_DOWN}.
+\emph{counterMode}, del tipo \emph{TimerCounterMode\_t}. Establece el modo de conteo del \emph{timer}, con valores listados tambien la tabla \ref{tab:PropRegConteoTimer}.
 \end{itemize}
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l}   
+		\toprule
+		\textbf{counterSize} & \textbf{counterMode} \\
+		\midrule
+		\textbf{TimerCounterSize\_t} & \textbf{TimerCounterMode\_t} \\
+		\midrule
+      COUNTER\_BIT8  & COUNT\_UP       \\
+      COUNTER\_BIT16 & COUNT\_DOWN     \\
+      COUNTER\_BIT24 & COUNT\_UP\_DOWN \\
+      COUNTER\_BIT32 &                 \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles de las propiedades del registro de conteo de \emph{TIMER}]{Valores posibles de las propiedades del registro de conteo de \emph{TIMER}}
+	\label{tab:PropRegConteoTimer}
+\end{table}
+
+\pagebreak
 
 Propiedades que configuran el comportamiento del contador ante eventos (todos del tipo \emph{TimerCounterBehavior\_t}):  
 
 \begin{itemize}
 \item
-\emph{onOverflowEvent} evento de desborde del vlaor de conteo. Permite usar los valores: \emph{RESET\_COUNTER}, \emph{INVERT\_COUNTER} o \emph{STOP\_COUNTER}.
+\emph{onOverflowEvent} evento de desborde del vlaor de conteo. Permite usar los valores:
+\begin{itemize}
+\item \emph{RESET\_COUNTER}
+\item \emph{INVERT\_COUNTER}
+\item \emph{STOP\_COUNTER}
+\end{itemize}
 \item
 \emph{onCompareMatchEvent0, ..., onCompareMatchEventN}, evento de comparación exitosa con valor de comparación. Además de los valores ateriores agrega \emph{DO\_NOTHING}.
 \item
@@ -85,14 +137,25 @@ Propiedad \emph{location}, del tipo \emph{Location\_t}.
 
 \begin{itemize}
 \item
-\emph{onCaptureEvent0, ..., onCaptureEventN}, del tipo \emph{TimerCaptureInputPinEvent\_t}. Configura ante qué eventos del pin de entrada se captura el valor de conteo del temporizador, con valores posibles \emph{RISING\_EDGE}, \emph{FALLING\_EDGE} o \emph{BOTH\_EDGES}. 
+\emph{onCaptureEvent0, ..., onCaptureEventN}, del tipo \emph{TimerCaptureInputPinEvent\_t}. Configura ante qué eventos del pin de entrada se captura el valor de conteo del temporizador, con valores posibles:
+\begin{itemize}
+\item \emph{RISING\_EDGE}
+\item \emph{FALLING\_EDGE}
+\item \emph{BOTH\_EDGES}
+\end{itemize}
 \end{itemize}
 
 \titulo{Propiedad de cada pin de salida de comparación del temporizador}
 
 \begin{itemize}
 \item
-\emph{onCompareMatchEvent0, ..., onCompareMatchEventN}, del tipo \emph{TimerCompareOutputPinEvent\_t}. Configura el comportamiento del pin de salida ante eventos de comparación, con valores posibles \emph{DO\_NOTHING}, \emph{TOGGLE\_OUTPUT}, \emph{SET\_OUTPUT} o \emph{CLEAR\_OUTPUT}.
+\emph{onCompareMatchEvent0, ..., onCompareMatchEventN}, del tipo \emph{TimerCompareOutputPinEvent\_t}. Configura el comportamiento del pin de salida ante eventos de comparación, con valores posibles:
+\begin{itemize}
+\item \emph{DO\_NOTHING}
+\item \emph{TOGGLE\_OUTPUT}
+\item \emph{SET\_OUTPUT}
+\item \emph{CLEAR\_OUTPUT}
+\end{itemize}
 \end{itemize}
 
 \titulo{Métodos de TIMER}

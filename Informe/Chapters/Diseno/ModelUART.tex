@@ -7,15 +7,43 @@ El módulo UART modela un periférico de comunicación serie transmisor/receptor
 
 \begin{itemize}
 \item
-\emph{baudRate}, del tipo \emph{int\_t}, tasa de baudios. Depende de la arquitectura pero en general se permiten: 1200, 2400, 4800, 9600, 19200, 38400, 57600 o 115200.
+\emph{baudRate}, del tipo \emph{UartDataBits\_t}.
 \item
-\emph{dataBits}, del tipo \emph{UartDataBits\_t}, que puede tomar los valores \emph{DATABITS5}, \emph{DATABITS6}, \emph{DATABITS7}, \emph{DATABITS8} o \emph{DATABITS9}.
+\emph{dataBits}, del tipo \emph{UartDataBits\_t}.
 \item
-\emph{parity}, del tipo \emph{UartParity\_t}, con valores posibles \emph{NONE}, \emph{EVEN} o \emph{ODD}.
+\emph{parity}, del tipo \emph{UartParity\_t}.
 \item
-\emph{stopBits}, del tipo \emph{UartStopBits\_t}, con valores \emph{STOPBITS1}, \emph{STOPBITS2} o \emph{STOPBITS1\_5}.
+\emph{stopBits}, del tipo \emph{UartStopBits\_t}.
 \item
-\emph{flowControl}, del tipo \emph{UartFlowCtrl\_t}, cuyos valores posibles son \emph{NONE}, \emph{CTS}, \emph{RTS} o \emph{RTS\_CTS}.
+\emph{flowControl}, del tipo \emph{UartFlowCtrl\_t}.
+\end{itemize}
+
+En la tabla \ref{tab:uartProperties} se listan los posibles valores de configuración de estas propiedades. 
+
+\begin{table}[h]
+	\centering	
+	\begin{tabular}{l l l l l}   
+		\toprule
+		\textbf{baudRate} & \textbf{dataBits} & \textbf{parity} & \textbf{stopBits} & \textbf{flowControl} \\
+		\midrule
+		\textbf{int\_t} & \textbf{UartDataBits\_t} & \textbf{UartParity\_t} & \textbf{UartStopBits\_t} & \textbf{UartFlowCtrl\_t} \\
+		\midrule
+      1200   & DATABITS5 & NONE & STOPBITS1          & NONE     \\
+      2400   & DATABITS6 & EVEN & STOPBITS2          & CTS      \\
+      4800   & DATABITS7 & ODD  & STOPBITS1\_5 (1.5) & RTS      \\
+      9600   & DATABITS8 &      &                    & RTS\_CTS \\
+      19200  & DATABITS9 &      &                    &          \\
+      38400  &           &      &                    &          \\
+      57600  &           &      &                    &          \\
+      115200 &           &      &                    &          \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\caption[Valores posibles de las propiedades de UART]{Valores posibles de las propiedades de UART}
+	\label{tab:uartProperties}
+\end{table}
+
+\begin{itemize}
 \item
 \emph{enableTransmitter}, del tipo \emph{bool\_t}, se utiliza para habilitar/deshabilitar el transmisor de la UART.
 \item
@@ -169,6 +197,11 @@ Métodos de lectura de arreglo de bytes:
    • readByteArray( inOut ByteArray_t data,
                     inOut size_t dataSize
                   )
+\end{verbatim}
+
+\pagebreak
+
+\begin{verbatim}
    • readByteArraySync( inOut ByteArray_t data,
                         inOut size_t dataSize,
                         Time_t timeout
