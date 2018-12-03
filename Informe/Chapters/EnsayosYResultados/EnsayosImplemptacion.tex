@@ -110,10 +110,12 @@ Los resultados de \emph{Travis CI} son plasmados dentro de una pequeña imagen c
 \end{center}
 \end{figure}
 
+Todos los ensayos mencionados pueden ser ejecutados también de forma local antes de enviar los cambios al repositorio.
+
 %------------------------------------------------------------------------------
 \subsection{Ensayos funcionales sobre las plataformas de hardware}
 
-Como \emph{Travis CI} es un servicio en la nube, no permite ejecutar \emph{tests} programas sobre las plataformas de hardware. Para realizarlo, se debe montar un servidor propio con \emph{Travis CI} y conectarle las cuatro plataformas, contando con alta disponibilidad. Debido a los costos de mantenimiento de esta infraestructura, se realizaron ensayos sobre el hardware a demanda. Esto es, se conectan las cuatro placas en una computadora de desarrollo en forma local y se ejecuta un \emph{script} denominado \emph{tests-c-unit.sh}. Este \emph{script} realiza las siguientes tareas, repitiéndolas para cada plataforma de hardware:
+Como \emph{Travis CI} es un servicio en la nube, no permite ejecutar programas de \emph{tests} corriendo sobre las plataformas de hardware. Para realizarlo, se debe montar un servidor propio con \emph{Travis CI} y conectarle las cuatro plataformas, contando con alta disponibilidad. Debido a los costos de mantenimiento de esta infraestructura, se realizaron ensayos sobre el hardware a demanda. Esto es, se conectan las cuatro placas en una computadora de desarrollo en forma local y se ejecuta un \emph{script} denominado \emph{tests-c-unit.sh}. Este \emph{script} realiza las siguientes tareas, repitiéndolas para cada plataforma de hardware:
 
 \begin{itemize}
 \item

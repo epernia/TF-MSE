@@ -61,7 +61,7 @@ Para conocer los canales disponibles de un ADC existe el método
    • channelsGet() : List_t
 \end{verbatim}
 
-Si el ADC tiene configurado \emph{conversionMode = CONTINUOUS} muestrea automáticamente los canales habilitados. El método\emph{startConversion()} comienza el muestreo automático, para parar el muestreo se utiliza \emph{stopConversion()}. Si en cambio \emph{conversionMode = SINGLE}, la lectura se debe lanzar mediante el método \emph{startConversion()} que recibe un canal como parámetro. 
+Si el ADC tiene configurado \emph{conversionMode = CONTINUOUS} muestrea automáticamente los canales habilitados. El método \emph{startConversion()} comienza el muestreo automático, para parar el muestreo se utiliza \emph{stopConversion()}. Si en cambio \emph{conversionMode = SINGLE}, la lectura se debe lanzar mediante el método \emph{startConversion()} que recibe un canal como parámetro. 
 Una conversión se puede abortar con \emph{stopConversion()}.
 
 \begin{verbatim}
