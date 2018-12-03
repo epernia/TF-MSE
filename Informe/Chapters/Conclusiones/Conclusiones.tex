@@ -1,6 +1,5 @@
-En este capítulo se destacan los principales aportes del trabajo realizado, se evalúa el cumplimiento de los requerimientos y se destacan los conocimientos utilizados. Finalmente se identifican las líneas de acción a futuro.
+En este capítulo se destacan los principales aportes del trabajo realizado, se evalúa el cumplimiento de los requerimientos, se destacan los conocimientos utilizados y se expone una reflexión final. Finalmente se identifican las líneas de acción a futuro.
 
- Se destacan los conocimientos
 %Asimismo, se documentan las técnicas que resultaron útiles para la ejecución del proyecto. 
 
 %Por otra parte, se deja constancia de las metas que no pudieron ser alcanzadas junto con las respectivas causas y se identifican las líneas de acción a futuro.
@@ -14,22 +13,73 @@ En este capítulo se destacan los principales aportes del trabajo realizado, se 
 % La idea de esta sección es resaltar cuáles son los principales aportes del trabajo realizado y cómo se podría continuar. Debe ser especialmente breve y concisa. Es buena idea usar un listado para enumerar los logros obtenidos.
 
 
-% Que se logoro realizar (de objetivos) --> implementacion.
-%   Evaluar el cumplimiento de los objetivos y requerimientos.
-% Que se logoro realizar (no planeado inicialmente) --> implementacion.
-% Que se diseño --> Diseño.
+% Aportes del trabajo realizado. Que se logoro realizar.
+% Evaluar el cumplimiento de los objetivos y requerimientos.
+% Que se logoro realizar (no planeado inicialmente).
+% Cómo se realizo:
 	% Metodología aplicada
 	% Desafios a lo largo del proyecto.
-% Que conocimientos puse en práctica de la Maestría.
+% Que conocimientos puse en práctica.
 % Conocimientos adquiridos.
 % Reflexion final.
 
-En el presente Trabajo Final se ha logrado obtener 
+\subsection{Aportes del trabajo}
+
+En el presente trabajo final se destacan los siguientes logros:
+
+\begin{itemize}
+\item
+La definición de una biblioteca para la programación de sistemas embebidos generando especificaciones que no dependen de determinados componentes de hardware o lenguajes de programación, logrando construir un diseño de biblioteca totalmente portable, tanto entre plataformas de hardware, como lenguajes de programación.
+\item
+Construcción de herramientas de código abierto para desarrolladores, que automatizan gran parte de la implementación de la biblioteca en una nueva plataforma en base a archivos de descripción de la misma, así como la definición de nuevos módulos de bibliotecas.
+\item
+El desarrollo implementaciones (casi completas) de la biblioteca en lenguaje C, que cumple con las pautas y definiciones incluidas en las distintas partes del diseño, para cuatro plataformas de hardware diferentes, demostrando así la flexibilidad del diseño realizado. 
+\item
+Implementación de ejemplos funcionales independientes de las plataformas de hardware.
+\item
+La definición y ensayo de una metodología de trabajo sustentable, mediante el uso de herramientas de código abierto y servicios gratuitos; que de ser aplicada en forma correcta, permite asegurar la calidad del software desarrollado.
+\item
+La redacción de documentos destinados para usuarios y desarrolladores.
+\item
+Resultados exitosos en el uso de la biblioteca en educación.
+\end{itemize}
+
+\subsection{Cumplimiento de los requerimientos}
+
+A excepción de los requerimientos \emph{REQ.3.2}, \emph{REQ.4.3} y \emph{REQ.4.4}, todos los requerimientos se completaron de forma exitosa.
+
+Se destaca que en base a las sugerencias del jurado durante la evaluación preliminar (llevada a cabo a mitad del proyecto), se decidió invertir más esfuerzos en el desarrollo de las metodologías de trabajo y realización de ensayos automatizados, por sobre las implmentaciones particulares de la biblioteca en cada plataforma (como se especificó en \emph{REQ.3.2}). 
+
+En consecuencia, se posterga el lanzamiento al público de estas bibliotecas para el 30 de diciembre de 2018 (estos se exigían en \emph{REQ.4.3} y \emph{REQ.4.4}). Para esta fecha se espera concluir la primera versión completa para cada una de ellas.
+
+El autor considera que este inconveniente es superado ampliamente por los beneficios obtenidos a largo plazo por el desarrollo y despliegue de las metodologías.
+
+
+
+%La definición del diseño fue llevada a cabo en conjunto, y en muchos casos influida por la construcción de implementaciones de referencia. Se culmina este Trabajo Final con la férrea convicción que esta manera de realizarlo, permitió llegar a diseños más acabados, brindando pautas concretas y realmente útiles para el desarrollo de futuras implementaciones.
+
+%Además, el desarrollo de un modelo referente a los conceptos de las plataformas de hardware  de programación, involucró investigar y adquirir conocimientos avanzados de programación, por ejemplo; tipos de datos, definiciones, declaraciones, parseo, compilación, etc.
+
+
+
+%
+%Considerando este último aspecto, 
+
+
+
+%En base a los resultados obtenidos al utilizar la biblioteca en el dictado de diferentes cursos, asignaturas de diferentes niveles en la enseñanza, y la aceptación de múltiples programadores para sus proyectos personales, se cree que se ha logrado diseñar una biblioteca que permite la programación en lenguaje C de forma sencilla en plataformas embebidas basadas en microcontrolador sin la necesidad de conocer en detalle la arquitectura particular de cada uno de ellos. En particular, para programadores experimentados la biblioteca sAPI logra agilizar el desarrollo de aplicaciones mediante su directa utilización, extender o reconfigurar la misma de acuerdo a sus necesidades; o bien, tomarla como base para entender la programación de una plataforma particular revisando su código fuente. En el campo de la enseñanza de la programación de sistemas embebidos, permite concentrar los esfuerzos de los estudiantes novatos en entender la programación aplicaciones sobre sistemas embebidos en general, en lugar de una aprender la programación de una única plataforma particular, logrando que se entiendan los conceptos más importantes independientemente del hardware subyacente. Luego, con el avance de la formación un alumno puede entender como está realizada la biblioteca para una plataforma en particular y tomarla como un ejemplo de capa de abstracción de hardware. De esta manera se hace hincapié en todo momento en el hecho fundamental de diseñar aplicaciones independientes del hardware debido a la velocidad de cambio de estos dispositivos en el mercado.
+
+
+
+
 
 
 %\medskip
 
-El desarrollo de este trabajo final demandó la articulación de conocimientos adquiridos a lo largo de la Carrera de Especialización en Sistemas Embebidos y Maestría en Sistemas Embebidos. Se destacan los aprendizajes obtenidos en las asignaturas:
+
+\subsection{Conocimientos utilizados}
+
+El desarrollo de este trabajo final demandó la articulación de conocimientos adquiridos a lo largo de la Carrera de Especialización en Sistemas Embebidos y Maestría en Sistemas Embebidos, entre los cuales se destacan:
 
 \begin{itemize}
 \item
@@ -45,11 +95,11 @@ El desarrollo de este trabajo final demandó la articulación de conocimientos a
 \item
 \emph{Protocolos de comunicación en sistemas embebidos}. En esta asignatura se afianzaron los conocimientos necesarios para la programación de los periféricos SPI e I2C.
 \item
-\emph{Sistemas Operativos de Tiempo Real (I, II)} e \emph{Implementación de Sistemas Operativos (I, II)}. Estas asignaturas impactaron en el entrenamiento sobre aplicaciones en sistemas embebidos, permitiendo comprender los requerimientos necesarios para \emph{drivers} coexistentes en una aplicación de tiempo real.
+\emph{Sistemas Operativos de Tiempo Real (I y II)} e \emph{Implementación de Sistemas Operativos (I y II)}. Estas asignaturas impactaron en el entrenamiento sobre aplicaciones en sistemas embebidos, permitiendo comprender los requerimientos necesarios para \emph{drivers} coexistentes en una aplicación de tiempo real.
 \item
-\textbf{Implementación de manejadores de dispositivos}. Esta asignatura contibuyó mediante la compresión de cómo se generan \emph{drivers} para un sistema operativo de propósito general, y como gestiona las diferentes configuraciones físicas de hardware (mediante el \emph{device tree}) que impactaron en las decisiones de diseño de los archivos de descripción de plataformas.
+\emph{Implementación de manejadores de dispositivos}. Esta asignatura contibuyó mediante la compresión de cómo se generan \emph{drivers} para un sistema operativo de propósito general, y como gestionan las diferentes configuraciones físicas de hardware utilizando un \emph{device tree}. Estos conocimientos impactaron en las decisiones de diseño sobre los archivos de descripción de plataformas.
 \item
-\textbf{Diseño de Sistemas Críticos}. Los conceptos de esta asignatura contribuyeron a comprender, inmediatamente, las importantes implicancias de utilizar metodologías para generar software que puedan utilizarse en este tipo de aplicaciones.
+\emph{Diseño de Sistemas Críticos}. Los conceptos de esta asignatura contribuyeron a comprender las importantes implicancias de utilizar metodologías para generar software que pueda utilizarse en este tipo de aplicaciones.
 \end{itemize}
 
 %\medskip
@@ -62,44 +112,16 @@ Programación de aplicaciones en lenguaje \emph{JavaScript} con \emph{Node.js} y
 \item
 Experiencia en arquitecturas de núcleos de procesamiento y periféricos de diversos fabricantes.
 \item
-Desarrollo de software modular.
+Utilización avanzada de sistemas de control de versiones.
 \item
-Sistemas de control de versiones.
+Utilización de diversas herramientas para \emph{testeo} automatizado. 
 \item
-\emph{Testeo} autoatizado. 
-\item
-Desarrollo de infraestructura de integración continua.
+Experiencia en despliegue de infraestructura de integración continua.
 \end{itemize}
 
+\subsection{Reflexión final}
 
-En cuanto al diseño de la biblioteca sAPI se buscó generar especificaciones que no dependieran de determinados componentes de Hardware o lenguajes de programación, logrando construir un diseño de biblioteca totalmente portable.
-
-Como parte del trabajo, se desarrolló una implementación que cumple con las pautas y definiciones incluidas en las distintas partes del diseño, para cuatro plataformas de hardware diferentes, demostrando así la flexibilidad del diseño realizado.
-
-Por lo tanto, se llega a la conclusión que los objetivos planteados al comenzar el trabajo han sido alcanzados satisfactoriamente.
-
-La definición del diseño fue llevada a cabo en conjunto, y en muchos casos influida por la construcción de implementaciones de referencia. Se culmina este Trabajo Final con la férrea convicción que esta manera de realizarlo, permitió llegar a diseños más acabados, brindando pautas concretas y realmente útiles para el desarrollo de futuras implementaciones.
-
-
-%
-%Considerando este último aspecto, 
-
-Cabe resaltar que la utilización de los conceptos principales del paradigma de programación orientada a objetos, facilitó el desarrollo del diseño y su implementación de referencia. 
-En particular, contribuyó a manejar la gran complejidad del modelo computacional de una Configuración de Software y de los programas incluidos, permitiendo la obtención de componentes bien definidos e interfaces claras entre los mismos, logrando que componentes de distintas características puedan ensamblarse en forma sencilla dentro de un mismo diseño general.
-
-Además, el desarrollo de un modelo referente a los conceptos de las plataformas de hardware  de programación, involucró investigar y adquirir conocimientos avanzados de programación, por ejemplo; tipos de datos, definiciones, declaraciones, parseo, compilación, etc.
-
-Otra herramienta clave para llevar a cabo esta labor, fue la experiencia adquirida en programación de Microcontroladores,  siendo, el autor de este trabajo, alumno y auxiliar académico en las materias correspondientes, hecho que contribuyó en la investigación de uno de los Microcontroladores (y su IDE de desarrollo) más novedosos disponible en el mercado, utilizado para la implementación de referencia del Hardware.
-
-
-
-
-En base a los resultados obtenidos al utilizar la biblioteca en el dictado de diferentes cursos, asignaturas de diferentes niveles en la enseñanza, y la aceptación de múltiples programadores para sus proyectos personales, se cree que se ha logrado diseñar una biblioteca que permite la programación en lenguaje C de forma sencilla en plataformas embebidas basadas en microcontrolador sin la necesidad de conocer en detalle la arquitectura particular de cada uno de ellos. En particular, para programadores experimentados la biblioteca sAPI logra agilizar el desarrollo de aplicaciones mediante su directa utilización, extender o reconfigurar la misma de acuerdo a sus necesidades; o bien, tomarla como base para entender la programación de una plataforma particular revisando su código fuente. En el campo de la enseñanza de la programación de sistemas embebidos, permite concentrar los esfuerzos de los estudiantes novatos en entender la programación aplicaciones sobre sistemas embebidos en general, en lugar de una aprender la programación de una única plataforma particular, logrando que se entiendan los conceptos más importantes independientemente del hardware subyacente. Luego, con el avance de la formación un alumno puede entender como está realizada la biblioteca para una plataforma en particular y tomarla como un ejemplo de capa de abstracción de hardware. De esta manera se hace hincapié en todo momento en el hecho fundamental de diseñar aplicaciones independientes del hardware debido a la velocidad de cambio de estos dispositivos en el mercado.
-
-
-Concluyendo, la realización de este trabajo demandó la articulación entre los conocimientos adquiridos a lo largo de la maestría y otros aprendizajes incorporados, habilitando su puesta en práctica.
-
-Por lo tanto, se llega a la conclusión que los objetivos planteados al comenzar el trabajo han sido alcanzados satisfactoriamente, y además, se han obtenido conocimientos y experiencia muy importantes para la formación profesional del autor.
+Se llega a la conclusión que los objetivos planteados al comenzar el trabajo han sido alcanzados satisfactoriamente, y además, se han obtenido conocimientos y experiencia muy importantes para la formación profesional del autor.
 
 %------------------------------------------------------------------------------
 %	SECTION
@@ -108,13 +130,22 @@ Por lo tanto, se llega a la conclusión que los objetivos planteados al comenzar
 
 Como labor a futuro, se pretende llevar a cabo las siguientes tareas:
 
+\titulo{Tareas estratégicas en el marco del proyecto CIAA}
+
 \begin{itemize}
 \item
 Concluir completamente las implementaciones de sAPI para las plataformas del proyecto CIAA.
 \item
+Continuar afianzando la metodología de trabajo propuesta.
+\item
+Implementar la biblioteca para plataformas de hardware abierto de bajo costo, producción masiva y alta popularidad, para darle mayor visibilidad a las herramientas de software desarrolladas, y lograr incrementar la comunidad de usuarios y desarrolladores.
+\end{itemize}
+
+\titulo{Tareas de investigación}
+
+\begin{itemize}
+\item
 Analizar la posibilidad de utilizar los archivos para descripción de vista del sistema, (\emph{CMSIS-SVD}) \citep{CMSISSVD}, con el fin de extraer la información necesaria para generar, de forma automatizada, los archivos JSON de descripción a nivel \emph{SoC} para una dada plataforma. Los archivos \emph{CMSIS-SVD} son provistos por proveedores de silicio para sus familias de microcontroladores con soporte de CMSIS.
 \item
 Investigar los archivos de descripción de hardware, realizados con el software de diseño de circuitos impresos \emph{Kicad} \citep{Kicad}, para obtener automáticamente el modelo de \emph{board} de una plataforma de sistemas embebidos en formato JSON.
-\item
-Implementar la biblioteca para plataformas de hardware abierto de bajo costo, producción masiva y alta popularidad, para darle mayor visibilidad a las herramientas de software desarrolladas, y lograr incrementar la comunidad de usuarios y desarrolladores.
 \end{itemize}
